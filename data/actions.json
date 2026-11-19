@@ -1,0 +1,324 @@
+{
+  "general": {
+    "en": {
+      "dos": [
+        "Take a deep breath and stay calm. Scammers rely on panic and urgency.",
+        "Talk to a trusted family member, neighbour, or friend before taking any step.",
+        "Immediately report suspicious numbers to Chakshu on sancharsaathi.gov.in.",
+        "Call the National Cyber Crime Helpline on 1930 if any money has been deducted."
+      ],
+      "donts": [
+        "Do NOT transfer money to any unknown account or UPI ID.",
+        "Do NOT share your OTP, UPI PIN, ATM PIN, or passwords with anyone.",
+        "Do NOT click on any links sent in the message or install any app.",
+        "Do NOT stay on the call if someone pressures you not to disconnect."
+      ],
+      "official_channels": [
+        "National Cyber Crime Helpline: Dial 1930 (Toll-Free, 24x7)",
+        "National Cyber Crime Portal: https://cybercrime.gov.in",
+        "Sanchar Saathi (Chakshu Fraud Reporting): https://sancharsaathi.gov.in"
+      ]
+    },
+    "hi": {
+      "dos": [
+        "शांत रहें और घबराएं नहीं। धोखेबाज जल्दबाजी और डर का फायदा उठाते हैं।",
+        "कोई भी कदम उठाने से पहले अपने परिवार के किसी भरोसेमंद सदस्य या मित्र से बात करें।",
+        "संदिग्ध नंबर की शिकायत sancharsaathi.gov.in पर 'चक्षु' (Chakshu) पर करें।",
+        "यदि पैसे कट गए हों, तो तुरंत राष्ट्रीय साइबर हेल्पलाइन नंबर 1930 पर कॉल करें।"
+      ],
+      "donts": [
+        "किसी भी अज्ञात खाते या यूपीआई आईडी पर पैसे ट्रांसफर न करें।",
+        "अपना ओटीपी, यूपीआई पिन, एटीएम पिन या पासवर्ड किसी के साथ साझा न करें।",
+        "संदेश में आए किसी भी लिंक पर क्लिक न करें और कोई नया ऐप इंस्टॉल न करें।",
+        "यदि कोई कॉल काटने से मना करे या दबाव बनाए, तो तुरंत फोन काट दें।"
+      ],
+      "official_channels": [
+        "राष्ट्रीय साइबर क्राइम हेल्पलाइन: 1930 डायल करें (निःशुल्क, 24 घंटे)",
+        "राष्ट्रीय साइबर क्राइम पोर्टल: https://cybercrime.gov.in",
+        "संचार साथी (चक्षु फ्रॉड रिपोर्टिंग): https://sancharsaathi.gov.in"
+      ]
+    }
+  },
+  "categories": {
+    "digital_arrest": {
+      "en": {
+        "dos": [
+          "Remember: Real police, CBI, ED, or courts NEVER arrest anyone over WhatsApp or video calls.",
+          "Disconnect the call immediately. You cannot be arrested virtually in India.",
+          "Inform your family members or go in person to your local police station if in doubt.",
+          "Report the caller's number and screenshots immediately to 1930 and cybercrime.gov.in."
+        ],
+        "donts": [
+          "Do NOT transfer any money to any 'government safe account' or 'verification account'.",
+          "Do NOT stay isolated in a room or keep your camera switched on for them.",
+          "Do NOT share your Aadhaar, bank details, or screen access.",
+          "Do NOT believe fake arrest warrants or police ID badges shown on video."
+        ],
+        "official_channels": [
+          "National Cyber Crime Helpline: 1930",
+          "Report Digital Arrest Frauds: https://cybercrime.gov.in",
+          "Report Impersonation to Chakshu: https://sancharsaathi.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "याद रखें: असली पुलिस, सीबीआई, ईडी या अदालत कभी भी व्हाट्सएप या वीडियो कॉल पर गिरफ्तार नहीं करती।",
+          "तुरंत कॉल काट दें। भारत में वीडियो कॉल पर 'डिजिटल अरेस्ट' नाम की कोई कानूनी प्रक्रिया नहीं है।",
+          "अपने परिवार को तुरंत बताएं और संदेह होने पर नजदीकी पुलिस थाने में जाकर बात करें।",
+          "इस कॉल की शिकायत तुरंत 1930 पर और cybercrime.gov.in पर दर्ज कराएं।"
+        ],
+        "donts": [
+          "किसी भी 'सुरक्षित सरकारी खाते' या 'जांच खाते' में पैसे कभी ट्रांसफर न करें।",
+          "कमरे में अकेले बंद न रहें और अपना कैमरा ऑन न रखें।",
+          "अपना आधार कार्ड, बैंक खाता या मोबाइल स्क्रीन शेयर न करें।",
+          "वीडियो कॉल पर दिखाए जाने वाले फर्जी पुलिस आईडी कार्ड या वारंट पर विश्वास न करें।"
+        ],
+        "official_channels": [
+          "राष्ट्रीय साइबर हेल्पलाइन: 1930",
+          "साइबर पोर्टल: https://cybercrime.gov.in",
+          "संचार साथी (चक्षु सुविधा): https://sancharsaathi.gov.in"
+        ]
+      }
+    },
+    "kyc_account_block": {
+      "en": {
+        "dos": [
+          "Visit your home bank branch or official bank mobile app to verify your KYC status.",
+          "Check electricity bills or SIM status through official helpline numbers printed on your bill.",
+          "Block your debit/credit card immediately if you suspect card details were entered.",
+          "Forward spam SMS to 1909 (Do Not Disturb) and report to Chakshu."
+        ],
+        "donts": [
+          "Do NOT click on any link claiming to update KYC or link your PAN.",
+          "Do NOT download remote-access apps like AnyDesk, TeamViewer, or QuickSupport.",
+          "Do NOT share the OTP received on your phone with any caller claiming to be a bank executive.",
+          "Do NOT call phone numbers mentioned in threatening SMS alerts."
+        ],
+        "official_channels": [
+          "National Cyber Crime Helpline: 1930",
+          "RBI Sachet Fraud Portal: https://sachet.rbi.org.in",
+          "Sanchar Saathi: https://sancharsaathi.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "केवाईसी स्थिति जांचने के लिए सीधे अपनी बैंक शाखा जाएं या आधिकारिक बैंक ऐप का उपयोग करें।",
+          "बिजली बिल या सिम की स्थिति की जांच अपने पुराने बिल पर छपे आधिकारिक नंबर पर कॉल करके करें।",
+          "यदि गलती से कार्ड विवरण दे दिया हो, तो बैंक हेल्पलाइन पर कॉल करके कार्ड तुरंत ब्लॉक कराएं।",
+          "संदिग्ध एसएमएस की रिपोर्ट संचार साथी पोर्टल पर करें।"
+        ],
+        "donts": [
+          "केवाईसी अपडेट या पैन लिंक करने का दावा करने वाले किसी भी लिंक पर क्लिक न करें।",
+          "एनीडेस्क (AnyDesk), टीमव्यूअर जैसी स्क्रीन शेयरिंग ऐप कभी डाउनलोड न करें।",
+          "बैंक कर्मचारी बनकर कॉल करने वाले किसी भी व्यक्ति को अपना ओटीपी न बताएं।",
+          "धमकी भरे एसएमएस में दिए गए नंबरों पर कभी वापस कॉल न करें।"
+        ],
+        "official_channels": [
+          "राष्ट्रीय साइबर क्राइम हेल्पलाइन: 1930",
+          "आरबीआई सचेत पोर्टल: https://sachet.rbi.org.in",
+          "संचार साथी: https://sancharsaathi.gov.in"
+        ]
+      }
+    },
+    "lottery": {
+      "en": {
+        "dos": [
+          "Remember: You cannot win a lottery or contest that you never purchased a ticket for.",
+          "Delete the message and block the sender immediately.",
+          "Verify any legitimate company cashback only inside their official mobile app.",
+          "Warn friends and family about fake KBC or lottery messages."
+        ],
+        "donts": [
+          "Do NOT pay any 'processing fee', 'GST', or 'clearance charges' to claim prizes.",
+          "Do NOT share your bank account, Cheque photo, or Aadhaar details.",
+          "Do NOT call the WhatsApp number mentioned in the lottery image.",
+          "Do NOT forward the message to other groups or contacts."
+        ],
+        "official_channels": [
+          "National Cyber Crime Helpline: 1930",
+          "Chakshu Lottery Fraud Reporting: https://sancharsaathi.gov.in",
+          "National Cyber Crime Portal: https://cybercrime.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "याद रखें: जिस लॉटरी या प्रतियोगिता का आपने कभी टिकट नहीं खरीदा, आप उसमें कभी नहीं जीत सकते।",
+          "संदेश को तुरंत डिलीट करें और भेजने वाले नंबर को ब्लॉक करें।",
+          "किसी भी वास्तविक कैशबैक की जांच केवल कंपनी के आधिकारिक ऐप के अंदर ही करें।",
+          "परिवार और मित्रों को ऐसे फर्जी केबीसी या लॉटरी संदेशों से सचेत करें।"
+        ],
+        "donts": [
+          "इनाम या लॉटरी पाने के नाम पर कोई 'प्रोसेसिंग फीस', 'जीएसटी' या अग्रिम शुल्क कभी न भरें।",
+          "अपना बैंक खाता, कैंसिल चेक या आधार कार्ड की फोटो किसी को न भेजें।",
+          "लॉटरी पर्चे पर लिखे किसी भी व्हाट्सएप नंबर पर संपर्क न करें।",
+          "ऐसे संदेशों को दूसरे ग्रुपों में फॉरवर्ड न करें।"
+        ],
+        "official_channels": [
+          "राष्ट्रीय साइबर हेल्पलाइन: 1930",
+          "संचार साथी (चक्षु): https://sancharsaathi.gov.in",
+          "साइबर पोर्टल: https://cybercrime.gov.in"
+        ]
+      }
+    },
+    "job_scam": {
+      "en": {
+        "dos": [
+          "Apply for jobs only through verified company career portals or recognized platforms.",
+          "Research the company credentials independently through official websites.",
+          "Discuss the offer with family members or working relatives before responding.",
+          "Report fraudulent hiring messages to Chakshu."
+        ],
+        "donts": [
+          "Do NOT pay any registration fee, interview fee, or laptop security deposit for a job.",
+          "Do NOT accept tasks asking you to like videos or deposit money for higher returns.",
+          "Do NOT share your PAN, Aadhaar, or bank credentials with unofficial recruiters.",
+          "Do NOT join suspicious Telegram or WhatsApp groups for easy daily income."
+        ],
+        "official_channels": [
+          "National Cyber Crime Helpline: 1930",
+          "National Career Service (Ministry of Labour): https://www.ncs.gov.in",
+          "National Cyber Crime Portal: https://cybercrime.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "नौकरी के लिए केवल आधिकारिक कंपनी पोर्टल या मान्यता प्राप्त रोजगार मंचों के जरिए आवेदन करें।",
+          "कंपनी के बारे में अपने परिवार के कामकाजी सदस्यों से सलाह लें।",
+          "संदिग्ध व्हाट्सएप या टेलीग्राम जॉब मैसेज को रिपोर्ट और ब्लॉक करें।",
+          "फर्जी जॉब संदेशों की शिकायत संचार साथी पर करें।"
+        ],
+        "donts": [
+          "नौकरी पाने के नाम पर कभी भी रजिस्ट्रेशन फीस, इंटरव्यू चार्ज या सिक्योरिटी डिपॉजिट न दें।",
+          "यूट्यूब वीडियो लाइक करने या टास्क पूरा करने के बदले पैसे देने वाले झांसे में न आएं।",
+          "व्हाट्सएप पर मिले अज्ञात रिक्रूटर को अपने दस्तावेज या बैंक विवरण न दें।",
+          "घर बैठे लाखों कमाने के झांसे वाले टेलीग्राम ग्रुपों से तुरंत बाहर निकलें।"
+        ],
+        "official_channels": [
+          "राष्ट्रीय साइबर क्राइम हेल्पलाइन: 1930",
+          "राष्ट्रीय करियर सेवा (श्रम मंत्रालय): https://www.ncs.gov.in",
+          "साइबर पोर्टल: https://cybercrime.gov.in"
+        ]
+      }
+    },
+    "loan_scam": {
+      "en": {
+        "dos": [
+          "Apply for loans only through RBI-registered banks or licensed NBFCs.",
+          "Check the RBI registered lenders list on rbi.org.in before considering any loan app.",
+          "Review loan terms directly at a physical bank branch.",
+          "Report illegal lending apps to the RBI Sachet portal."
+        ],
+        "donts": [
+          "Do NOT pay any upfront 'processing fee' or 'file approval charge' to personal accounts.",
+          "Do NOT install unknown loan APK files sent via WhatsApp or SMS.",
+          "Do NOT grant contact list, gallery, or location permissions to instant loan apps.",
+          "Do NOT trust pre-approved loan offers offering unbelievable low interest rates without paperwork."
+        ],
+        "official_channels": [
+          "National Cyber Crime Helpline: 1930",
+          "RBI Sachet (Report Illegal Loan Apps): https://sachet.rbi.org.in",
+          "National Cyber Crime Portal: https://cybercrime.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "लोन के लिए केवल आरबीआई-पंजीकृत बैंकों या अधिकृत वित्तीय संस्थानों से ही संपर्क करें।",
+          "किसी भी ऐप से लोन लेने से पहले rbi.org.in पर अधिकृत संस्थाओं की सूची जांचें।",
+          "लोन की शर्तों की पुष्टि सीधे बैंक शाखा जाकर करें।",
+          "फर्जी लोन ऐप की शिकायत आरबीआई सचेत पोर्टल पर करें।"
+        ],
+        "donts": [
+          "लोन पास कराने के नाम पर किसी के व्यक्तिगत खाते में 'प्रोसेसिंग फीस' या अग्रिम शुल्क न डालें।",
+          "व्हाट्सएप या मैसेज में भेजे गए अज्ञात लोन ऐप (APK) को कभी इंस्टॉल न करें।",
+          "लोन ऐप को अपने कॉन्टैक्ट्स या फोटो गैलरी की अनुमति कभी न दें।",
+          "बिना किसी कागजात के 2% ब्याज पर तुरंत लोन देने वाले दावों पर कतई भरोसा न करें।"
+        ],
+        "official_channels": [
+          "राष्ट्रीय साइबर हेल्पलाइन: 1930",
+          "आरबीआई सचेत पोर्टल: https://sachet.rbi.org.in",
+          "साइबर पोर्टल: https://cybercrime.gov.in"
+        ]
+      }
+    },
+    "family_emergency": {
+      "en": {
+        "dos": [
+          "Hang up and directly dial your child or family member on their known regular phone number.",
+          "Call another family member, relative, or friend who might be with them to verify.",
+          "Ask a personal security question that only the real family member would know.",
+          "Call the local police control room on 112 if someone claims your relative is in custody."
+        ],
+        "donts": [
+          "Do NOT panic or rush to send money immediately under emotional pressure.",
+          "Do NOT send funds to the stranger's UPI or hospital account without direct spoken verification.",
+          "Do NOT keep the situation a secret as demanded by the caller.",
+          "Do NOT trust AI-cloned or distressed voices without independent verification."
+        ],
+        "official_channels": [
+          "Emergency Response Support System: Dial 112",
+          "National Cyber Crime Helpline: Dial 1930",
+          "National Cyber Crime Portal: https://cybercrime.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "फोन काटें और अपने बेटे/बेटी या परिजन के पुराने सामान्य नंबर पर सीधे कॉल करके बात करें।",
+          "यदि उनका फोन न लगे, तो उनके साथ रहने वाले किसी अन्य मित्र या परिजन से संपर्क करें।",
+          "कॉल करने वाले से कोई ऐसी निजी बात पूछें जो केवल आपके असली परिजन को पता हो।",
+          "यदि कोई पुलिस हिरासत का दावा करे, तो तुरंत आपातकालीन नंबर 112 पर पुलिस से पुष्टि करें।"
+        ],
+        "donts": [
+          "घबराकर या भावुक होकर तुरंत पैसे भेजने की जल्दबाजी न करें।",
+          "बिना आमने-सामने या सीधे फोन पर बात किए किसी भी अज्ञात यूपीआई पर पैसे न भेजें।",
+          "कॉलर के कहने पर इस बात को परिवार से कभी न छुपाएं।",
+          "रोने या डराने वाली आवाज (एआई आवाज) सुनकर बिना जांच किए विश्वास न करें।"
+        ],
+        "official_channels": [
+          "आपातकालीन पुलिस सहायता: 112 डायल करें",
+          "राष्ट्रीय साइबर क्राइम हेल्पलाइन: 1930",
+          "साइबर पोर्टल: https://cybercrime.gov.in"
+        ]
+      }
+    },
+    "general_suspicious": {
+      "en": {
+        "dos": [
+          "Take time to verify the sender's identity through official channels.",
+          "Discuss any unexpected request with a trusted family member or banker.",
+          "Delete and report unsolicited suspicious messages to Chakshu on sancharsaathi.gov.in.",
+          "Keep your mobile operating system and banking apps updated."
+        ],
+        "donts": [
+          "Do NOT click on shortened links (bit.ly, tinyurl) or unknown web links.",
+          "Do NOT share OTPs, PINs, or banking passwords with anyone.",
+          "Do NOT install any application sent by strangers.",
+          "Do NOT transfer funds based on unverified urgency."
+        ],
+        "official_channels": [
+          "National Cyber Crime Helpline: 1930",
+          "National Cyber Crime Portal: https://cybercrime.gov.in",
+          "Sanchar Saathi (Chakshu): https://sancharsaathi.gov.in"
+        ]
+      },
+      "hi": {
+        "dos": [
+          "संदेश भेजने वाले की पहचान आधिकारिक माध्यमों से जांचने के लिए समय लें।",
+          "किसी भी अप्रत्याशित मांग के बारे में अपने परिवार या बैंक से चर्चा करें।",
+          "संदिग्ध संदेशों को तुरंत डिलीट करें और संचार साथी पोर्टल पर रिपोर्ट करें।",
+          "अपने मोबाइल और बैंकिंग ऐप्स को हमेशा अपडेट रखें।"
+        ],
+        "donts": [
+          "संदेश में आए छोटे लिंक (bit.ly, tinyurl) पर कभी क्लिक न करें।",
+          "ओटीपी, पिन या पासवर्ड किसी के साथ साझा न करें।",
+          "अज्ञात व्यक्तियों द्वारा भेजे गए किसी भी ऐप को इंस्टॉल न करें।",
+          "जल्दबाजी या दबाव में आकर पैसे ट्रांसफर न करें।"
+        ],
+        "official_channels": [
+          "राष्ट्रीय साइबर हेल्पलाइन: 1930",
+          "राष्ट्रीय साइबर पोर्टल: https://cybercrime.gov.in",
+          "संचार साथी (चक्षु): https://sancharsaathi.gov.in"
+        ]
+      }
+    }
+  }
+}

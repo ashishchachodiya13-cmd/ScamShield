@@ -1,0 +1,263 @@
+{
+  "thresholds": {
+    "low_max": 2,
+    "medium_max": 5
+  },
+  "categories": [
+    {
+      "id": "digital_arrest",
+      "name_en": "Digital Arrest Scam",
+      "name_hi": "डिजिटल अरेस्ट धोखाधड़ी",
+      "associated_flags": [
+        "authority_impersonation",
+        "urgency_threat",
+        "secrecy_demand",
+        "immediate_payment"
+      ],
+      "pretext_keywords": [
+        "arrest", "cbi", "police", "customs", "warrant", "video call", "skype",
+        "गिरफ्तारी", "सीबीआई", "पुलिस", "वारंट", "कस्टम"
+      ]
+    },
+    {
+      "id": "kyc_account_block",
+      "name_en": "KYC / Account-Block Fraud",
+      "name_hi": "केवाईसी / खाता ब्लॉक धोखाधड़ी",
+      "associated_flags": [
+        "kyc_account_block",
+        "sensitive_info",
+        "urgency_threat",
+        "suspicious_link_app"
+      ],
+      "pretext_keywords": [
+        "kyc", "pan", "account", "sim", "electricity", "power supply", "deactivated", "suspended",
+        "केवाईसी", "पैन", "खाता", "सिम", "बिजली"
+      ]
+    },
+    {
+      "id": "lottery",
+      "name_en": "Lottery / Prize Scam",
+      "name_hi": "लॉटरी / इनाम धोखाधड़ी",
+      "associated_flags": [
+        "prize_reward",
+        "advance_fee",
+        "immediate_payment",
+        "suspicious_link_app"
+      ],
+      "pretext_keywords": [
+        "lottery", "lucky draw", "prize", "jackpot", "winner", "crorepati", "kbc", "cashback",
+        "लॉटरी", "इनाम", "लकी ड्रा", "विजेता", "करोड़पति"
+      ]
+    },
+    {
+      "id": "job_scam",
+      "name_en": "Fake Job Offer Scam",
+      "name_hi": "फर्जी नौकरी ऑफर धोखाधड़ी",
+      "associated_flags": [
+        "advance_fee",
+        "sensitive_info",
+        "immediate_payment",
+        "suspicious_link_app"
+      ],
+      "pretext_keywords": [
+        "job", "hiring", "recruitment", "salary", "part-time", "full-time", "work from home", "daily earn", "interview",
+        "नौकरी", "भर्ती", "वेतन", "जॉब"
+      ]
+    },
+    {
+      "id": "loan_scam",
+      "name_en": "Fake Loan Offer Scam",
+      "name_hi": "फर्जी लोन ऑफर धोखाधड़ी",
+      "associated_flags": [
+        "advance_fee",
+        "immediate_payment",
+        "sensitive_info",
+        "urgency_threat"
+      ],
+      "pretext_keywords": [
+        "loan", "pre-approved", "sanctioned", "interest rate", "emi", "credit limit", "disbursal", "sanction",
+        "लोन", "ऋण", "ब्याज", "किस्त"
+      ]
+    },
+    {
+      "id": "family_emergency",
+      "name_en": "Family Emergency / Distress Scam",
+      "name_hi": "पारिवारिक आपातकाल धोखाधड़ी",
+      "associated_flags": [
+        "family_emergency",
+        "immediate_payment",
+        "secrecy_demand",
+        "urgency_threat"
+      ],
+      "pretext_keywords": [
+        "son", "daughter", "child", "hospital", "accident", "custody", "trouble", "beta", "beti", "accidente",
+        "बेटा", "बेटी", "बच्चा", "अस्पताल", "एक्सीडेंट", "मुसीबत"
+      ]
+    },
+    {
+      "id": "general_suspicious",
+      "name_en": "General Suspicious Communication",
+      "name_hi": "सामान्य संदिग्ध संदेश",
+      "associated_flags": [],
+      "pretext_keywords": []
+    }
+  ],
+  "flags": [
+    {
+      "id": "authority_impersonation",
+      "name_en": "Authority Impersonation",
+      "name_hi": "अधिकारी का झूठा दिखावा",
+      "description_en": "Claims to be from CBI, police, customs, RBI, courts, or senior bank officials.",
+      "description_hi": "सीबीआई, पुलिस, कस्टम्स, आरबीआई, अदालत या बैंक अधिकारी होने का झूठा दावा।",
+      "weight": 3,
+      "patterns": [
+        "\\b(cbi|police|customs|rbi|ed|enforcement\\s+directorate|narcotics|ncb|nia|cid)\\b",
+        "\\b(cbi\\s+officer|police\\s+officer|customs\\s+officer|bank\\s+officer|rbi\\s+officer)\\b",
+        "\\b(crime\\s+branch|cyber\\s+crime\\s+cell|police\\s+station|thana|thane\\s+se)\\b",
+        "\\b(supreme\\s+court|high\\s+court|magistrate|judge|arrest\\s+warrant|court\\s+order)\\b",
+        "(सीबीआई|पुलिस|कस्टम्स|आरबीआई|प्रवर्तन\\s*निदेशालय|नारकोटिक्स|क्राइम\\s*ब्रांच|थाना|अदालत|वारंट|जज|मजिस्ट्रेट)",
+        "\\b(cbi\\s+bol\\s+raha|police\\s+se\\s+bol|custom\\s+se|dsp|sp\\s+officer|inspector)\\b"
+      ]
+    },
+    {
+      "id": "urgency_threat",
+      "name_en": "Urgency or Threat",
+      "name_hi": "जल्दबाजी या डराना-धमकाना",
+      "description_en": "Pressures you to act immediately, threatens arrest, penalties, or immediate blocking.",
+      "description_hi": "तुरंत कार्रवाई करने का दबाव, गिरफ्तारी, जुर्माना या सेवा बंद करने की धमकी।",
+      "weight": 2,
+      "patterns": [
+        "\\b(turant|urgent|urgently|immediately|right\\s+now|without\\s+delay|at\\s+once)\\b",
+        "\\b(within\\s+(?:24|12|48|2|1|few)\\s*(?:hours|hrs|hours?|ghante?))\\b",
+        "\\b(arrest\\s+(?:warrant|threat|ho\\s+jayega|kar\\s+lenge)|jail\\s+bhej|jail\\s+hogi)\\b",
+        "\\b(account\\s+(?:will\\s+be\\s+)?(?:blocked|suspended|terminated|frozen|closed))\\b",
+        "\\b(legal\\s+action|police\\s+complaint|fir\\s+register|penal(?:ty|ized)|hathkadi)\\b",
+        "(तुरंत|जल्दी|तत्काल|२४\\s*घंटे|24\\s*घंटे|गिरफ्तारी|जेल|खाता\\s*बंद|कानूनी\\s*कार्रवाई|वारंट|एफआईआर|हथकड़ी|अन्यथा)",
+        "\\b(aaj\\s+hi|abhi\\s+karein|abhi\\s+karo|nahi\\s+toh\\s+arrest|action\\s+hoga)\\b"
+      ]
+    },
+    {
+      "id": "sensitive_info",
+      "name_en": "Request for Sensitive Information",
+      "name_hi": "गोपनीय जानकारी मांगना",
+      "description_en": "Asks for passwords, OTPs, UPI PINs, CVV, or card/bank account details.",
+      "description_hi": "ओटीपी, यूपीआई पिन, सीवीवी, पासवर्ड, या कार्ड व बैंक खाते का विवरण मांगना।",
+      "weight": 3,
+      "patterns": [
+        "(?<!do not\\s)(?<!don't\\s)(?<!never\\s)\\b(share|send|enter|tell|verify)\\s+(?:your\\s+)?(?:upi\\s*)?(?:otp|pin|cvv|password|details)\\b",
+        "\\b(otp|one\\s+time\\s+password|upi\\s*pin|cvv)\\s+(?:share|batao|bhejo|enter|daalein)\\b",
+        "\\b(card\\s+number|netbanking\\s+password|debit\\s+card\\s+pin)\\s+(?:batao|bhejo|enter)\\b",
+        "(?<!न\\s)(?<!मत\\s)(ओटीपी|पिन|सीवीवी|पासवर्ड)\\s*(?:बताएं|दीजिए|शेयर|भेजें|दर्ज\\s*करें)"
+      ]
+    },
+    {
+      "id": "secrecy_demand",
+      "name_en": "Secrecy Demand",
+      "name_hi": "गोपनीयता या राज रखने का दबाव",
+      "description_en": "Demands you not tell family or anyone, or stay isolated on call.",
+      "description_hi": "परिवार या किसी और को न बताने अथवा अकेले रहने का दबाव बनाना।",
+      "weight": 3,
+      "patterns": [
+        "\\b(do\\s+not|don'?t|never)\\s+tell\\s+(anyone|anybody|family|police|bank)\\b",
+        "\\b(kisi\\s+ko\\s+(?:bhi\\s+)?mat\\s+batana|kisi\\s+ko\\s+mat\\s+batao|kisi\\s+se\\s+mat\\s+keh(\\w+)?)\\b",
+        "\\b(keep\\s+(?:it\\s+)?(?:secret|confidential)|confidential\\s+investigation)\\b",
+        "\\b(do\\s+not\\s+disconnect|don'?t\\s+cut\\s+the\\s+call|call\\s+mat\\s+kaatna)\\b",
+        "\\b(stay\\s+in\\s+(?:a\\s+)?room\\s+alone|akele\\s+me\\s+baitho|akele\\s+raho)\\b",
+        "(किसी\\s*को\\s*मत\\s*बताना|किसी\\s*को\\s*न\\s*बताएं|गोपनीय|सीक्रेट|कॉल\\s*मत\\s*काटना|अकेले\\s*रहो)"
+      ]
+    },
+    {
+      "id": "immediate_payment",
+      "name_en": "Immediate Payment Demand",
+      "name_hi": "तुरंत पैसे भेजने की मांग",
+      "description_en": "Demands transferring money, moving funds to a 'safe account', or paying a penalty.",
+      "description_hi": "पैसे ट्रांसफर करने, 'सुरक्षित खाते' में पैसे डालने या जुर्माना भरने को कहना।",
+      "weight": 3,
+      "patterns": [
+        "\\b(transfer\\s+(?:money|amount|funds|cash|rs|inr|\\d+)|send\\s+money)\\b",
+        "\\b(transfer\\s+kijiye|transfer\\s+karo|paise\\s+bhejo|paise\\s+daalo|amount\\s+bhejo)\\b",
+        "\\b(safe\\s+account|rbi\\s+safe\\s+account|government\\s+safe\\s+account|suraksha\\s+account)\\b",
+        "\\b(pay\\s+(?:fee|fine|penalty|charges|clearance|security\\s+deposit))\\b",
+        "\\b(deposit\\s+(?:money|amount|funds|kijiye)|jurmana\\s+bharo|penalty\\s+bharo)\\b",
+        "(पैसे\\s*भेजें|पैसे\\s*ट्रांसफर|सुरक्षित\\s*खाते|सुरक्षित\\s*खाता|फीस\\s*जमा|जुर्माना\\s*भरें|रुपये\\s*भेजो|तुरंत\\s*भेजें)"
+      ]
+    },
+    {
+      "id": "prize_reward",
+      "name_en": "Prize or Reward Claim",
+      "name_hi": "लॉटरी या इनाम का झूठा दावा",
+      "description_en": "Claims you have won a lottery, lucky draw, cash prize, or special reward.",
+      "description_hi": "लॉटरी, लकी ड्रा, नकद पुरस्कार या उपहार जीतने का दावा करना।",
+      "weight": 2,
+      "patterns": [
+        "\\b(lottery|lucky\\s+draw|won\\s+(?:a\\s+)?(?:prize|car|cash|crore|lakh)|cashback)\\b",
+        "\\b(kbc\\s+(?:lottery|winner|crorepati)|congratulations\\s+you\\s+have\\s+won)\\b",
+        "\\b(gift\\s+voucher|reward\\s+points|bonus\\s+prize|jackpot)\\b",
+        "\\b(lottery\\s+lag\\s+gayi|inaam\\s+jeeta|prize\\s+mila|lucky\\s+winner)\\b",
+        "(लॉटरी|लकी\\s*ड्रा|इनाम|कैशबैक|करोड़पति|केबीसी|उपहार|जैकपॉट|बधाई\\s*आपने\\s*जीता)"
+      ]
+    },
+    {
+      "id": "suspicious_link_app",
+      "name_en": "Suspicious Link or App Download",
+      "name_hi": "संदिग्ध लिंक या ऐप डाउनलोड",
+      "description_en": "Urges clicking shortened links or downloading screen-sharing / remote-access apps.",
+      "description_hi": "अज्ञात लिंक पर क्लिक करने या एनीडेस्क, टीमव्यूअर जैसी ऐप इंस्टॉल करने को कहना।",
+      "weight": 2,
+      "patterns": [
+        "\\b(bit\\.ly|tinyurl\\.com|t\\.co|is\\.gd|rb\\.gy|shorturl\\.at)\\b",
+        "https?://(?:[a-zA-Z0-9-]+\\.)*(?:xyz|top|work|tk|ga|cf|gq|club|buzz|cc|app)/?\\S*",
+        "\\b(anydesk|teamviewer|rustdesk|quicksupport|airdroid)\\b",
+        "\\b(download\\s+(?:the\\s+)?(?:app|apk)|install\\s+(?:the\\s+)?(?:app|apk))\\b",
+        "\\b(click\\s+(?:on\\s+)?(?:this\\s+)?link|link\\s+par\\s+click|app\\s+install\\s+karo)\\b",
+        "(लिंक\\s*पर\\s*क्लिक|ऐप\\s*डाउनलोड|एपीके\\s*इंस्टॉल|एनीडेस्क|टीमव्यूअर)"
+      ]
+    },
+    {
+      "id": "kyc_account_block",
+      "name_en": "KYC or Account-Block Pretext",
+      "name_hi": "केवाईसी या खाता ब्लॉक का बहाना",
+      "description_en": "Falsely claims your KYC is expired, PAN is suspended, or bank account is blocked.",
+      "description_hi": "केवाईसी समाप्त होने, पैन निलंबित होने या खाता बंद होने का झूठा दावा।",
+      "weight": 2,
+      "patterns": [
+        "\\b(update\\s+kyc|kyc\\s+(?:is\\s+)?(?:pending|expired|suspended|incomplete))\\b",
+        "\\b(pan\\s+(?:card\\s+)?(?:suspended|blocked|inactive|deactivated))\\b",
+        "\\b((?:electricity|power\\s+supply)\\s+(?:will\\s+be\\s+)?(?:cut|disconnected|stopped)|bijli\\s+cut\\s+jayegi)\\b",
+        "\\b(sim\\s+(?:card\\s+)?(?:block|deactivated|disconnected)|sim\\s+band)\\b",
+        "\\b(kyc\\s+update\\s+karein|pan\\s+link\\s+karein|aadhaar\\s+link)\\b",
+        "(केवाईसी\\s*अपडेट|पैन\\s*कार्ड\\s*निलंबित|बिजली\\s*कट|सिम\\s*बंद|केवाईसी\\s*पेंडिंग|पैन\\s*कार्ड\\s*निष्क्रिय)"
+      ]
+    },
+    {
+      "id": "advance_fee",
+      "name_en": "Advance-Fee Request",
+      "name_hi": "अग्रिम शुल्क / रजिस्ट्रेशन फीस की मांग",
+      "description_en": "Requests registration, processing, or clearance fee before giving a job, loan, or prize.",
+      "description_hi": "नौकरी, लोन या लॉटरी देने के नाम पर पहले रजिस्ट्रेशन या प्रोसेसिंग फीस मांगना।",
+      "weight": 3,
+      "patterns": [
+        "\\b(registration\\s+fee|processing\\s+fee|clearance\\s+fee|documentation\\s+charges)\\b",
+        "\\b(pay\\s+(?:advance|charges|deposit)\\s+first|pehle\\s+(?:fee|charges)\\s+bharo)\\b",
+        "\\b(loan\\s+(?:approval|sanction|processing)\\s+fee|security\\s+deposit)\\b",
+        "\\b(work\\s+from\\s+home\\s+deposit|daily\\s+earning\\s+fee|joining\\s+fee)\\b",
+        "(रजिस्ट्रेशन\\s*शुल्क|रजिस्ट्रेशन\\s*फीस|प्रोसेसिंग\\s*फीस|एडवांस\\s*फीस|दस्तावेज\\s*शुल्क|लोन\\s*फीस|फाइल\\s*चार्ज)"
+      ]
+    },
+    {
+      "id": "family_emergency",
+      "name_en": "Family Emergency Pretext",
+      "name_hi": "पारिवारिक आपातकाल का बहाना",
+      "description_en": "Claims your child or relative is arrested, in hospital, or in an accident.",
+      "description_hi": "बेटे, बेटी या रिश्तेदार के दुर्घटनाग्रस्त होने, अस्पताल में होने या पकड़े जाने का बहाना।",
+      "weight": 2,
+      "patterns": [
+        "\\b(your\\s+(?:son|daughter|child|relative)\\s+is\\s+in\\s+(?:trouble|custody|hospital))\\b",
+        "\\b(?:aapka|aapke)\\s+bete?\\s+(?:ne\\s+)?(?:accident|musibat|police|custody|hospital)\\b",
+        "\\b(accident\\s+ho\\s+gaya|serious\\s+condition|urgent\\s+operation|hospitalized|icu)\\b",
+        "\\b(police\\s+ne\\s+pakad\\s+liya|police\\s+custody\\s+me\\s+hai|mamla\\s+khatam)\\b",
+        "(बेटा\\s*गंभीर\\s*मुसीबत|बेटा\\s*मुसीबत|बेटी\\s*मुसीबत|अस्पताल|एक्सीडेंट|पुलिस\\s*ने\\s*पकड़ा|गंभीर\\s*हालत)"
+      ]
+    }
+  ]
+}

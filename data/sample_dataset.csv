@@ -1,0 +1,31 @@
+id,message,label,category,split
+1,"This is Crime Branch Inspector Sharma. Your Aadhaar is found in money laundering case. Do not disconnect the video call. Transfer Rs 75,000 to safe verification account immediately.",scam,digital_arrest,dev
+2,"Main CBI officer bol raha hu. Aapke naam par arrest warrant hai. Turant 50,000 transfer kijiye aur kisi ko mat batana.",scam,digital_arrest,dev
+3,"सीबीआई मुख्यालय से अधिकारी बोल रहा हूं। आपके नाम गैर-जमानती वारंट जारी हुआ है। तुरंत 40,000 रुपये सुरक्षित खाते में ट्रांसफर करें अन्यथा जेल भेजा जाएगा।",scam,digital_arrest,test
+4,"Dear SBI Customer, your bank account will be blocked within 24 hours due to pending KYC. Update immediately at http://bit.ly/sbi-kyc-verify or call +91-9876543210.",scam,kyc_account_block,dev
+5,"Dear user aapka SBI account suspend ho jayega. Turant KYC update karein nahi toh account band ho jayega. Download anydesk app for verification.",scam,kyc_account_block,dev
+6,"प्रिय ग्राहक, आपका पैन कार्ड निष्क्रिय हो गया है। खाता ब्लॉक होने से बचाने के लिए 24 घंटे के अंदर केवाईसी अपडेट करें। लिंक पर क्लिक करें bit.ly/pan-update",scam,kyc_account_block,test
+7,"Urgent electricity disconnection notice: Your power supply will be cut tonight at 9 PM due to unpaid bill. Call electricity officer immediately on 9123456789.",scam,kyc_account_block,test
+8,"Congratulations! You have won 25 Lakhs in KBC Lucky Draw 2026. Contact lottery manager on WhatsApp to pay registration fee of Rs 2,500 and claim prize.",scam,lottery,dev
+9,"Badhai ho! Aapne jeeta hai 15 Lakh ka cash prize in lucky draw. Inaam claim karne ke liye pehle registration fee transfer kijiye.",scam,lottery,dev
+10,"बधाई हो! आपने 25 लाख रुपये की लॉटरी जीती है। अपनी इनाम राशि बैंक खाते में प्राप्त करने के लिए तुरंत 3,500 रुपये रजिस्ट्रेशन शुल्क जमा करें।",scam,lottery,test
+11,"Part-time work from home job offer. Earn 3,000 to 5,000 daily by rating hotels and YouTube videos. Pay 1,500 security deposit to receive daily assignments.",scam,job_scam,dev
+12,"Work from home part time job. Rozana kamaye 4000 rs. Pehle documentation charges of 1200 pay karein.",scam,job_scam,test
+13,"घर बैठे नौकरी: प्रतिदिन 2000 से 5000 रुपये कमाएं। केवल वीडियो लाइक करने का काम। ज्वाइनिंग के लिए 1000 रुपये रजिस्ट्रेशन फीस ट्रांसफर करें।",scam,job_scam,test
+14,"Pre-approved personal loan of Rs 5,00,000 sanctioned at 2% interest with zero paperwork. Transfer Rs 4,999 processing fee immediately to disburse loan.",scam,loan_scam,dev
+15,"Aapka 10 Lakh ka instant loan pass ho gaya hai. Loan sanction fee 3000 rs abhi deposit kijiye.",scam,loan_scam,test
+16,"बधाई! आपका 5 लाख रुपये का पर्सनल लोन 2% वार्षिक ब्याज पर पास हुआ। लोन राशि खाते में पाने के लिए 2,500 रुपये फाइल चार्ज तुरंत भेजें।",scam,loan_scam,dev
+17,"Uncle, your son is in trouble and met with a severe accident on highway. He is in hospital ICU. Send Rs 35,000 urgently for operation and do not tell anyone.",scam,family_emergency,dev
+18,"Aapka beta police ki custody me hai accident ke baad. Case dabane ke liye turant paise bhejo aur call mat kaatna, kisi ko mat batana.",scam,family_emergency,test
+19,"आपका बेटा गंभीर मुसीबत में है और पुलिस ने पकड़ लिया है। तुरंत 50,000 रुपये भेजें, किसी को मत बताना।",scam,family_emergency,test
+20,"Police station se inspector bol raha hu. Aapke bete ne accident kar diya hai. Mamla khatam karne ke liye turant paise bhejo.",scam,family_emergency,dev
+21,"Dear Customer, Rs 1,500.00 debited from A/c XX4019 on 19-Nov-26 at ATM HDFC001. Available balance Rs 24,310.20. If not done by you, SMS BLOCK to 567676 - SBI",genuine,genuine,dev
+22,"928301 is your OTP for transaction of Rs 850 at Swiggy on your HDFC Bank Card ending 8219. Valid for 5 mins. Do not share OTP with anyone.",genuine,genuine,dev
+23,"Your Amazon package with tracking ID 849201940 is out for delivery today by agent Ramesh. Please share delivery code 42 upon receiving.",genuine,genuine,test
+24,"Good morning Papa, please take your blood pressure medication after breakfast. See you this weekend.",genuine,genuine,dev
+25,"Your monthly electricity bill for consumer no 10293848 is Rs 1,420. Due date is 28-Nov-2026. Pay securely on official portal www.mpwz.co.in.",genuine,genuine,test
+26,"Dear Customer, your appointment with Dr. Mehta at Fortis Hospital is confirmed for tomorrow 10:30 AM. Please reach 15 minutes prior.",genuine,genuine,dev
+27,"Dear Customer, Rs 25,000.00 credited to your A/c XX1092 towards pension for Nov 2026. Net balance: Rs 68,400. - Bank of India",genuine,genuine,test
+28,"नमस्ते पिताजी, आपकी दवाइयां घर पर डिलीवर हो गई हैं। शाम को फोन करूंगा।",genuine,genuine,dev
+29,"Your LPG cylinder booking reference is 894021. Expected delivery within 2 working days - Indane Gas.",genuine,genuine,test
+30,"Dear Customer, welcome to Jio Fiber. Your monthly plan of 30 Mbps has been successfully renewed on 19-Nov-2026.",genuine,genuine,test

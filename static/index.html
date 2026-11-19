@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScamShield – AI Scam Decision Support</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div>
+          <h1 class="app-title">🛡️ <span id="app-title-text">ScamShield</span></h1>
+          <p class="app-subtitle" id="app-subtitle-text">AI-Assisted Scam Decision Support for Senior Citizens</p>
+        </div>
+        
+        <!-- Language Switcher -->
+        <div class="lang-selector">
+          <span style="font-weight: 700; font-size: 18px;" id="lang-label-text">Language / भाषा:</span>
+          <button type="button" class="lang-btn active" id="btn-lang-en" onclick="setLanguage('en')">English</button>
+          <button type="button" class="lang-btn" id="btn-lang-hi" onclick="setLanguage('hi')">हिन्दी</button>
+        </div>
+      </div>
+
+      <!-- Official Disclaimer Banner -->
+      <div class="disclaimer-banner">
+        <span class="disclaimer-badge" id="disclaimer-badge-text">Decision-Support Tool</span>
+        <p id="disclaimer-desc-text">
+          This tool assists you in identifying suspicious messages. It is NOT a replacement for the National Cyber Helpline (1930) or Sanchar Saathi / Chakshu.
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Input Form Card -->
+    <main id="input-section">
+      <div class="card">
+        <h2 class="card-title" id="input-heading-text">Check a Suspicious Message or Call</h2>
+        <p class="card-subtext" id="input-subheading-text">
+          Paste any message (SMS, WhatsApp, or Call transcript) or upload a photo of the message below.
+        </p>
+
+        <!-- Message Input Textarea -->
+        <textarea
+          id="message-input"
+          class="input-textarea"
+          rows="6"
+          placeholder="Paste the suspicious message or call transcript here..."
+          aria-label="Suspicious Message Text"
+        ></textarea>
+
+        <!-- Action Buttons -->
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-analyze" onclick="handleAnalyze()">
+            🔍 <span id="btn-analyze-text">Analyze Message</span>
+          </button>
+
+          <input
+            type="file"
+            id="screenshot-file"
+            class="file-input-hidden"
+            accept="image/png, image/jpeg, image/jpg, image/webp"
+            onchange="handleFileUpload(event)"
+          >
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('screenshot-file').click()">
+            📁 <span id="btn-upload-text">Upload Screenshot</span>
+          </button>
+
+          <button type="button" class="btn-clear" id="btn-clear-text" onclick="handleClearInput()">
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- OCR Review & Correction Box (UC3, UC4, UC5) -->
+      <div id="ocr-box" class="ocr-review-box" style="display: none;">
+        <div class="ocr-banner">
+          <h3 style="font-size: 22px; margin-bottom: 4px;" id="ocr-title-text">Review Text from Screenshot</h3>
+          <p id="ocr-instruction-text" style="font-size: 19px;">
+            Please compare the extracted text below with your screenshot. Correct any misspelled words or numbers before analyzing.
+          </p>
+        </div>
+
+        <div class="ocr-columns">
+          <div class="ocr-preview-col">
+            <img id="ocr-image-preview" src="" alt="Screenshot Preview">
+          </div>
+          <div class="ocr-edit-col">
+            <textarea
+              id="ocr-text-editor"
+              aria-label="Editable OCR Extracted Text"
+              placeholder="Extracted text will appear here..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top: 18px;">
+          <button type="button" class="btn btn-primary" id="btn-ocr-confirm" onclick="handleConfirmOCR()">
+            ✓ <span id="btn-ocr-confirm-text">Looks Correct – Analyze Now</span>
+          </button>
+          <button type="button" class="btn btn-secondary" id="btn-ocr-cancel" onclick="handleCancelOCR()">
+            ✕ <span id="btn-ocr-cancel-text">Remove Image</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-box" role="status" aria-live="polite">
+      <div class="spinner"></div>
+      <p style="font-size: 22px; font-weight: 700;" id="loading-status-text">Analyzing message for red flags...</p>
+    </div>
+
+    <!-- Results Section (UC9, UC10) -->
+    <section id="results-section" class="result-section" aria-live="polite">
+      <!-- Big Risk Badge -->
+      <div id="risk-banner" class="risk-banner">
+        <div id="risk-icon" class="risk-icon">⚠️</div>
+        <div class="risk-info">
+          <h2 id="risk-level-title">HIGH RISK – Warning: Likely Scam</h2>
+          <p id="risk-level-desc"></p>
+        </div>
+      </div>
+
+      <!-- Scam Category Card -->
+      <div class="category-card">
+        <div style="font-size: 18px; font-weight: 700; color: #475569; text-transform: uppercase;" id="cat-label-text">
+          Detected Scam Type
+        </div>
+        <div class="category-name" id="result-category-name">Digital Arrest Scam</div>
+        <div style="font-size: 18px; margin-top: 6px; color: #64748b;" id="result-score-text">
+          Suspicion Score: 11 / 10+
+        </div>
+      </div>
+
+      <!-- Plain Language Explanation Box (UC10) -->
+      <div class="explanation-card">
+        <span id="explanation-source-badge" class="explanation-source-badge">✨ AI Explanation</span>
+        <h3 class="card-title" id="explanation-heading-text">Why This Looks Suspicious (Simple Explanation)</h3>
+        <p class="explanation-text" id="result-explanation-text"></p>
+      </div>
+
+      <!-- Matched Red Flags Card -->
+      <div class="card">
+        <h3 class="card-title" id="flags-heading-text">Red Flags Detected in this Message</h3>
+        <div id="flags-container" class="flags-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Safety Actions: Do's and Don'ts Checklist -->
+      <div class="card">
+        <h3 class="card-title" id="actions-heading-text">What You Should Do Now</h3>
+        <div class="actions-container">
+          <!-- What TO Do -->
+          <div class="action-column dos-column">
+            <h4 class="column-title" id="dos-title-text">✅ What TO Do</h4>
+            <ul id="dos-list" class="action-list">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+
+          <!-- What NOT To Do -->
+          <div class="action-column donts-column">
+            <h4 class="column-title" id="donts-title-text">❌ What NOT To Do</h4>
+            <ul id="donts-list" class="action-list">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Official Helplines -->
+        <div class="helplines-card">
+          <h4 id="helplines-title-text">🚨 Official Emergency Contacts</h4>
+          <ul id="helplines-list">
+            <!-- Populated dynamically -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feedback Section (UC11) -->
+      <div class="feedback-card">
+        <h3 class="card-title" id="feedback-heading-text">Was this helpful?</h3>
+        <p class="card-subtext" id="feedback-subheading-text">
+          Your anonymous feedback helps us protect more senior citizens. No message content is ever stored.
+        </p>
+        
+        <div class="feedback-buttons" id="feedback-action-row">
+          <button type="button" class="btn btn-secondary" onclick="handleFeedback(true)">
+            <span id="feedback-helpful-btn-text">👍 Yes, it helped me</span>
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="handleFeedback(false)">
+            <span id="feedback-unhelpful-btn-text">👎 Not helpful</span>
+          </button>
+        </div>
+
+        <div id="feedback-comment-container" class="feedback-comment-box">
+          <input
+            type="text"
+            id="feedback-comment-input"
+            class="feedback-comment-input"
+            placeholder="Optional: Tell us what could be clearer..."
+          >
+          <button type="button" class="btn btn-primary" onclick="submitFeedbackComment()">
+            <span id="feedback-submit-btn-text">Submit Feedback</span>
+          </button>
+        </div>
+
+        <div id="feedback-thanks" class="feedback-alert">
+          ✓ <span id="feedback-thanks-text">Thank you! Your feedback has been recorded safely.</span>
+        </div>
+      </div>
+
+      <!-- Reset / Check Another Message Button -->
+      <div style="text-align: center; margin: 32px 0;">
+        <button type="button" class="btn btn-primary" onclick="handleReset()">
+          <span id="check-another-btn-text">🔄 Check Another Message</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>ScamShield – Mini Project | Medicaps University, Indore | Aug–Dec 2026</p>
+      <p style="margin-top: 4px; font-size: 16px;">Decision-Support System | Always verify independently with official authorities</p>
+    </footer>
+  </div>
+
+  <script src="/static/js/i18n.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

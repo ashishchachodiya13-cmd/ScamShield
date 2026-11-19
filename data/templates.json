@@ -1,0 +1,36 @@
+{
+  "categories": {
+    "digital_arrest": {
+      "en": "This message displays clear indicators of a Digital Arrest fraud. The sender claims to be a law enforcement authority such as the CBI or police, creates artificial panic with arrest threats, demands complete secrecy, and pressures you to transfer funds. In India, no government agency or court arrests individuals over video calls or demands money transfers to 'safe accounts'.",
+      "hi": "यह संदेश 'डिजिटल अरेस्ट' धोखाधड़ी के स्पष्ट संकेत दिखाता है। भेजने वाला सीबीआई या पुलिस अधिकारी होने का झूठा दावा कर रहा है, गिरफ्तारी की धमकी देकर डरा रहा है, और किसी को न बताने तथा तुरंत पैसे ट्रांसफर करने का दबाव बना रहा है। याद रखें कि भारत में असली पुलिस या अदालत कभी भी वीडियो कॉल पर गिरफ्तार नहीं करती और न ही पैसे मांगती है।"
+    },
+    "kyc_account_block": {
+      "en": "This message exhibits classic warning signs of KYC or Account-Block fraud. The sender falsely claims your bank account, SIM card, or PAN is suspended and pressures you to act immediately or click a suspicious link. Genuine banks and service providers never ask for OTPs, PINs, or threaten abrupt service cancellation over SMS.",
+      "hi": "यह संदेश केवाईसी या बैंक खाता ब्लॉक करने की धोखाधड़ी का स्पष्ट उदाहरण है। इसमें दावा किया गया है कि आपका बैंक खाता, सिम कार्ड या पैन बंद हो रहा है, और तुरंत लिंक पर क्लिक करने का दबाव बनाया जा रहा है। असली बैंक कभी भी ऐसे लिंक भेजकर गोपनीय जानकारी या ओटीपी नहीं मांगते।"
+    },
+    "lottery": {
+      "en": "This communication is typical of a fake Lottery or Prize Scam. It falsely informs you that you have won a large cash prize or lucky draw, and demands an advance registration fee or tax to release the funds. Genuine lotteries never ask winners to pay advance fees to receive their prize.",
+      "hi": "यह संदेश फर्जी लॉटरी या इनाम धोखाधड़ी का संकेत देता है। इसमें आपको बिना टिकट खरीदे बड़ी रकम या लॉटरी जीतने का झूठा लालच दिया गया है, और इनाम देने के बहाने अग्रिम फीस या टैक्स मांगा जा रहा है। असली संस्थाएं इनाम देने के लिए कभी भी पहले पैसे जमा करने को नहीं कहती हैं।"
+    },
+    "job_scam": {
+      "en": "This message resembles a fake Job Offer or Work-From-Home Scam. The sender promises unrealistic high daily income for easy tasks, but requires you to pay upfront registration or documentation fees. Legitimate employers never charge candidates money to provide jobs or work materials.",
+      "hi": "यह संदेश फर्जी नौकरी या वर्क-फ्रॉम-होम धोखाधड़ी का है। इसमें कम समय में बहुत अधिक पैसे कमाने का लालच दिया जाता है, लेकिन काम शुरू करने से पहले रजिस्ट्रेशन या फाइल चार्ज के नाम पर पैसे मांगे जाते हैं। कोई भी प्रतिष्ठित कंपनी नौकरी देने के बदले पैसे नहीं लेती।"
+    },
+    "loan_scam": {
+      "en": "This communication shows signs of a Fake Loan Offer Scam. It claims an instant or pre-approved loan has been sanctioned with little or no documentation, but demands an upfront processing fee or security deposit. Licensed lenders deduct legitimate fees from the disbursed loan amount, never to personal UPI accounts.",
+      "hi": "यह संदेश फर्जी लोन ऑफर धोखाधड़ी का है। इसमें बिना किसी जांच या कागजात के तुरंत भारी लोन स्वीकृत होने का दावा किया गया है, और फाइल पास कराने के लिए पहले पैसे ट्रांसफर करने को कहा जा रहा है। अधिकृत बैंक कभी भी व्यक्तिगत खातों में अग्रिम फीस नहीं मांगते।"
+    },
+    "family_emergency": {
+      "en": "This message uses emotional manipulation typical of a Family Emergency Scam. The caller or sender falsely asserts that your child or relative is hospitalized, involved in an accident, or in police custody, demanding urgent money transfers while insisting you don't call them directly. Always call your relative directly to verify.",
+      "hi": "यह संदेश पारिवारिक संकट या इमरजेंसी धोखाधड़ी का है। इसमें दावा किया गया है कि आपका बेटा, बेटी या परिजन गंभीर मुसीबत, अस्पताल या पुलिस हिरासत में है, और डर का माहौल बनाकर तुरंत पैसे ट्रांसफर करने को कहा गया है। घबराएं नहीं और पहले अपने परिजन से सीधे फोन पर बात करें।"
+    },
+    "general_suspicious": {
+      "en": "This communication contains suspicious red flags such as unreasonable urgency, payment requests, or demands for sensitive information. Treat this message with high caution and do not share any personal credentials or transfer any funds until verified.",
+      "hi": "इस संदेश में संदिग्ध संकेत जैसे अनावश्यक जल्दबाजी, पैसे ट्रांसफर करने का दबाव या गोपनीय जानकारी की मांग पाई गई है। इस संदेश पर अत्यधिक सावधानी बरतें और बिना पुष्टि के कोई भी जानकारी या पैसे साझा न करें।"
+    }
+  },
+  "zero_flags": {
+    "en": "No known red flags were detected in this message. However, stay cautious. Scam techniques evolve constantly, and legitimate banks or government departments will never ask you for passwords, OTPs, or immediate funds transfers.",
+    "hi": "इस संदेश में कोई ज्ञात संदिग्ध संकेत (रेड फ्लैग) नहीं पाया गया। फिर भी सतर्क रहें। असली बैंक या सरकारी विभाग कभी भी फोन या मैसेज पर आपका पासवर्ड, ओटीपी या पैसे ट्रांसफर करने की मांग नहीं करते हैं।"
+  }
+}
