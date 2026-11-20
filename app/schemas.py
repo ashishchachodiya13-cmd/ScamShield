@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional, Literal
+from typing import List, Dict, Optional, Literal, Any
 from pydantic import BaseModel, Field
 
 
@@ -89,3 +89,63 @@ class FeedbackRequest(BaseModel):
     category: Optional[str] = None
     risk_level: Optional[str] = None
     comment: Optional[str] = None
+
+
+# ==============================================================================
+# Auth & User Schemas (Stage 1)
+# ==============================================================================
+
+class UserRegisterRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=255)
+    name: str = Field(min_length=1, max_length=100)
+    password: str = Field(min_length=8, max_length=128)
+
+
+class UserLoginRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=255)
+    password: str = Field(min_length=1, max_length=128)
+    remember_me: bool = False
+
+
+class UserResponse(BaseModel):
+    id: int
+    email: str
+    name: str
+    created_at: str
+    last_login_at: Optional[str] = None
+
+
+class PreferencesResponse(BaseModel):
+    language: str = "en"
+    large_text: bool = False
+    retain_masked_text: bool = False
+    notify_settings: Dict[str, Any] = Field(default_factory=dict)
+
+
+class UserMeResponse(BaseModel):
+    user: UserResponse
+    preferences: PreferencesResponse
+
+
+class UserUpdateRequest(BaseModel):
+    name: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    current_password: Optional[str] = Field(default=None, min_length=1)
+    new_password: Optional[str] = Field(default=None, min_length=8, max_length=128)
+
+
+class DeleteAccountRequest(BaseModel):
+    password: str = Field(min_length=1)
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=255)
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str = Field(min_length=10)
+    new_password: str = Field(min_length=8, max_length=128)
+
+
+class AuthMessageResponse(BaseModel):
+    status: str = "ok"
+    message: str

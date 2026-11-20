@@ -43,6 +43,10 @@ actions_manager = ActionsManager()
 explanation_manager = ExplanationManager()
 init_db()
 
+# Mount API routers
+from app.routers import auth as auth_router
+app.include_router(auth_router.router)
+
 
 @app.get("/")
 async def serve_index():
