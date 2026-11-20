@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, HTTPException, status
+from fastapi import FastAPI, UploadFile, File, HTTPException, status, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,7 +16,14 @@ from app.pipeline.rules import RuleEngine
 from app.pipeline.ocr import extract_text_from_image
 from app.pipeline.actions import ActionsManager
 from app.pipeline.explain import ExplanationManager
-from app.database import init_db, save_feedback, get_feedback_stats
+from app.database import (
+    init_db,
+    save_feedback,
+    get_feedback_stats,
+    create_analysis,
+    get_user_preferences,
+)
+from app.routers.auth import get_current_user_optional
 
 # Base paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +52,14 @@ init_db()
 
 # Mount API routers
 from app.routers import auth as auth_router
+from app.routers import history as history_router
+from app.routers import stats as stats_router
+from app.routers import preferences as preferences_router
+
 app.include_router(auth_router.router)
+app.include_router(history_router.router)
+app.include_router(stats_router.router)
+app.include_router(preferences_router.router)
 
 
 @app.get("/")
@@ -58,7 +72,7 @@ async def serve_index():
 
 
 @app.post("/api/analyze", response_model=AnalysisResponse)
-async def analyze_message(req: AnalysisRequest):
+async def analyze_message(req: AnalysisRequest, request: Request):
     """
     Main analysis pipeline:
     1. Validates input text.
@@ -102,6 +116,25 @@ async def analyze_message(req: AnalysisRequest):
         is_zero_flags=is_zero_flags,
     )
 
+    # Step 5: Save anonymized analysis record if user is authenticated (Stage 2)
+    analysis_id = None
+    user = get_current_user_optional(request)
+    if user is not None:
+        prefs = get_user_preferences(user["id"])
+        retain_masked = bool(prefs["retain_masked_text"]) if prefs else False
+        stored_masked = masked_text if retain_masked else None
+        flag_ids = [f.id for f in matched_flags]
+        analysis_id = create_analysis(
+            user_id=user["id"],
+            risk_level=risk_level,
+            score=score,
+            category=category_id,
+            flag_ids=flag_ids,
+            language=req.language,
+            source=req.source,
+            masked_text=stored_masked,
+        )
+
     return AnalysisResponse(
         risk_level=risk_level,
         score=score,
@@ -113,6 +146,7 @@ async def analyze_message(req: AnalysisRequest):
         actions=actions,
         language=req.language,
         masked_text=masked_text,
+        analysis_id=analysis_id,
     )
 
 
@@ -159,6 +193,7 @@ async def submit_feedback(req: FeedbackRequest):
             category=req.category,
             risk_level=req.risk_level,
             comment=req.comment,
+            analysis_id=req.analysis_id,
         )
         return {"status": "ok", "message": "Feedback submitted successfully.", "id": row_id}
     except Exception as e:

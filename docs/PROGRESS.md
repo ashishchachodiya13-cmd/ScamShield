@@ -55,3 +55,29 @@ This document tracks the iterative upgrade of ScamShield across Stages 0 through
 - **Known Gaps:**
   - Frontend auth UI (login/signup forms, session handling) is scheduled for Stage 4.
   - Saving analyses to database for authenticated users is scheduled for Stage 2.
+
+---
+
+## Stage 2 — History, Stats, Reports & Privacy API
+
+- **Date:** November 2026
+- **What Changed:**
+  - Extended `AnalysisRequest` (optional `source`), `AnalysisResponse` (optional `analysis_id`), and `FeedbackRequest` (optional `analysis_id`) in `app/schemas.py`.
+  - Added Pydantic schemas for History (`HistoryItemResponse`, `HistoryListResponse`, `HistoryDetailResponse`), Stats (`StatsOverviewResponse`, `ReportsResponse`), and Preferences (`PreferencesUpdateRequest`).
+  - Added database functions to `app/database.py` for analyses persistence, user-scoped querying, pagination, search, detail retrieval, individual and bulk deletion, SQL aggregate dashboard stats, date-ranged reports analytics, and anonymized CSV/JSON export.
+  - Implemented `app/routers/history.py` providing user-scoped `GET /api/history` (with search, risk/category filters, date ranges, pagination), `GET /api/history/{id}` (reconstructing matched flags, certified actions, and templates; returning 404 for other users' IDs), `DELETE /api/history/{id}`, and `DELETE /api/history` (requiring `confirm=true`).
+  - Implemented `app/routers/stats.py` providing `GET /api/stats/overview` (SQL aggregates, zero hardcoded numbers), `GET /api/stats/reports` (week/month/all ranges with percentages and timeline), and `GET /api/reports/export` (anonymized CSV or JSON export with strict privacy guarantees).
+  - Implemented `app/routers/preferences.py` providing `GET /api/preferences` and `PUT /api/preferences` (with CSRF protection).
+  - Updated `POST /api/analyze` in `app/main.py`: automatically saves anonymized analysis metadata for authenticated users, respects `preferences.retain_masked_text` (default off), and leaves guest scans completely unsaved (`analysis_id=None`).
+  - Updated `POST /api/feedback` in `app/main.py` to link `analysis_id` when submitted.
+  - Mounted all Stage 2 routers in `app/main.py`.
+  - Added comprehensive test suite in `tests/test_history_stats.py` verifying history CRUD, user isolation (404 on other users' records), empty-state stats, SQL aggregate calculation, anonymized CSV/JSON export, preferences updating, masked-text retention opt-in, and full-database privacy assertions (zero raw text, phone numbers, or OTPs anywhere in SQLite).
+- **Tests Status:**
+  - `pytest -q`: **53 passed, 2 failed** in 3.65s.
+    - 10 new tests passing in `tests/test_history_stats.py`.
+    - Total tests: 55 (53 passed; 2 failures are pre-existing OCR tests due to missing Tesseract binary on the host OS).
+    - 0 regressions across all tests.
+  - `evaluate.py --split all`: Accuracy 100.00%, Precision 100.00%, Recall 100.00%, F1-Score 100.00%, Category Accuracy 90.00%.
+- **Known Gaps:**
+  - Frontend UI for dashboard, history drawer, reports charts, and preferences settings is scheduled for Stages 4–6.
+  - Expanded scam category detection (Investment/Trading, Suspicious UPI, Fake Bank, Govt Impersonation) is scheduled for Stage 3.

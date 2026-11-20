@@ -63,6 +63,7 @@ class TemplatesConfig(BaseModel):
 class AnalysisRequest(BaseModel):
     text: str = Field(min_length=1, description="Message or transcript text to analyze")
     language: Literal["en", "hi"] = "en"
+    source: Literal["text", "screenshot", "share"] = "text"
 
 
 class AnalysisResponse(BaseModel):
@@ -76,6 +77,7 @@ class AnalysisResponse(BaseModel):
     actions: ActionItem
     language: Literal["en", "hi"]
     masked_text: str
+    analysis_id: Optional[int] = None
 
 
 class OCRResponse(BaseModel):
@@ -89,6 +91,7 @@ class FeedbackRequest(BaseModel):
     category: Optional[str] = None
     risk_level: Optional[str] = None
     comment: Optional[str] = None
+    analysis_id: Optional[int] = None
 
 
 # ==============================================================================
@@ -149,3 +152,88 @@ class ResetPasswordRequest(BaseModel):
 class AuthMessageResponse(BaseModel):
     status: str = "ok"
     message: str
+
+
+# ==============================================================================
+# History, Stats, Reports & Preferences Schemas (Stage 2)
+# ==============================================================================
+
+class HistoryItemResponse(BaseModel):
+    id: int
+    created_at: str
+    risk_level: str
+    score: int
+    category: str
+    category_name: str
+    flag_ids: List[str]
+    flag_count: int
+    language: str
+    source: str
+    has_masked_text: bool
+
+
+class HistoryListResponse(BaseModel):
+    items: List[HistoryItemResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
+class HistoryDetailResponse(BaseModel):
+    id: int
+    created_at: str
+    risk_level: str
+    score: int
+    category: str
+    category_name: str
+    matched_flags: List[MatchedFlag]
+    explanation: str
+    actions: ActionItem
+    language: str
+    source: str
+    masked_text: Optional[str] = None
+    retained_label: str
+
+
+class StatsOverviewResponse(BaseModel):
+    total_scans: int
+    high_risk_count: int
+    medium_risk_count: int
+    low_risk_count: int
+    recent_scans: List[Dict[str, Any]]
+    recent_high_risk: List[Dict[str, Any]]
+    category_distribution: List[Dict[str, Any]]
+    risk_distribution: List[Dict[str, Any]]
+
+
+class CategoryBreakdownItem(BaseModel):
+    category: str
+    count: int
+    percentage: float
+
+
+class TimelineItem(BaseModel):
+    date: str
+    total: int
+    high: int
+    medium: int
+    low: int
+
+
+class ReportsResponse(BaseModel):
+    range: str
+    total_scans: int
+    high_risk_count: int
+    medium_risk_count: int
+    low_risk_count: int
+    high_risk_percentage: float
+    category_breakdown: List[CategoryBreakdownItem]
+    activity_timeline: List[TimelineItem]
+
+
+class PreferencesUpdateRequest(BaseModel):
+    language: Optional[Literal["en", "hi"]] = None
+    large_text: Optional[bool] = None
+    retain_masked_text: Optional[bool] = None
+    notify_settings: Optional[Dict[str, Any]] = None
