@@ -161,6 +161,8 @@ async def get_history_detail(
         matched_flags=matched_flags,
         explanation=explanation,
         actions=actions,
+        avoid=actions.donts,
+        reporting_channels=actions.official_channels,
         language=lang,
         source=row["source"],
         masked_text=masked_text,

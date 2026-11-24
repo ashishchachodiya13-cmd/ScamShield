@@ -54,6 +54,29 @@ HINGLISH_MAPPINGS: Dict[str, str] = {
     r"\bsim\s+band\s+ho\s+jayega\b": "sim deactivated",
     r"\bpan\s+link\s+karo\b": "update kyc",
     r"\bkyc\s+update\s+karo\b": "update kyc",
+
+    # Investment & Trading variants (Stage 3)
+    r"\bpaisa\s+double\b": "double money",
+    r"\bpaise\s+double\b": "double money",
+    r"\brozana\s+kamayein?\b": "daily profit",
+    r"\bhar\s+din\s+kamayein?\b": "daily profit",
+    r"\btrading\s+tips?\b": "stock tips",
+    r"\bguaranteed\s+munafa\b": "guaranteed profit",
+    r"\bgroup\s+join\s+karo\b": "telegram group",
+
+    # UPI & QR variants (Stage 3)
+    r"\bpin\s+daalo\b": "pin enter",
+    r"\bpin\s+daaliye\b": "pin enter",
+    r"\bpin\s+enter\s+karo\b": "pin enter",
+    r"\bqr\s+scan\s+karo\b": "scan qr",
+    r"\bqr\s+code\s+scan\b": "scan qr",
+    r"\bcollect\s+request\s+bheja\b": "collect request",
+    r"\bpaise\s+account\s+me\s+aayenge\b": "receive money",
+
+    # Phishing & Govt pretexts (Stage 3)
+    r"\bchallan\s+bharo\b": "pay challan",
+    r"\bchallan\s+jama\s+karo\b": "pay challan",
+    r"\bparcel\s+rokk\s+liya\b": "parcel seized",
 }
 
 

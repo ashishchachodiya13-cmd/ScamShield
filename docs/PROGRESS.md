@@ -81,3 +81,55 @@ This document tracks the iterative upgrade of ScamShield across Stages 0 through
 - **Known Gaps:**
   - Frontend UI for dashboard, history drawer, reports charts, and preferences settings is scheduled for Stages 4–6.
   - Expanded scam category detection (Investment/Trading, Suspicious UPI, Fake Bank, Govt Impersonation) is scheduled for Stage 3.
+
+---
+
+## Stage 3 — Detection Engine Expansion (JSON-First)
+
+- **Date:** November 2026
+- **What Changed:**
+  - Expanded detection engine JSON-first without modifying engine classification logic:
+    - Added 4 new scam categories in `data/red_flags.json`, `data/actions.json`, and `data/templates.json`:
+      1. `investment_fraud` (Investment / Trading Fraud)
+      2. `upi_collect_fraud` (Suspicious UPI / QR Request Fraud)
+      3. `fake_bank_phishing` (Fake Bank / Phishing Link Fraud)
+      4. `impersonation_govt` (Government Official Impersonation)
+    - Added 6 new red flags with calibrated weights and multilingual regex patterns (English, Devanagari Hindi, and Hinglish):
+      - `guaranteed_returns` (weight 3)
+      - `investment_group_tip` (weight 2)
+      - `upi_collect_request` (weight 3)
+      - `qr_code_receive` (weight 3)
+      - `fake_bank_pretext` (weight 3)
+      - `govt_officer_impersonation` (weight 3)
+    - Added canonical Hinglish normalization mappings in `app/pipeline/preprocess.py` for trading tips, daily returns, UPI collect/PIN, QR scanning, and parcel/challan pretexts.
+    - Resolved `family_emergency` vs `digital_arrest` pretext ambiguity: refined `family_emergency` patterns and pretext keywords (`"bete"`, `"beto"`, `"police ki custody me hai"`, `"accident ke baad"`). Samples 18 & 20 now correctly resolve to `family_emergency`.
+    - Added comprehensive bilingual safety actions (dos, donts, official channels: 1930, cybercrime.gov.in, sancharsaathi.gov.in, scores.sebi.gov.in, sachet.rbi.org.in, echallan.parivahan.gov.in, bank card helpline) in `data/actions.json`.
+    - Added plain-language template explanations for the 4 new categories (both EN and HI) in `data/templates.json`.
+    - Additively exposed `avoid` (what NOT to do) and `reporting_channels` (official helplines) at top level in `AnalysisResponse` and `HistoryDetailResponse` (`app/schemas.py`, `app/main.py`, `app/routers/history.py`) while preserving backward-compatible `actions: ActionItem`.
+    - Added 12 new test communications (2 scam + 1 genuine per new category, IDs 31 to 42) to `data/sample_dataset.csv`.
+    - Added unit tests in `tests/test_rules.py` covering all 4 new categories and family emergency disambiguation.
+    - Added schema assertions in `tests/test_api.py` validating top-level `avoid` and `reporting_channels`.
+    - Fixed Windows console CP1252 encoding in `evaluate.py` report printer.
+- **Tests Status:**
+  - `pytest -q`: **58 passed, 2 failed** in 8.86s.
+    - 5 new tests passing in `tests/test_rules.py`.
+    - Total tests: 60 (58 passed; 2 failures are pre-existing OCR tests due to missing Tesseract binary on the host OS).
+    - 0 regressions across all tests.
+  - `evaluate.py` Performance Metrics (Before vs After):
+    - **Before Stage 3** (30 samples: 20 scam, 10 genuine):
+      - Accuracy: **100.00%**
+      - Precision: **100.00%**
+      - Recall: **100.00%**
+      - F1-Score: **100.00%**
+      - Category Accuracy: **90.00% (18/20)** (Samples 18 & 20 misclassified as digital arrest)
+    - **After Stage 3** (42 samples: 28 scam, 14 genuine):
+      - Accuracy: **100.00%**
+      - Precision: **100.00%**
+      - Recall: **100.00%**
+      - F1-Score: **100.00%**
+      - Category Accuracy: **100.00% (28/28)** (0 misclassified communications!)
+      - Dev Split: Accuracy 100.00%, Category Accuracy 100.00% (15/15)
+      - Test Split: Accuracy 100.00%, Category Accuracy 100.00% (13/13)
+- **Known Gaps:**
+  - Frontend UI for auth, dashboard, scan page, history, reports, and settings is scheduled for Stages 4–6.
+

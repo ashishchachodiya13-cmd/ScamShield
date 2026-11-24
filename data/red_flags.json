@@ -90,8 +90,71 @@
         "urgency_threat"
       ],
       "pretext_keywords": [
-        "son", "daughter", "child", "hospital", "accident", "custody", "trouble", "beta", "beti", "accidente",
+        "son", "daughter", "child", "hospital", "accident", "custody", "trouble", "beta", "beti", "bete", "beto", "accidente",
         "बेटा", "बेटी", "बच्चा", "अस्पताल", "एक्सीडेंट", "मुसीबत"
+      ]
+    },
+    {
+      "id": "investment_fraud",
+      "name_en": "Investment / Trading Fraud",
+      "name_hi": "निवेश / ट्रेडिंग धोखाधड़ी",
+      "associated_flags": [
+        "guaranteed_returns",
+        "investment_group_tip",
+        "immediate_payment",
+        "suspicious_link_app",
+        "urgency_threat"
+      ],
+      "pretext_keywords": [
+        "investment", "trading", "returns", "profit", "stock tip", "crypto", "forex", "ipo", "share market", "demat", "mutual fund", "daily return", "high return", "guaranteed profit", "telegram tip", "whatsapp group", "vip group", "double money", "daily profit",
+        "निवेश", "ट्रेडिंग", "मुनाफा", "गारंटीड", "शेयर बाजार", "क्रिप्टो", "प्रॉफिट", "रिटर्न"
+      ]
+    },
+    {
+      "id": "upi_collect_fraud",
+      "name_en": "Suspicious UPI / QR Request Fraud",
+      "name_hi": "संदिग्ध यूपीआई / क्यूआर धोखाधड़ी",
+      "associated_flags": [
+        "upi_collect_request",
+        "qr_code_receive",
+        "sensitive_info",
+        "immediate_payment",
+        "urgency_threat"
+      ],
+      "pretext_keywords": [
+        "upi", "collect", "qr code", "receive money", "enter pin", "gpay", "phonepe", "paytm", "bhim", "scan to receive", "refund upi", "claim money", "collect request", "scan qr",
+        "यूपीआई", "क्यूआर", "पिन डालें", "पैसे प्राप्त", "कलेक्ट रिक्वेस्ट", "स्कैन करें"
+      ]
+    },
+    {
+      "id": "fake_bank_phishing",
+      "name_en": "Fake Bank / Phishing Link Fraud",
+      "name_hi": "फर्जी बैंक / फ़िशिंग लिंक धोखाधड़ी",
+      "associated_flags": [
+        "fake_bank_pretext",
+        "suspicious_link_app",
+        "sensitive_info",
+        "urgency_threat"
+      ],
+      "pretext_keywords": [
+        "bank alert", "debit card", "credit card", "netbanking", "reward points", "expiry", "redeem", "phishing", "update details", "sbi netbanking", "hdfc netbanking", "icici", "points expire",
+        "फर्जी बैंक", "बैंक अलर्ट", "रिवॉर्ड पॉइंट", "नेटबैंकिंग", "कार्ड ब्लॉक"
+      ]
+    },
+    {
+      "id": "impersonation_govt",
+      "name_en": "Government Official Impersonation",
+      "name_hi": "सरकारी अधिकारी का फर्जी रूप",
+      "associated_flags": [
+        "govt_officer_impersonation",
+        "authority_impersonation",
+        "urgency_threat",
+        "immediate_payment",
+        "suspicious_link_app"
+      ],
+      "pretext_keywords": [
+        "tax department", "income tax", "customs clearance", "parcel detained", "challan", "traffic police", "rto", "court fine", "parivahan", "tax refund", "pay challan", "parcel seized", "parcel", "customs", "fine", "traffic",
+        "आयकर", "चालान", "कस्टम विभाग", "पार्सल", "ट्रैफिक पुलिस", "सरकारी अधिकारी", "जुर्माना"
       ]
     },
     {
@@ -128,7 +191,7 @@
       "weight": 2,
       "patterns": [
         "\\b(turant|urgent|urgently|immediately|right\\s+now|without\\s+delay|at\\s+once)\\b",
-        "\\b(within\\s+(?:24|12|48|2|1|few)\\s*(?:hours|hrs|hours?|ghante?))\\b",
+        "\\b(?:within|in)\\s+(?:24|12|48|2|1|few)\\s*(?:hours|hrs|hours?|ghante?)\\b",
         "\\b(arrest\\s+(?:warrant|threat|ho\\s+jayega|kar\\s+lenge)|jail\\s+bhej|jail\\s+hogi)\\b",
         "\\b(account\\s+(?:will\\s+be\\s+)?(?:blocked|suspended|terminated|frozen|closed))\\b",
         "\\b(legal\\s+action|police\\s+complaint|fir\\s+register|penal(?:ty|ized)|hathkadi)\\b",
@@ -144,7 +207,7 @@
       "description_hi": "ओटीपी, यूपीआई पिन, सीवीवी, पासवर्ड, या कार्ड व बैंक खाते का विवरण मांगना।",
       "weight": 3,
       "patterns": [
-        "(?<!do not\\s)(?<!don't\\s)(?<!never\\s)\\b(share|send|enter|tell|verify)\\s+(?:your\\s+)?(?:upi\\s*)?(?:otp|pin|cvv|password|details)\\b",
+        "(?<!do not\\s)(?<!don't\\s)(?<!never\\s)\\b(share|send|enter|tell|verify)\\s+(?:your\\s+)?(?:(?:4|6)[- ]?digit\\s+)?(?:upi\\s*)?(?:otp|pin|cvv|password|details)\\b",
         "\\b(otp|one\\s+time\\s+password|upi\\s*pin|cvv)\\s+(?:share|batao|bhejo|enter|daalein)\\b",
         "\\b(card\\s+number|netbanking\\s+password|debit\\s+card\\s+pin)\\s+(?:batao|bhejo|enter)\\b",
         "(?<!न\\s)(?<!मत\\s)(ओटीपी|पिन|सीवीवी|पासवर्ड)\\s*(?:बताएं|दीजिए|शेयर|भेजें|दर्ज\\s*करें)"
@@ -175,7 +238,7 @@
       "weight": 3,
       "patterns": [
         "\\b(transfer\\s+(?:money|amount|funds|cash|rs|inr|\\d+)|send\\s+money)\\b",
-        "\\b(transfer\\s+kijiye|transfer\\s+karo|paise\\s+bhejo|paise\\s+daalo|amount\\s+bhejo)\\b",
+        "\\b(transfer\\s+(?:karein|kijiye|karo)|paise\\s+bhejo|paise\\s+daalo|amount\\s+bhejo)\\b",
         "\\b(safe\\s+account|rbi\\s+safe\\s+account|government\\s+safe\\s+account|suraksha\\s+account)\\b",
         "\\b(pay\\s+(?:fee|fine|penalty|charges|clearance|security\\s+deposit))\\b",
         "\\b(deposit\\s+(?:money|amount|funds|kijiye)|jurmana\\s+bharo|penalty\\s+bharo)\\b",
@@ -254,9 +317,100 @@
       "patterns": [
         "\\b(your\\s+(?:son|daughter|child|relative)\\s+is\\s+in\\s+(?:trouble|custody|hospital))\\b",
         "\\b(?:aapka|aapke)\\s+bete?\\s+(?:ne\\s+)?(?:accident|musibat|police|custody|hospital)\\b",
-        "\\b(accident\\s+ho\\s+gaya|serious\\s+condition|urgent\\s+operation|hospitalized|icu)\\b",
-        "\\b(police\\s+ne\\s+pakad\\s+liya|police\\s+custody\\s+me\\s+hai|mamla\\s+khatam)\\b",
+        "\\b(accident\\s+ho\\s+gaya|accident\\s+ke\\s+baad|serious\\s+condition|urgent\\s+operation|hospitalized|icu)\\b",
+        "\\b(police\\s+ne\\s+pakad\\s+liya|police\\s+(?:ki\\s+)?custody\\s+me\\s+(?:hai|le\\s+liya)|mamla\\s+khatam)\\b",
         "(बेटा\\s*गंभीर\\s*मुसीबत|बेटा\\s*मुसीबत|बेटी\\s*मुसीबत|अस्पताल|एक्सीडेंट|पुलिस\\s*ने\\s*पकड़ा|गंभीर\\s*हालत)"
+      ]
+    },
+    {
+      "id": "guaranteed_returns",
+      "name_en": "Guaranteed or Unrealistic High Returns",
+      "name_hi": "गारंटीड या अत्यधिक मुनाफे का झूठा वादा",
+      "description_en": "Promises guaranteed profit, fixed daily income, risk-free stock/crypto returns or doubling money.",
+      "description_hi": "गारंटीड मुनाफा, दैनिक निश्चित आय, जोखिम मुक्त रिटर्न या पैसा डबल करने का वादा।",
+      "weight": 3,
+      "patterns": [
+        "\\b(guaranteed\\s+(?:(?:\\d+|[a-zA-Z]+)%\\s+)?(?:return|returns|profit|income)|100%\\s+profit|risk[- ]free\\s+profit)\\b",
+        "\\b(double\\s+(?:your\\s+)?(?:money|investment)|2x\\s+(?:returns?|profit)|paisa\\s+double)\\b",
+        "\\b(daily\\s+(?:profit|income|earning|return)|daily\\s+rs\\.?\\s*\\d+|har\\s+din\\s+kamayein?)\\b",
+        "\\b(guaranteed\\s+munafa|sure\\s+shot\\s+profit|fixed\\s+monthly\\s+return)\\b",
+        "(गारंटीड\\s*मुनाफा|गारंटीड\\s*रिटर्न|पैसा\\s*डबल|दैनिक\\s*कमाई|निश्चित\\s*मुनाफा|जोखिम\\s*मुक्त)"
+      ]
+    },
+    {
+      "id": "investment_group_tip",
+      "name_en": "Investment Group or VIP Tip Referral",
+      "name_hi": "इन्वेस्टमेंट ग्रुप या वीआईपी ट्रेडिंग टिप",
+      "description_en": "Invites you to secret WhatsApp or Telegram channels for insider stock, crypto, or forex tips.",
+      "description_hi": "गुप्त स्टॉक, क्रिप्टो या फॉरेक्स टिप्स के लिए व्हाट्सएप या टेलीग्राम ग्रुप से जुड़ने का न्योता।",
+      "weight": 2,
+      "patterns": [
+        "\\b(join\\s+(?:our\\s+)?(?:vip|premium|exclusive|telegram|whatsapp)?\\s*(?:group|channel))\\b",
+        "\\b(vip\\s+(?:stock|trading|crypto|exclusive)\\s+tips?|stock\\s+tips?|trading\\s+tips?|crypto\\s+signals?|forex\\s+trading|ipo\\s+allotment\\s+tip)\\b",
+        "\\b(telegram\\s+(?:channel|group|link)|whatsapp\\s+(?:group|trading))\\b",
+        "\\b(expert\\s+guidance\\s+trading|inside\\s+trade\\s+tip|sebi\\s+certified\\s+expert)\\b",
+        "(टेलीग्राम\\s*ग्रुप|व्हाट्सएप\\s*ग्रुप|ट्रेडिंग\\s*टिप्स|स्टॉक\\s*टिप्स|शेयर\\s*टिप्स|ग्रुप\\s*ज्वाइन\\s*करें)"
+      ]
+    },
+    {
+      "id": "upi_collect_request",
+      "name_en": "UPI Collect Request Fraud",
+      "name_hi": "यूपीआई कलेक्ट रिक्वेस्ट धोखाधड़ी",
+      "description_en": "Asks you to accept a collect request or enter UPI PIN falsely claiming you will receive money.",
+      "description_hi": "पैसे प्राप्त होने का झूठा दावा कर कलेक्ट रिक्वेस्ट स्वीकारने या यूपीआई पिन डालने को कहना।",
+      "weight": 3,
+      "patterns": [
+        "\\b(enter\\s+(?:your\\s+)?(?:6-digit\\s+|4-digit\\s+)?(?:upi\\s*)?pin\\s+to\\s+(?:receive|credit|get|accept)\\s+(?:money|cash|funds|amount|refund))\\b",
+        "\\b(pin\\s+(?:daalo|daaliye|enter\\s+karo)\\s+(?:paise\\s+pane|paise\\s+lene|account\\s+me\\s+paise))\\b",
+        "\\b(approve\\s+(?:the\\s+)?(?:upi\\s*)?collect\\s+request|collect\\s+request\\s+approve\\s+karein)\\b",
+        "\\b(click\\s+pay\\s+to\\s+receive\\s+money|pay\\s+par\\s+click\\s+karke\\s+paise\\s+lo)\\b",
+        "(पिन\\s*डालकर\\s*पैसे\\s*पाएं|पिन\\s*दर्ज\\s*करें\\s*पैसे\\s*मिलेंगे|कलेक्ट\\s*रिक्वेस्ट|पैसे\\s*प्राप्त\\s*करने\\s*के\\s*लिए\\s*पिन)"
+      ]
+    },
+    {
+      "id": "qr_code_receive",
+      "name_en": "Scan QR Code to Receive Money Pretext",
+      "name_hi": "पैसे पाने के लिए क्यूआर कोड स्कैन करने का झांसा",
+      "description_en": "Claims scanning a QR code or entering your PIN will deposit or refund money to your account.",
+      "description_hi": "दावा करना कि क्यूआर कोड स्कैन करने या पिन डालने से आपके खाते में पैसे आएंगे।",
+      "weight": 3,
+      "patterns": [
+        "\\b(scan\\s+(?:this\\s+)?qr\\s*(?:code)?\\s+(?:on\\s+[a-zA-Z\\s]+\\s+)?to\\s+(?:receive|get|claim|credit)\\s+(?:money|payment|cash|amount|refund))\\b",
+        "\\b(?:to\\s+receive|to\\s+get|to\\s+claim)\\s+.*?\\bscan\\s+(?:this\\s+)?qr\\s*(?:code)?\\b",
+        "\\b(qr\\s*(?:code)?\\s+(?:scan\\s+karke|scan\\s+karein)\\s+(?:paise\\s+lo|paise\\s+payein|refund\\s+paayein))\\b",
+        "\\b(scan\\s+qr\\s+to\\s+receive\\s+money|qr\\s+code\\s+scan\\s+karo)\\b",
+        "(क्यूआर\\s*कोड\\s*स्कैन\\s*करके\\s*पैसे\\s*पाएं|स्कैन\\s*करें\\s*पैसे\\s*मिलेंगे|क्यूआर\\s*स्कैन\\s*करो)"
+      ]
+    },
+    {
+      "id": "fake_bank_pretext",
+      "name_en": "Fake Bank Alert / Reward Phishing",
+      "name_hi": "फर्जी बैंक अलर्ट या रिवॉर्ड पॉइंट फ़िशिंग",
+      "description_en": "Spoofs bank alerts claiming credit card reward points are expiring or unverified netbanking login.",
+      "description_hi": "क्रेडिट कार्ड रिवॉर्ड पॉइंट समाप्त होने या फर्जी नेटबैंकिंग लॉगिन का झांसा देकर जानकारी चुराना।",
+      "weight": 3,
+      "patterns": [
+        "\\b(reward\\s+points?\\s+(?:worth\\s+rs\\.?\\s*\\d+|are\\s+expiring|expire\\s+today|redeem\\s+now))\\b",
+        "\\b(redeem\\s+(?:immediately\\s+in\\s+cash|your\\s+points?|your\\s+(?:reward|credit\\s+card|debit\\s+card)\\s+points?))\\b",
+        "\\b(netbanking\\s+(?:access|account|login)\\s+(?:locked|blocked|suspended|requires\\s+verification))\\b",
+        "\\b(netbanking\\s+unlock\\s+karne|password\\s+verify\\s+karein)\\b",
+        "\\b(reward\\s+points\\s+(?:redeem\\s+karein|expire\\s+ho\\s+rahe))\\b",
+        "(रिवॉर्ड\\s*पॉइंट\\s*समाप्त|रिवॉर्ड\\s*पॉइंट\\s*रिडीम|क्रेडिट\\s*कार्ड\\s*पॉइंट|नेटबैंकिंग\\s*ब्लॉक)"
+      ]
+    },
+    {
+      "id": "govt_officer_impersonation",
+      "name_en": "Government Officer / E-Challan Pretext",
+      "name_hi": "सरकारी अधिकारी या ई-चालान का झांसा",
+      "description_en": "Falsely claims traffic challan, income tax penalty, or postal customs parcel detained.",
+      "description_hi": "ट्रैफिक चालान, आयकर जुर्माना या डाकघर/कस्टम्स में पार्सल रोके जाने का झूठा दावा।",
+      "weight": 3,
+      "patterns": [
+        "\\b(traffic\\s+(?:e-?challan|police\\s+challan|violation\\s+notice)|pending\\s+traffic\\s+(?:police\\s+)?challan|pending\\s+traffic\\s+fine)\\b",
+        "\\b(income\\s+tax\\s+(?:department|notice|refund|penalty|officer|defaulter))\\b",
+        "\\b(parcel\\s+(?:detained|seized|held|confiscated|rokk\\s+liya)\\s+(?:at|by)?\\s*(?:customs|custom\\s+department|post\\s+office|airport))\\b",
+        "\\b(pay\\s+challan|challan\\s+(?:bharo|jama\\s+karo)|customs\\s+fine)\\b",
+        "(ट्रैफिक\\s*चालान|ई-चालान|आयकर\\s*विभाग|कस्टम\\s*पार्सल|पार्सल\\s*जब्त|चालान\\s*भरें|आरटीओ\\s*जुर्माना)"
       ]
     }
   ]

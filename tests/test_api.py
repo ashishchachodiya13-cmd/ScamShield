@@ -33,6 +33,10 @@ def test_analyze_mandatory_cbi_case():
     assert len(data["matched_flags"]) >= 4
     assert len(data["actions"]["dos"]) > 0
     assert len(data["actions"]["donts"]) > 0
+    assert "avoid" in data
+    assert len(data["avoid"]) > 0
+    assert "reporting_channels" in data
+    assert len(data["reporting_channels"]) > 0
     assert data["explanation_source"] in ("llm", "template")
 
 

@@ -161,7 +161,7 @@ def print_report(res: Dict[str, Any]):
             print(f"     Flags    : {', '.join(item['flags']) if item['flags'] else 'None'}")
             print("-" * 68)
     else:
-        print("\n [✓] Excellent: 0 misclassified communications in this split!")
+        print("\n [OK] Excellent: 0 misclassified communications in this split!")
     print("=" * 68)
 
 

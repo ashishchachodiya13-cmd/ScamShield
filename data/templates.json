@@ -24,6 +24,22 @@
       "en": "This message uses emotional manipulation typical of a Family Emergency Scam. The caller or sender falsely asserts that your child or relative is hospitalized, involved in an accident, or in police custody, demanding urgent money transfers while insisting you don't call them directly. Always call your relative directly to verify.",
       "hi": "यह संदेश पारिवारिक संकट या इमरजेंसी धोखाधड़ी का है। इसमें दावा किया गया है कि आपका बेटा, बेटी या परिजन गंभीर मुसीबत, अस्पताल या पुलिस हिरासत में है, और डर का माहौल बनाकर तुरंत पैसे ट्रांसफर करने को कहा गया है। घबराएं नहीं और पहले अपने परिजन से सीधे फोन पर बात करें।"
     },
+    "investment_fraud": {
+      "en": "This message exhibits classic warning signs of an Investment or Trading Scam. The sender lures you with promises of guaranteed high profits, risk-free returns, or exclusive VIP stock tips in private chat groups. Genuine, regulated financial investments never guarantee profits, and licensed advisors never solicit funds into private personal accounts.",
+      "hi": "यह संदेश फर्जी निवेश या ट्रेडिंग धोखाधड़ी का स्पष्ट संकेत है। इसमें कम समय में गारंटीड मुनाफे, पैसा डबल करने या वीआईपी ट्रेडिंग ग्रुप से जुड़कर अमीर बनने का झूठा लालच दिया गया है। कोई भी वैध वित्तीय संस्था गारंटीड मुनाफे का वादा नहीं करती और न ही व्यक्तिगत खातों में निवेश के पैसे जमा कराती है।"
+    },
+    "upi_collect_fraud": {
+      "en": "This communication shows indicators of a UPI / QR Code Collect Scam. The sender falsely tells you to enter your UPI PIN or approve a collect request to 'receive' funds or a refund. In the UPI system, entering your PIN or scanning a QR code is exclusively used to SEND money out of your account, never to receive it.",
+      "hi": "यह संदेश यूपीआई या क्यूआर कोड कलेक्ट धोखाधड़ी का संकेत देता है। इसमें पैसे या रिफंड प्राप्त करने के लिए यूपीआई पिन डालने या कलेक्ट रिक्वेस्ट स्वीकार करने को कहा जा रहा है। याद रखें कि यूपीआई में पिन केवल पैसे भेजने के लिए डाला जाता है, पैसे प्राप्त करने के लिए कभी पिन नहीं डालना पड़ता।"
+    },
+    "fake_bank_phishing": {
+      "en": "This message is a Phishing Scam impersonating a bank. It falsely claims your credit card reward points are expiring or your netbanking account is suspended, urging you to click a link. Genuine banks never send links urging you to enter netbanking passwords, CVV, or card credentials.",
+      "hi": "यह संदेश बैंक के नाम पर की जाने वाली फ़िशिंग धोखाधड़ी है। इसमें क्रेडिट कार्ड रिवॉर्ड पॉइंट खत्म होने या नेटबैंकिंग बंद होने का डर दिखाकर लिंक पर क्लिक करने को कहा जा रहा है। असली बैंक कभी भी ऐसे लिंक भेजकर गोपनीय पासवर्ड, सीवीवी या कार्ड विवरण दर्ज करने को नहीं कहते।"
+    },
+    "impersonation_govt": {
+      "en": "This communication indicates a Government Official Impersonation Scam. The sender pretends to represent the traffic police, income tax department, or customs, demanding immediate payment for a fine, challan, or detained parcel. Official government agencies never demand immediate penalty payments through unofficial links or personal UPI IDs.",
+      "hi": "यह संदेश सरकारी अधिकारी बनकर की जाने वाली धोखाधड़ी का है। इसमें ट्रैफिक पुलिस, आयकर विभाग या कस्टम्स का नाम लेकर चालान भरने या पार्सल छुड़ाने के नाम पर तुरंत पैसे मांगे जा रहे हैं। सरकारी विभाग कभी भी व्हाट्सएप लिंक या व्यक्तिगत यूपीआई पर जुर्माना जमा करने को नहीं कहते।"
+    },
     "general_suspicious": {
       "en": "This communication contains suspicious red flags such as unreasonable urgency, payment requests, or demands for sensitive information. Treat this message with high caution and do not share any personal credentials or transfer any funds until verified.",
       "hi": "इस संदेश में संदिग्ध संकेत जैसे अनावश्यक जल्दबाजी, पैसे ट्रांसफर करने का दबाव या गोपनीय जानकारी की मांग पाई गई है। इस संदेश पर अत्यधिक सावधानी बरतें और बिना पुष्टि के कोई भी जानकारी या पैसे साझा न करें।"

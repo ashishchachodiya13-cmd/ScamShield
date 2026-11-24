@@ -144,6 +144,8 @@ async def analyze_message(req: AnalysisRequest, request: Request):
         explanation=explanation,
         explanation_source=explanation_source,
         actions=actions,
+        avoid=actions.donts,
+        reporting_channels=actions.official_channels,
         language=req.language,
         masked_text=masked_text,
         analysis_id=analysis_id,

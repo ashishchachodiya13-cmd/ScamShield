@@ -29,3 +29,15 @@ id,message,label,category,split
 28,"नमस्ते पिताजी, आपकी दवाइयां घर पर डिलीवर हो गई हैं। शाम को फोन करूंगा।",genuine,genuine,dev
 29,"Your LPG cylinder booking reference is 894021. Expected delivery within 2 working days - Indane Gas.",genuine,genuine,test
 30,"Dear Customer, welcome to Jio Fiber. Your monthly plan of 30 Mbps has been successfully renewed on 19-Nov-2026.",genuine,genuine,test
+31,"Exclusive VIP stock tip: Buy XYZ stock now for guaranteed 50% profit in 24 hours. Join our private Telegram trading channel: https://t.me/fake_vip_tips",scam,investment_fraud,dev
+32,"Aapka paisa double hoga 7 din me. Guaranteed daily profit of Rs 5000 in crypto trading. Deposit Rs 10000 in our account now.",scam,investment_fraud,test
+33,"Dear Investor, your monthly SIP of Rs 2,000 in HDFC Top 100 Fund has been successfully processed on 15-Nov-2026. Folio no: 1928374.",genuine,genuine,dev
+34,"Aapko 5,000 rs cashback mila hai PhonePe par. Apne account me paise lene ke liye abhi collect request approve karein aur UPI PIN daalein.",scam,upi_collect_fraud,dev
+35,"To receive Rs 15,000 refund from electricity board, scan this QR code on Google Pay and enter your 6-digit UPI PIN immediately.",scam,upi_collect_fraud,test
+36,"Paid Rs 120.00 to Sharma Grocery Store via UPI Ref 492019482910 on 19-Nov-2026. Updated Bank of Baroda A/c balance Rs 14,290.",genuine,genuine,test
+37,"Dear SBI customer, your credit card reward points worth Rs 9,850 are expiring today. Redeem immediately in cash by visiting: http://sbi-reward-points.xyz/redeem",scam,fake_bank_phishing,dev
+38,"Aapka netbanking account suspicious activity ki wajah se lock kar diya gaya hai. Netbanking unlock karne ke liye link par click karke password verify karein: http://bit.ly/hdfc-verify-login",scam,fake_bank_phishing,test
+39,"Dear Customer, your SBI credit card statement for October 2026 has been generated. Total due: Rs 3,420. Minimum due: Rs 500. Due date: 05-Dec-2026.",genuine,genuine,dev
+40,"Notice from Traffic Police: You have a pending traffic police challan of Rs 1,000. Pay challan immediately within 24 hours to avoid court arrest warrant: http://parivahan-challan-pay.xyz",scam,impersonation_govt,dev
+41,"Aapka ek international parcel customs department ne rokk liya hai. Parcel me illegal items mile hain. Turant 25000 rs customs fine transfer karein nahi toh arrest action hoga.",scam,impersonation_govt,test
+42,"Dear Citizen, your driving license renewal application no 894012 is approved. Download digital copy from parivahan.gov.in. - Transport Dept",genuine,genuine,test

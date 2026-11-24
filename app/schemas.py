@@ -75,6 +75,8 @@ class AnalysisResponse(BaseModel):
     explanation: str
     explanation_source: Literal["llm", "template"]
     actions: ActionItem
+    avoid: List[str] = Field(default_factory=list, description="What NOT to do (avoid) guidance")
+    reporting_channels: List[str] = Field(default_factory=list, description="Official reporting channels")
     language: Literal["en", "hi"]
     masked_text: str
     analysis_id: Optional[int] = None
@@ -190,6 +192,8 @@ class HistoryDetailResponse(BaseModel):
     matched_flags: List[MatchedFlag]
     explanation: str
     actions: ActionItem
+    avoid: List[str] = Field(default_factory=list, description="What NOT to do (avoid) guidance")
+    reporting_channels: List[str] = Field(default_factory=list, description="Official reporting channels")
     language: str
     source: str
     masked_text: Optional[str] = None
