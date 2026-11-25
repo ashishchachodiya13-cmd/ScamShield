@@ -1,0 +1,62 @@
+[
+  {
+    "id": "rbi_no_otp",
+    "source": "Reserve Bank of India (RBI Kehta Hai)",
+    "source_hi": "भारतीय रिज़र्व बैंक (आरबीआई कहता है)",
+    "title_en": "Never Share OTPs or UPI PINs",
+    "title_hi": "ओटीपी या यूपीआई पिन कभी साझा न करें",
+    "tip_en": "Bank executives, RBI officials, and customer support representatives NEVER ask for OTPs, CVV, passwords, or UPI PINs. Entering a UPI PIN always transfers money out of your account, never into it.",
+    "tip_hi": "बैंक अधिकारी, आरबीआई या कस्टमर केयर कभी भी फोन या मैसेज पर ओटीपी, सीवीवी या यूपीआई पिन नहीं मांगते। यूपीआई पिन डालने से हमेशा आपके खाते से पैसे कटते हैं, पैसे कभी नहीं मिलते।",
+    "link": "https://rbi.org.in"
+  },
+  {
+    "id": "i4c_digital_arrest",
+    "source": "Indian Cyber Crime Coordination Centre (I4C)",
+    "source_hi": "भारतीय साइबर अपराध समन्वय केंद्र (I4C)",
+    "title_en": "No Police Arrests Over Video Calls",
+    "title_hi": "वीडियो कॉल पर कोई पुलिस गिरफ्तारी नहीं होती",
+    "tip_en": "Law enforcement agencies (CBI, Police, ED, Customs, Courts) never conduct investigations or make arrests over WhatsApp or Skype video calls. Digital Arrest is 100% fraudulent.",
+    "tip_hi": "सीबीआई, पुलिस, कस्टम्स या अदालतें कभी भी व्हाट्सएप या स्काइप वीडियो कॉल पर जांच या गिरफ्तारी नहीं करतीं। 'डिजिटल अरेस्ट' पूरी तरह से फर्जी और डराने की साजिश है।",
+    "link": "https://cybercrime.gov.in"
+  },
+  {
+    "id": "certin_qr_code",
+    "source": "CERT-In & NPCI Safety Advisory",
+    "source_hi": "सर्ट-इन और एनपीसीआई सुरक्षा परामर्श",
+    "title_en": "QR Codes Are Only for Paying, Never for Receiving",
+    "title_hi": "क्यूआर कोड केवल पैसे भेजने के लिए होता है, पाने के लिए नहीं",
+    "tip_en": "The Golden Rule of UPI: You only scan a QR code or enter your PIN to SEND money. If someone tells you to scan a QR code to receive a refund or lottery prize, it is an outright scam.",
+    "tip_hi": "यूपीआई का सुनहरा नियम: क्यूआर कोड केवल पैसे भेजने के लिए स्कैन किया जाता है। यदि कोई कहे कि पैसे या रिफंड प्राप्त करने के लिए क्यूआर स्कैन करें या पिन डालें, तो वह 100% फ्रॉड है।",
+    "link": "https://www.npci.org.in"
+  },
+  {
+    "id": "dot_chakshu_reporting",
+    "source": "Department of Telecommunications (DoT)",
+    "source_hi": "दूरसंचार विभाग (DoT)",
+    "title_en": "Report Suspicious Callers on Chakshu",
+    "title_hi": "संदिग्ध नंबरों की शिकायत 'चक्षु' पर करें",
+    "tip_en": "Received a threatening SMS about electricity disconnection, SIM suspension, or parcel clearance? Report the sender number immediately on the Chakshu portal at sancharsaathi.gov.in.",
+    "tip_hi": "बिजली कटने, सिम बंद होने या पार्सल जब्त होने की धमकी भरे संदेश आने पर तुरंत sancharsaathi.gov.in पर जाकर 'चक्षु' सुविधा के माध्यम से नंबर की शिकायत दर्ज कराएं।",
+    "link": "https://sancharsaathi.gov.in"
+  },
+  {
+    "id": "morth_echallan",
+    "source": "Ministry of Road Transport & Highways",
+    "source_hi": "सड़क परिवहन एवं राजमार्ग मंत्रालय",
+    "title_en": "Verify Traffic Challans Directly on Official Portal",
+    "title_hi": "ई-चालान की जांच हमेशा आधिकारिक पोर्टल पर करें",
+    "tip_en": "Fake traffic fine alerts contain malicious APK or phishing links (.xyz, bit.ly). Always verify and pay traffic violations directly on the official portal: echallan.parivahan.gov.in.",
+    "tip_hi": "ट्रैफिक चालान के फर्जी मैसेज में खतरनाक ऐप डाउनलोड लिंक होते हैं। चालान की सही स्थिति हमेशा सरकार के आधिकारिक पोर्टल echallan.parivahan.gov.in पर ही देखें।",
+    "link": "https://echallan.parivahan.gov.in"
+  },
+  {
+    "id": "mha_1930_helpline",
+    "source": "National Cyber Crime Helpline (1930)",
+    "source_hi": "राष्ट्रीय साइबर हेल्पलाइन (1930)",
+    "title_en": "Call 1930 Within the Golden Hour",
+    "title_hi": "पैसे कटने पर तुरंत 1930 पर कॉल करें",
+    "tip_en": "If any money has been deducted from your bank account by deceit, dial 1930 immediately. Rapid reporting enables banks and police to freeze fraudulent transactions before scammers withdraw funds.",
+    "tip_hi": "यदि धोखे से आपके बैंक खाते से पैसे कट जाएं, तो तुरंत 1930 डायल करें। जल्दी शिकायत करने से साइबर सेल धोखेबाज के खाते को तुरंत फ्रीज कर पैसा रोक देती है।",
+    "link": "https://cybercrime.gov.in"
+  }
+]

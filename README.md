@@ -60,39 +60,62 @@
 ```
 SchamShield/
 ├── docs/
-│   ├── ScamShield_Synopsis.docx
-│   └── ScamShield_Use_Case_Specifications.docx
+│   ├── AUDIT.md                 # Baseline system audit report (Stage 0)
+│   ├── PROGRESS.md              # Progressive upgrade log (Stages 0–8)
+│   ├── ANDROID_INTEGRATION_PLAN.md # PWA Share Target & Android companion roadmap (Stage 7)
+│   ├── MOBILE_TEST_CHECKLIST.md # Mobile device verification checklist (Stage 7)
+│   └── screenshots/             # Responsive QA screenshots across viewports
 ├── data/
-│   ├── red_flags.json           # Red flags, weights, multilingual patterns, category mappings
+│   ├── red_flags.json           # Red flags, weights, multilingual patterns (10 categories)
 │   ├── actions.json             # Predefined category safety actions & official helplines (EN & HI)
-│   ├── templates.json           # Predefined plain-language explanations & fallback templates
-│   ├── sample_dataset.csv       # 30 labelled messages (dev/test split, scam across 6 categories + genuine)
+│   ├── templates.json           # Plain-language explanations & fallback templates
+│   ├── security_tips.json       # Verified safety advisories citing RBI, I4C (1930), CERT-In, DoT
+│   ├── sample_dataset.csv       # 42 labelled messages (100% precision & recall)
 │   └── tessdata/                # Tesseract OCR language packs (eng.traineddata, hin.traineddata)
 ├── app/
-│   ├── __init__.py
-│   ├── main.py                  # FastAPI application, REST endpoints, static file mounting
-│   ├── schemas.py               # Pydantic models for request/response & config validation
-│   ├── database.py              # SQLite storage for anonymised feedback only (NEVER raw messages)
+│   ├── main.py                  # FastAPI application with security headers & rate limiting
+│   ├── config.py                # App configuration & environment safety guards
+│   ├── limiter.py               # In-memory sliding window rate limiter
+│   ├── security.py              # Argon2id password hashing, JWT tokens, CSRF protection
+│   ├── schemas.py               # Pydantic models for Auth, History, Stats, Reports & Analysis
+│   ├── database.py              # SQLite storage with WAL mode, foreign keys, and DAOs
+│   ├── migrations/              # Idempotent DB schema migrations with auto-backup
+│   ├── routers/
+│   │   ├── auth.py              # Auth API (/register, /login, /logout, /forgot-password, /me)
+│   │   ├── history.py           # User-scoped scan history CRUD & detail drawer (/api/history)
+│   │   ├── stats.py             # Dashboard aggregates & export (/api/stats, /api/reports/export)
+│   │   └── preferences.py       # Accessibility & privacy settings (/api/preferences)
 │   └── pipeline/
-│       ├── __init__.py
-│       ├── preprocess.py        # Normalisation & sensitive data masking ([PHONE], [OTP], [ACCOUNT])
-│       ├── rules.py             # Weighted rule engine, threshold scoring, category classifier
+│       ├── preprocess.py        # Hinglish normalization & sensitive PII masking
+│       ├── rules.py             # Weighted rule engine & category classifier
 │       ├── ocr.py               # Tesseract OCR wrapper for English & Hindi screenshot reading
-│       ├── explain.py           # Gemini API integration via google-genai SDK + template fallback
+│       ├── explain.py           # Gemini API integration via google-genai + template fallback
 │       └── actions.py           # Predefined safety action checklists
 ├── static/
-│   ├── index.html               # Senior-accessible single-page interface
+│   ├── index.html               # Senior-accessible single-page application shell
+│   ├── manifest.webmanifest     # PWA manifest with Web Share Target (/share-target)
 │   ├── css/
-│   │   └── style.css            # 20px+ font, high contrast, responsive accessible layout
-│   └── js/
-│       ├── i18n.js              # Complete English and Hindi UI translation dictionary
-│       └── app.js               # Frontend controller: OCR preview & edit flow, analysis, feedback
+│   │   ├── tokens.css           # Cybersecurity SaaS design tokens (Navy, Indigo, Cyan, Inter)
+│   │   ├── components.css       # Accessible buttons, inputs, modals, toasts, multi-factor badges
+│   │   └── style.css            # Responsive layout (Desktop sidebar, mobile drawer, bottom nav)
+│   ├── js/
+│   │   ├── i18n.js              # Complete English & Hindi bilingual parity (0 hardcoded strings)
+│   │   └── app.js               # App controller (Auth, Dashboard, History, Reports, Scanner, OCR)
+│   ├── vendor/
+│   │   └── chart.umd.min.js     # Chart.js 4.4.7 vendored locally (zero CDN dependencies)
+│   └── icons/
+│       ├── icon-192.png         # PWA icon 192x192
+│       └── icon-512.png         # PWA icon 512x512
 ├── tests/
-│   ├── test_rules.py            # Rule engine unit tests (including mandatory CBI test case)
+│   ├── test_rules.py            # Rule engine unit tests across all 10 scam categories
 │   ├── test_preprocess.py       # PII masking & Hinglish normalisation tests
 │   ├── test_ocr.py              # OCR extraction & error resilience tests
 │   ├── test_explain.py          # LLM template fallback & feedback privacy tests
-│   └── test_api.py              # FastAPI endpoint integration tests
+│   ├── test_api.py              # FastAPI endpoint integration tests
+│   ├── test_migrations.py       # DB schema migration & backup runner tests
+│   ├── test_auth.py             # Authentication & session revocation tests
+│   ├── test_history_stats.py    # History isolation, stats aggregation & export tests
+│   └── test_stage5_8.py         # Security tips, share target, headers, rate limit & log privacy tests
 ├── evaluate.py                  # CLI evaluation tool (Precision, Recall, Accuracy, Confusion Matrix)
 ├── requirements.txt             # Python dependencies
 ├── .env.example                 # Environment configuration template

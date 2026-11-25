@@ -1,22 +1,132 @@
+/**
+ * ScamShield — Internationalization Dictionary (Stage 4)
+ * Complete English & Hindi parity across all UI strings:
+ * Navigation, Auth, Profile, Settings, Scanner, OCR, and Detection Results.
+ */
+
 const I18N = {
   en: {
+    // Brand & App Info
     appTitle: "ScamShield",
     appSubtitle: "AI-Assisted Scam Decision Support for Senior Citizens",
+    brandTagline: "India's First AI & Rule-Based Scam Defense for Senior Citizens",
     disclaimerBadge: "Decision-Support Tool",
-    disclaimerText: "This tool assists you in identifying suspicious messages. It is NOT a replacement for the National Cyber Helpline (1930) or Sanchar Saathi / Chakshu.",
-    langLabel: "भाषा / Language:",
-    
-    // Input Screen
+    disclaimerText: "This tool assists you in identifying suspicious messages. It is NOT a replacement for the National Cyber Crime Helpline (1930) or Sanchar Saathi / Chakshu.",
+    langLabel: "Language / भाषा:",
+
+    // Navigation & Shell
+    navOverview: "Overview",
+    navScan: "Scan Message",
+    navMobile: "Mobile Detection",
+    navHistory: "History",
+    navReports: "Reports",
+    navSettings: "Settings",
+    navProfile: "My Profile",
+    navLogout: "Log Out",
+    navLogin: "Log In",
+    navSignup: "Sign Up",
+    navGuestMode: "Guest Mode",
+
+    // Auth Showcase (Left Split Panel)
+    authShowcaseTag: "Enterprise-Grade Consumer Protection",
+    authShowcaseTitle: "Verify Suspicious Messages Before You Act",
+    authShowcaseSubtitle: "Empowering senior citizens and families in India to instantly detect digital arrest threats, fake bank alerts, lottery lures, and fraudulent UPI requests.",
+    authFeature1: "100% deterministic rule engine with RBI & CERT-In aligned fraud guidelines",
+    authFeature2: "Zero personal data storage — raw messages, numbers & OTPs are never saved",
+    authFeature3: "Bilingual English & Hindi support with high-contrast Senior Text Mode",
+    authTrustBadge: "Aligned with I4C (1930) & Sanchar Saathi Safety Protocols",
+
+    // Auth: Login
+    loginTitle: "Welcome back",
+    loginSubtitle: "Log in to your account to access your scan history and reports",
+    emailLabel: "Email address",
+    emailPlaceholder: "name@example.com",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your password",
+    rememberMe: "Remember me for 30 days",
+    forgotPasswordLink: "Forgot password?",
+    loginBtn: "Log In",
+    loginSubmitting: "Logging in...",
+    noAccountPrompt: "Don't have an account?",
+    signupLink: "Create an account",
+
+    // Auth: Sign Up
+    signupTitle: "Create your account",
+    signupSubtitle: "Join ScamShield to protect yourself and keep track of suspicious alerts",
+    nameLabel: "Full Name",
+    namePlaceholder: "e.g. Ramesh Sharma",
+    confirmPasswordLabel: "Confirm Password",
+    confirmPasswordPlaceholder: "Re-enter your password",
+    signupBtn: "Create Free Account",
+    signupSubmitting: "Creating account...",
+    haveAccountPrompt: "Already have an account?",
+    loginLink: "Log In here",
+    pwdStrengthLabel: "Password strength:",
+    pwdWeak: "Weak",
+    pwdFair: "Fair",
+    pwdGood: "Good",
+    pwdStrong: "Strong",
+    pwdRule1: "At least 8 characters",
+    pwdRule2: "Not all-numeric",
+    pwdRule3: "Must not contain your email",
+
+    // Auth: Forgot & Reset Password
+    forgotTitle: "Reset your password",
+    forgotSubtitle: "Enter your registered email address and we will provide a reset link",
+    sendResetBtn: "Send Reset Link",
+    backToLogin: "Back to Login",
+    resetTitle: "Set new password",
+    resetSubtitle: "Please choose a strong password with at least 8 characters",
+    newPasswordLabel: "New Password",
+    confirmNewPasswordLabel: "Confirm New Password",
+    resetBtn: "Update Password",
+    resetSuccessMsg: "Your password has been reset successfully! You can now log in.",
+
+    // Profile Screen
+    profileTitle: "My Profile",
+    profileSubtitle: "Manage your account credentials and personal preferences",
+    profileDetailsHeading: "Account Information",
+    registeredEmailLabel: "Registered Email",
+    fullNameLabel: "Full Name",
+    updateNameBtn: "Save Name",
+    changePwdHeading: "Change Password",
+    currentPwdLabel: "Current Password",
+    newPwdLabel: "New Password",
+    updatePwdBtn: "Change Password",
+    dangerZoneHeading: "Danger Zone",
+    deleteAccountTitle: "Delete Account & All Data",
+    deleteAccountDesc: "Permanently delete your user profile and all associated scan records. This action cannot be undone.",
+    deleteAccountBtn: "Delete My Account",
+    deleteModalTitle: "Confirm Account Deletion",
+    deleteModalDesc: "Are you sure you want to delete your ScamShield account? All your history and preferences will be permanently wiped.",
+    deleteModalPwdConfirm: "Please enter your password to confirm:",
+    cancelBtn: "Cancel",
+    confirmDeleteBtn: "Yes, Delete Account",
+
+    // Settings Screen
+    settingsTitle: "Application Settings",
+    settingsSubtitle: "Customize accessibility, display size, and privacy protections",
+    appearanceHeading: "Display & Accessibility",
+    largeTextTitle: "Senior Citizen Large Text Mode",
+    largeTextDesc: "Enlarge buttons, inputs, and fonts to 20px+ for easier reading without eye strain",
+    languageSettingTitle: "Application Language",
+    languageSettingDesc: "Switch seamlessly between English and Hindi across the entire platform",
+    privacyHeading: "Privacy & Data Storage",
+    retainMaskedTitle: "Save Masked Text in History",
+    retainMaskedDesc: "Allow your personal scan history to remember anonymised [MASKED] messages. Raw text and numbers are NEVER stored.",
+    saveSettingsBtn: "Save Preferences",
+
+    // Input Screen & Quick Scan
     inputHeading: "Check a Suspicious Message or Call",
     inputSubheading: "Paste any message (SMS, WhatsApp, or Call transcript) or upload a photo of the message below.",
     messagePlaceholder: "Paste the suspicious message or call transcript here...\n\nExample: 'Main CBI officer bol raha hu. Aapke naam par arrest warrant hai. Turant 50,000 transfer kijiye aur kisi ko mat batana.'",
-    uploadBtn: "📁 Upload Screenshot",
+    uploadBtn: "Upload Screenshot",
     uploadHelp: "PNG or JPG screenshot from WhatsApp, SMS, or Call Log",
     clearBtn: "Clear",
-    analyzeBtn: "🔍 Analyze Message",
+    analyzeBtn: "Analyze Message",
     analyzingText: "Analyzing message for red flags...",
     emptyError: "Please enter some message text or upload a screenshot first.",
-    
+
     // OCR Review
     ocrHeading: "Review Text from Screenshot",
     ocrInstruction: "Please compare the extracted text below with your screenshot. Correct any misspelled words or numbers before analyzing.",
@@ -24,7 +134,7 @@ const I18N = {
     ocrCancelBtn: "Remove Image",
     ocrProcessing: "Reading text from image...",
     ocrEmpty: "No text was detected in this image. Please upload a clearer photo or type the message directly.",
-    
+
     // Results Screen
     resultHeading: "Analysis Result",
     riskLabel: "Risk Level",
@@ -35,54 +145,232 @@ const I18N = {
     riskZeroSub: "We did not find any known scam patterns, but never consider any unknown message completely 'Safe'. Banks and government agencies will never ask for your passwords or OTPs.",
     categoryLabel: "Detected Scam Type",
     scoreLabel: "Suspicion Score",
-    
+
     // Explanation
     explanationHeading: "Why This Looks Suspicious (Simple Explanation)",
-    sourceLlm: "✨ AI Explanation",
-    sourceTemplate: "📋 Standard Safety Guide",
-    
+    sourceLlm: "AI-Written Explanation",
+    sourceTemplate: "Standard Safety Guide",
+
     // Red flags
     flagsHeading: "Red Flags Detected in this Message",
     noFlagsFound: "No specific manipulation tactics identified.",
     matchedSnippets: "Words detected:",
-    
+
     // Actions
     actionsHeading: "What You Should Do Now",
-    dosTitle: "✅ What TO Do",
-    dontsTitle: "❌ What NOT To Do",
-    helplinesTitle: "🚨 Official Emergency Contacts",
-    
+    dosTitle: "What TO Do",
+    dontsTitle: "What NOT To Do",
+    helplinesTitle: "Official Emergency Contacts",
+
     // Feedback
     feedbackHeading: "Was this helpful?",
     feedbackSubheading: "Your anonymous feedback helps us protect more senior citizens. No message content is ever stored.",
-    feedbackHelpfulBtn: "👍 Yes, it helped me",
-    feedbackUnhelpfulBtn: "👎 Not helpful",
+    feedbackHelpfulBtn: "Yes, it helped me",
+    feedbackUnhelpfulBtn: "Not helpful",
     feedbackCommentPlaceholder: "Optional: Tell us what could be clearer...",
     feedbackSubmitBtn: "Submit Feedback",
     feedbackThanks: "Thank you! Your feedback has been recorded safely.",
-    
-    // Reset
-    checkAnotherBtn: "🔄 Check Another Message",
+
+    // Reset & General
+    checkAnotherBtn: "Check Another Message",
+    guestNotice: "Scanning as Guest (no records saved)",
+    userSavedNotice: "Analysis recorded safely to your private history",
+    errorGeneric: "An unexpected error occurred. Please try again.",
+    comingSoon: "Feature ready in the upcoming stage.",
+
+    // Dashboard (Stage 5)
+    dashboardTitle: "Threat Dashboard",
+    dashboardSubtitle: "Real-time threat monitoring and personal scan analytics",
+    statTotalScans: "Total Scans",
+    statHighRisk: "High Risk Threats",
+    statMedRisk: "Medium Suspicion",
+    statLowRisk: "Low / Monitored",
+    riskDistributionTitle: "Threat Risk Distribution",
+    categoriesTitle: "Detected Scam Categories",
+    recentScansTitle: "Recent Analyses",
+    securityTipsTitle: "Verified Safety Advisory",
+    tableRiskDesc: "Accessible Data Table: Risk Distribution",
+    tableCatDesc: "Accessible Data Table: Detected Scam Categories",
+    noDataYet: "No scans recorded yet",
+    scanFirstPrompt: "Scan your first message to see real-time charts and personal protection metrics here.",
+    scanNowBtn: "Scan a Message Now",
+
+    // History (Stage 6)
+    historyTitle: "Scan History",
+    historySubtitle: "Search, filter, and inspect past suspicious communications",
+    filterRiskAll: "All Risk Levels",
+    filterRiskHigh: "High Risk",
+    filterRiskMed: "Medium Risk",
+    filterRiskLow: "Low Risk",
+    filterCatAll: "All Categories",
+    searchHistoryPlaceholder: "Search category or red flag...",
+    clearAllHistoryBtn: "Clear All History",
+    confirmClearHistory: "Are you sure you want to delete ALL your historical scans? This cannot be undone.",
+    historyEmptyTitle: "No History Records Found",
+    historyEmptyDesc: "No scanned messages match your active filters or you haven't scanned any messages while logged in.",
+    drawerTitle: "Analysis Details",
+    colDate: "Date & Time",
+    colRisk: "Risk Level",
+    colCategory: "Scam Category",
+    colScore: "Score",
+    colActions: "Action",
+    viewDetailsBtn: "View Details",
+    deleteRecordBtn: "Delete Record",
+    confirmDeleteRecord: "Delete this scan from your history?",
+
+    // Reports (Stage 6)
+    reportsTitle: "Fraud Reports & Analytics",
+    reportsSubtitle: "Periodic threat breakdown and data portability",
+    rangeWeek: "Past 7 Days",
+    rangeMonth: "Past 30 Days",
+    rangeAll: "All Time",
+    highRiskRatioLabel: "High-Risk Threat Ratio",
+    activityTimelineTitle: "Daily Detection Activity",
+    exportDataHeading: "Export Anonymised Records",
+    exportCsvBtn: "Download CSV",
+    exportJsonBtn: "Download JSON",
+    tableTimelineDesc: "Accessible Data Table: Detection Activity Timeline",
+
+    // Mobile & PWA (Stage 7)
+    mobileTitle: "Mobile Detection & Quick Share",
+    mobileSubtitle: "Instant analysis directly from WhatsApp, SMS, or Telegram on your smartphone",
+    pwaInstallTitle: "Install ScamShield on Your Phone",
+    pwaInstallDesc: "Install ScamShield as a lightweight app to appear in your phone's Android 'Share' menu.",
+    pwaInstallBtn: "Install App",
+    androidShareTitle: "How to Check Messages Directly from WhatsApp & SMS",
+    androidShareStep1: "1. Open WhatsApp or Messages and select the suspicious message or take a screenshot.",
+    androidShareStep2: "2. Tap 'Share' in your phone's menu.",
+    androidShareStep3: "3. Choose 'ScamShield' to immediately run rule-based scam detection.",
+    multiUploadTitle: "Multi-Screenshot Batch Analysis",
+    multiUploadDesc: "Upload up to 5 screenshots at once (max 5MB each). We extract text and identify fraud patterns across multiple chat bubbles.",
+    dropzonePrompt: "Click to upload or drag & drop up to 5 screenshot images here",
+    analyzeBatchBtn: "Analyze All Uploaded Images",
+    platformNoticeTitle: "Platform Compatibility",
+    platformNoticeDesc: "Android supports native Web Share Target for one-tap sharing. iOS (iPhone/iPad) users can take screenshots and upload them here via Safari.",
   },
-  
+
   hi: {
+    // Brand & App Info
     appTitle: "स्कैमशील्ड (ScamShield)",
     appSubtitle: "वरिष्ठ नागरिकों के लिए संदिग्ध संदेश पहचान व सुरक्षा सहायक",
+    brandTagline: "वरिष्ठ नागरिकों के लिए भारत का पहला एआई व नियम-आधारित फ्रॉड सुरक्षा कवच",
     disclaimerBadge: "निर्णय सहायता साधन",
-    disclaimerText: "यह साधन आपको संदिग्ध संदेशों को समझने में मदद करता है। यह राष्ट्रीय साइबर हेल्पलाइन (1930) या संचार साथी / चक्षु का विकल्प नहीं है।",
+    disclaimerText: "यह साधन आपको संदिग्ध संदेशों को समझने में मदद करता है। यह राष्ट्रीय साइबर क्राइम हेल्पलाइन (1930) या संचार साथी / चक्षु का विकल्प नहीं है।",
     langLabel: "Language / भाषा:",
-    
-    // Input Screen
+
+    // Navigation & Shell
+    navOverview: "डैशबोर्ड (Overview)",
+    navScan: "संदेश जांचें (Scan)",
+    navMobile: "मोबाइल सुरक्षा",
+    navHistory: "जांच इतिहास (History)",
+    navReports: "रिपोर्ट्स (Reports)",
+    navSettings: "सेटिंग्स (Settings)",
+    navProfile: "मेरी प्रोफाइल",
+    navLogout: "लॉग आउट",
+    navLogin: "लॉग इन",
+    navSignup: "नया खाता बनाएं",
+    navGuestMode: "अतिथि मोड",
+
+    // Auth Showcase (Left Split Panel)
+    authShowcaseTag: "वरिष्ठ नागरिक सुरक्षा कवच",
+    authShowcaseTitle: "कोई भी कदम उठाने से पहले संदिग्ध संदेश की जांच करें",
+    authShowcaseSubtitle: "डिजिटल अरेस्ट, फर्जी बैंक अलर्ट, लॉटरी झांसे और फर्जी यूपीआई मांग से खुद को और अपने परिवार को सुरक्षित रखें।",
+    authFeature1: "आरबीआई और राष्ट्रीय साइबर सुरक्षा मानकों पर आधारित 100% सटीक नियम इंजन",
+    authFeature2: "पूर्ण गोपनीयता — आपका संदेश, फोन नंबर या ओटीपी कभी भी स्टोर नहीं किया जाता",
+    authFeature3: "स्पष्ट हिंदी और अंग्रेजी भाषा समर्थन व वरिष्ठ नागरिकों के लिए बड़े अक्षरों की सुविधा",
+    authTrustBadge: "राष्ट्रीय साइबर हेल्पलाइन 1930 व संचार साथी सुरक्षा नियमों के अनुरूप",
+
+    // Auth: Login
+    loginTitle: "पुनः स्वागत है",
+    loginSubtitle: "अपने पिछले जांच इतिहास और रिपोर्ट देखने के लिए अपने खाते में लॉग इन करें",
+    emailLabel: "ईमेल पता (Email)",
+    emailPlaceholder: "name@example.com",
+    passwordLabel: "पासवर्ड (Password)",
+    passwordPlaceholder: "अपना पासवर्ड दर्ज करें",
+    rememberMe: "मुझे 30 दिनों तक याद रखें",
+    forgotPasswordLink: "पासवर्ड भूल गए?",
+    loginBtn: "लॉग इन करें",
+    loginSubmitting: "लॉग इन हो रहा है...",
+    noAccountPrompt: "खाता नहीं है?",
+    signupLink: "नया खाता बनाएं",
+
+    // Auth: Sign Up
+    signupTitle: "नया खाता बनाएं",
+    signupSubtitle: "धोखाधड़ी से सुरक्षित रहने और अपने अलर्ट ट्रैक करने के लिए स्कैमशील्ड से जुड़ें",
+    nameLabel: "पूरा नाम",
+    namePlaceholder: "जैसे: रमेश शर्मा",
+    confirmPasswordLabel: "पासवर्ड की पुनः पुष्टि करें",
+    confirmPasswordPlaceholder: "पासवर्ड दोबारा लिखें",
+    signupBtn: "निःशुल्क खाता बनाएं",
+    signupSubmitting: "खाता बन रहा है...",
+    haveAccountPrompt: "पहले से खाता मौजूद है?",
+    loginLink: "यहाँ लॉग इन करें",
+    pwdStrengthLabel: "पासवर्ड की मजबूती:",
+    pwdWeak: "कमजोर",
+    pwdFair: "सामान्य",
+    pwdGood: "अच्छा",
+    pwdStrong: "बहुत मजबूत",
+    pwdRule1: "कम से कम 8 अक्षर",
+    pwdRule2: "केवल संख्याएं न हों",
+    pwdRule3: "ईमेल पता शामिल न हो",
+
+    // Auth: Forgot & Reset Password
+    forgotTitle: "पासवर्ड रीसेट करें",
+    forgotSubtitle: "अपना पंजीकृत ईमेल दर्ज करें, हम पासवर्ड बदलने का लिंक प्रदान करेंगे",
+    sendResetBtn: "रीसेट लिंक भेजें",
+    backToLogin: "वापस लॉग इन पर जाएं",
+    resetTitle: "नया पासवर्ड बनाएं",
+    resetSubtitle: "कृपया कम से कम 8 अक्षरों का एक सुरक्षित पासवर्ड चुनें",
+    newPasswordLabel: "नया पासवर्ड",
+    confirmNewPasswordLabel: "नए पासवर्ड की पुष्टि करें",
+    resetBtn: "पासवर्ड अपडेट करें",
+    resetSuccessMsg: "आपका पासवर्ड सफलतापूर्वक बदल दिया गया है! अब आप लॉग इन कर सकते हैं।",
+
+    // Profile Screen
+    profileTitle: "मेरी प्रोफाइल",
+    profileSubtitle: "अपनी खाता जानकारी और सुरक्षा प्राथमिकताओं का प्रबंधन करें",
+    profileDetailsHeading: "खाते की जानकारी",
+    registeredEmailLabel: "पंजीकृत ईमेल",
+    fullNameLabel: "पूरा नाम",
+    updateNameBtn: "नाम सहेजें",
+    changePwdHeading: "पासवर्ड बदलें",
+    currentPwdLabel: "वर्तमान पासवर्ड",
+    newPwdLabel: "नया पासवर्ड",
+    updatePwdBtn: "पासवर्ड अपडेट करें",
+    dangerZoneHeading: "अत्यधिक संवेदनशील क्षेत्र (Danger Zone)",
+    deleteAccountTitle: "खाता और सारा डेटा हमेशा के लिए हटाएं",
+    deleteAccountDesc: "अपना खाता और सारा पिछला जांच रिकॉर्ड हमेशा के लिए मिटाएं। यह कार्रवाई वापस नहीं ली जा सकती।",
+    deleteAccountBtn: "मेरा खाता हटाएं",
+    deleteModalTitle: "खाता हटाने की पुष्टि करें",
+    deleteModalDesc: "क्या आप वाकई अपना स्कैमशील्ड खाता हटाना चाहते हैं? आपका समस्त इतिहास और सेटिंग्स मिटा दी जाएंगी।",
+    deleteModalPwdConfirm: "पुष्टि के लिए अपना पासवर्ड दर्ज करें:",
+    cancelBtn: "रद्द करें",
+    confirmDeleteBtn: "हाँ, खाता हटाएं",
+
+    // Settings Screen
+    settingsTitle: "एप्लिकेशन सेटिंग्स",
+    settingsSubtitle: "दृश्यता, फॉन्ट आकार और गोपनीयता प्राथमिकताओं को अनुकूलित करें",
+    appearanceHeading: "दृश्यता और सुगमता",
+    largeTextTitle: "वरिष्ठ नागरिक बड़े फॉन्ट मोड (Large Text)",
+    largeTextDesc: "आंखों पर जोर दिए बिना पढ़ने के लिए बटन, इनपुट और फॉन्ट को 20px+ तक बड़ा करें",
+    languageSettingTitle: "भाषा का चयन",
+    languageSettingDesc: "पूरी एप्लिकेशन में हिंदी और अंग्रेजी के बीच आसानी से बदलाव करें",
+    privacyHeading: "गोपनीयता और डेटा सुरक्षा",
+    retainMaskedTitle: "इतिहास में केवल मास्क किया संदेश सहेजें",
+    retainMaskedDesc: "इतिहास में केवल सुरक्षित [MASKED] रूप याद रखने की अनुमति दें। मूल संदेश या नंबर कभी भीPersist नहीं होते।",
+    saveSettingsBtn: "प्राथमिकताएं सहेजें",
+
+    // Input Screen & Quick Scan
     inputHeading: "संदिग्ध संदेश या कॉल की जांच करें",
     inputSubheading: "संदिग्ध एसएमएस, व्हाट्सएप संदेश या फोन कॉल की बातचीत यहाँ पेस्ट करें, या उसका स्क्रीनशॉट अपलोड करें।",
     messagePlaceholder: "संदिग्ध संदेश यहाँ पेस्ट करें...\n\nउदाहरण: 'सीबीआई अधिकारी बोल रहा हूं। तुरंत पैसे ट्रांसफर करें और किसी को मत बताना।'",
-    uploadBtn: "📁 स्क्रीनशॉट अपलोड करें",
+    uploadBtn: "स्क्रीनशॉट अपलोड करें",
     uploadHelp: "व्हाट्सएप, एसएमएस या कॉल स्क्रीनशॉट (PNG या JPG)",
     clearBtn: "साफ करें",
-    analyzeBtn: "🔍 संदेश की जांच करें",
+    analyzeBtn: "संदेश की जांच करें",
     analyzingText: "संदेश की जांच की जा रही है...",
     emptyError: "कृपया पहले कोई संदेश लिखें या स्क्रीनशॉट अपलोड करें।",
-    
+
     // OCR Review
     ocrHeading: "स्क्रीनशॉट से पढ़े गए शब्दों की जांच करें",
     ocrInstruction: "कृपया नीचे लिखे शब्दों को अपने स्क्रीनशॉट से मिलाएं। यदि कोई शब्द गलत पढ़ा गया हो तो उसे ठीक करके जांचें।",
@@ -90,7 +378,7 @@ const I18N = {
     ocrCancelBtn: "फोटो हटाएं",
     ocrProcessing: "स्क्रीनशॉट से अक्षर पढ़े जा रहे हैं...",
     ocrEmpty: "इस फोटो में कोई अक्षर नहीं पढ़े जा सके। कृपया अधिक साफ फोटो अपलोड करें या सीधे संदेश लिखें।",
-    
+
     // Results Screen
     resultHeading: "जांच का परिणाम",
     riskLabel: "जोखिम स्तर",
@@ -98,36 +386,110 @@ const I18N = {
     riskMedTitle: "मध्यम जोखिम – संदिग्ध संदेश",
     riskLowTitle: "कम जोखिम – सतर्क रहें",
     riskZeroTitle: "कोई ज्ञात संदिग्ध संकेत नहीं मिला – सतर्क रहें",
-    riskZeroSub: "इस संदेश में कोई जाना-पहचाना ठगी का तरीका नहीं दिखा, लेकिन किसी भी अज्ञात संदेश को पूरी तरह 'सुरक्षित' न मानें। असली बैंक या पुलिस कभी पासवर्ड या ओटीपी नहीं मांगते।",
-    categoryLabel: "धोखाधड़ी का प्रकार",
-    scoreLabel: "संदेह स्कोर",
-    
+    riskZeroSub: "हमें इस संदेश में धोखाधड़ी का कोई ज्ञात तरीका नहीं मिला, लेकिन किसी भी अज्ञात संदेश को पूरी तरह 'सुरक्षित' न मानें। असली बैंक या सरकारी एजेंसियां कभी भी आपका पासवर्ड या ओटीपी नहीं मांगतीं।",
+    categoryLabel: "पहचानी गई धोखाधड़ी",
+    scoreLabel: "संदेह अंक",
+
     // Explanation
-    explanationHeading: "यह संदेश संदिग्ध क्यों है? (सरल शब्दों में)",
-    sourceLlm: "✨ एआई व्याख्या",
-    sourceTemplate: "📋 प्रमाणित सुरक्षा विवरण",
-    
+    explanationHeading: "यह संदिग्ध क्यों है (सरल भाषा में विवरण)",
+    sourceLlm: "एआई द्वारा लिखित विवरण",
+    sourceTemplate: "मानक सुरक्षा विवरण",
+
     // Red flags
-    flagsHeading: "इस संदेश में मिले धोखे के संकेत (Red Flags)",
-    noFlagsFound: "कोई विशिष्ट चालाकी नहीं पाई गई।",
-    matchedSnippets: "संदेश में मिले शब्द:",
-    
+    flagsHeading: "संदेश में पाए गए संदिग्ध संकेत (Red Flags)",
+    noFlagsFound: "धोखाधड़ी का कोई विशिष्ट संकेत नहीं पाया गया।",
+    matchedSnippets: "पहचाने गए शब्द:",
+
     // Actions
-    actionsHeading: "अब आपको क्या करना चाहिए?",
-    dosTitle: "✅ क्या करें (सुरक्षित कदम)",
-    dontsTitle: "❌ क्या कभी न करें",
-    helplinesTitle: "🚨 आधिकारिक सहायता केंद्र",
-    
+    actionsHeading: "अब आपको क्या करना चाहिए",
+    dosTitle: "क्या करें (Do's)",
+    dontsTitle: "क्या न करें (Don'ts)",
+    helplinesTitle: "आधिकारिक आपातकालीन हेल्पलाइन",
+
     // Feedback
-    feedbackHeading: "क्या यह जानकारी आपके काम आई?",
-    feedbackSubheading: "आपकी राय अन्य बुजुर्गों को साइबर ठगी से बचाने में मदद करती है। आपका कोई भी संदेश कभी स्टोर नहीं किया जाता।",
-    feedbackHelpfulBtn: "👍 हाँ, बहुत मददगार था",
-    feedbackUnhelpfulBtn: "👎 मददगार नहीं था",
-    feedbackCommentPlaceholder: "वैकल्पिक: हमें बताएं कि क्या और सरल बनाया जा सकता है...",
+    feedbackHeading: "क्या यह जांच आपके लिए मददगार थी?",
+    feedbackSubheading: "आपकी अनाम राय अन्य वरिष्ठ नागरिकों को बचाने में मदद करती है। कोई भी संदेश कभी स्टोर नहीं होता।",
+    feedbackHelpfulBtn: "हाँ, इससे मदद मिली",
+    feedbackUnhelpfulBtn: "मददगार नहीं था",
+    feedbackCommentPlaceholder: "वैकल्पिक: बताएं कि क्या और स्पष्ट हो सकता था...",
     feedbackSubmitBtn: "राय भेजें",
-    feedbackThanks: "धन्यवाद! आपकी बहुमूल्य राय सुरक्षित रूप से दर्ज कर ली गई है।",
-    
-    // Reset
-    checkAnotherBtn: "🔄 दूसरा संदेश जांचें",
+    feedbackThanks: "धन्यवाद! आपकी राय सुरक्षित रूप से दर्ज कर ली गई है।",
+
+    // Reset & General
+    checkAnotherBtn: "अन्य संदेश की जांच करें",
+    guestNotice: "अतिथि के रूप में जांच (कोई रिकॉर्ड सुरक्षित नहीं)",
+    userSavedNotice: "जांच सुरक्षित रूप से आपके निजी इतिहास में सहेजी गई",
+    errorGeneric: "एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।",
+    comingSoon: "यह सुविधा अगले चरण में उपलब्ध होगी।",
+
+    // Dashboard (Stage 5)
+    dashboardTitle: "डैशबोर्ड एवं खतरा विश्लेषण",
+    dashboardSubtitle: "वास्तविक समय खतरा निगरानी और व्यक्तिगत स्कैन आंकड़े",
+    statTotalScans: "कुल जांचें",
+    statHighRisk: "अत्यधिक जोखिम खतरे",
+    statMedRisk: "मध्यम संदिग्ध",
+    statLowRisk: "कम जोखिम / सतर्क",
+    riskDistributionTitle: "जोखिम स्तर वितरण",
+    categoriesTitle: "पहचाने गए फ्रॉड प्रकार",
+    recentScansTitle: "हालिया जांचें",
+    securityTipsTitle: "सत्यापित सुरक्षा सलाह",
+    tableRiskDesc: "पहुंच योग्य डेटा तालिका: जोखिम स्तर वितरण",
+    tableCatDesc: "पहुंच योग्य डेटा तालिका: फ्रॉड प्रकार",
+    noDataYet: "अभी तक कोई रिकॉर्ड नहीं",
+    scanFirstPrompt: "डैशबोर्ड आंकड़े और विश्लेषण देखने के लिए अपना पहला संदेश जांचें।",
+    scanNowBtn: "संदेश जांचें",
+
+    // History (Stage 6)
+    historyTitle: "जांच इतिहास",
+    historySubtitle: "संदिग्ध संदेशों का पिछला इतिहास खोजें, फ़िल्टर करें और देखें",
+    filterRiskAll: "सभी जोखिम स्तर",
+    filterRiskHigh: "अत्यधिक जोखिम",
+    filterRiskMed: "मध्यम जोखिम",
+    filterRiskLow: "कम जोखिम",
+    filterCatAll: "सभी श्रेणियां",
+    searchHistoryPlaceholder: "श्रेणी या संदिग्ध संकेत खोजें...",
+    clearAllHistoryBtn: "सम्पूर्ण इतिहास हटाएं",
+    confirmClearHistory: "क्या आप वाकई अपना सारा जांच इतिहास हटाना चाहते हैं? यह वापस नहीं लाया जा सकता।",
+    historyEmptyTitle: "कोई रिकॉर्ड नहीं मिला",
+    historyEmptyDesc: "आपके फ़िल्टर से मेल खाता कोई रिकॉर्ड नहीं मिला अथवा आपने लॉग इन करके कोई जांच नहीं की है।",
+    drawerTitle: "जांच का संपूर्ण विवरण",
+    colDate: "दिनांक एवं समय",
+    colRisk: "जोखिम स्तर",
+    colCategory: "धोखाधड़ी का प्रकार",
+    colScore: "संदेह अंक",
+    colActions: "कार्रवाई",
+    viewDetailsBtn: "विवरण देखें",
+    deleteRecordBtn: "रिकॉर्ड हटाएं",
+    confirmDeleteRecord: "क्या आप इस रिकॉर्ड को हटाना चाहते हैं?",
+
+    // Reports (Stage 6)
+    reportsTitle: "फ्रॉड रिपोर्ट एवं विश्लेषण",
+    reportsSubtitle: "साप्ताहिक व मासिक विश्लेषण और डेटा डाउनलोड",
+    rangeWeek: "पिछले 7 दिन",
+    rangeMonth: "पिछले 30 दिन",
+    rangeAll: "शुरुआत से अब तक",
+    highRiskRatioLabel: "उच्च जोखिम अनुपात",
+    activityTimelineTitle: "दैनिक जांच गतिविधि",
+    exportDataHeading: "अनाम रिकॉर्ड डाउनलोड करें",
+    exportCsvBtn: "CSV डाउनलोड करें",
+    exportJsonBtn: "JSON डाउनलोड करें",
+    tableTimelineDesc: "पहुंच योग्य डेटा तालिका: दैनिक जांच गतिविधि",
+
+    // Mobile & PWA (Stage 7)
+    mobileTitle: "मोबाइल सुरक्षा एवं त्वरित शेयर",
+    mobileSubtitle: "व्हाट्सएप, एसएमएस या टेलीग्राम से सीधे अपने फोन पर एक क्लिक में संदेश जांचें",
+    pwaInstallTitle: "अपने फोन पर स्कैमशील्ड ऐप इंस्टॉल करें",
+    pwaInstallDesc: "स्कैमशील्ड को फोन ऐप के रूप में जोड़ें ताकि यह फोन के 'Share' मेन्यू में दिखाई दे।",
+    pwaInstallBtn: "ऐप इंस्टॉल करें",
+    androidShareTitle: "व्हाट्सएप और एसएमएस से सीधे कैसे जांचें",
+    androidShareStep1: "1. व्हाट्सएप या मैसेज ऐप में संदिग्ध संदेश चुनें या स्क्रीनशॉट लें।",
+    androidShareStep2: "2. फोन के 'Share' (साझा करें) बटन पर टैप करें।",
+    androidShareStep3: "3. 'ScamShield' चुनें और तुरंत सुरक्षित जांच परिणाम देखें।",
+    multiUploadTitle: "एक साथ कई स्क्रीनशॉट की जांच",
+    multiUploadDesc: "एक साथ 5 स्क्रीनशॉट तक अपलोड करें (अधिकतम 5MB प्रति फोटो)। हम पूरे चैट वार्तालाप की जांच करेंगे।",
+    dropzonePrompt: "5 स्क्रीनशॉट तक अपलोड करने के लिए यहां क्लिक करें या फोटो खींचकर छोड़ें",
+    analyzeBatchBtn: "सभी अपलोड किए गए फोटो जांचें",
+    platformNoticeTitle: "प्लेटफ़ॉर्म अनुकूलता",
+    platformNoticeDesc: "एंड्रॉइड पर शेयर टारगेट पूर्णतः समर्थित है। आईफोन (iOS) उपयोगकर्ता स्क्रीनशॉट लेकर यहां सफारी के माध्यम से अपलोड कर सकते हैं।",
   }
 };

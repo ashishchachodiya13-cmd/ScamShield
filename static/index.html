@@ -3,230 +3,1302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScamShield – AI Scam Decision Support</title>
+  <meta name="theme-color" content="#101828">
+  <link rel="manifest" href="/static/manifest.webmanifest">
+  <title>ScamShield — AI Scam Decision Support for Senior Citizens</title>
+  <meta name="description" content="India's First AI & Rule-Based Scam Defense for Senior Citizens. Detect digital arrest, KYC blocks, UPI frauds, and fake lottery messages safely.">
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/components.css">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <div class="header-top">
-        <div>
-          <h1 class="app-title">🛡️ <span id="app-title-text">ScamShield</span></h1>
-          <p class="app-subtitle" id="app-subtitle-text">AI-Assisted Scam Decision Support for Senior Citizens</p>
-        </div>
-        
-        <!-- Language Switcher -->
-        <div class="lang-selector">
-          <span style="font-weight: 700; font-size: 18px;" id="lang-label-text">Language / भाषा:</span>
-          <button type="button" class="lang-btn active" id="btn-lang-en" onclick="setLanguage('en')">English</button>
-          <button type="button" class="lang-btn" id="btn-lang-hi" onclick="setLanguage('hi')">हिन्दी</button>
-        </div>
-      </div>
 
-      <!-- Official Disclaimer Banner -->
-      <div class="disclaimer-banner">
-        <span class="disclaimer-badge" id="disclaimer-badge-text">Decision-Support Tool</span>
-        <p id="disclaimer-desc-text">
-          This tool assists you in identifying suspicious messages. It is NOT a replacement for the National Cyber Helpline (1930) or Sanchar Saathi / Chakshu.
-        </p>
-      </div>
-    </header>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite" role="region"></div>
 
-    <!-- Main Input Form Card -->
-    <main id="input-section">
-      <div class="card">
-        <h2 class="card-title" id="input-heading-text">Check a Suspicious Message or Call</h2>
-        <p class="card-subtext" id="input-subheading-text">
-          Paste any message (SMS, WhatsApp, or Call transcript) or upload a photo of the message below.
-        </p>
+  <!-- Mobile Sidebar Backdrop -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleMobileDrawer(false)"></div>
 
-        <!-- Message Input Textarea -->
-        <textarea
-          id="message-input"
-          class="input-textarea"
-          rows="6"
-          placeholder="Paste the suspicious message or call transcript here..."
-          aria-label="Suspicious Message Text"
-        ></textarea>
-
-        <!-- Action Buttons -->
-        <div class="btn-row">
-          <button type="button" class="btn btn-primary" id="btn-analyze" onclick="handleAnalyze()">
-            🔍 <span id="btn-analyze-text">Analyze Message</span>
-          </button>
-
-          <input
-            type="file"
-            id="screenshot-file"
-            class="file-input-hidden"
-            accept="image/png, image/jpeg, image/jpg, image/webp"
-            onchange="handleFileUpload(event)"
-          >
-          <button type="button" class="btn btn-secondary" onclick="document.getElementById('screenshot-file').click()">
-            📁 <span id="btn-upload-text">Upload Screenshot</span>
-          </button>
-
-          <button type="button" class="btn-clear" id="btn-clear-text" onclick="handleClearInput()">
-            Clear
-          </button>
-        </div>
-      </div>
-
-      <!-- OCR Review & Correction Box (UC3, UC4, UC5) -->
-      <div id="ocr-box" class="ocr-review-box" style="display: none;">
-        <div class="ocr-banner">
-          <h3 style="font-size: 22px; margin-bottom: 4px;" id="ocr-title-text">Review Text from Screenshot</h3>
-          <p id="ocr-instruction-text" style="font-size: 19px;">
-            Please compare the extracted text below with your screenshot. Correct any misspelled words or numbers before analyzing.
-          </p>
-        </div>
-
-        <div class="ocr-columns">
-          <div class="ocr-preview-col">
-            <img id="ocr-image-preview" src="" alt="Screenshot Preview">
-          </div>
-          <div class="ocr-edit-col">
-            <textarea
-              id="ocr-text-editor"
-              aria-label="Editable OCR Extracted Text"
-              placeholder="Extracted text will appear here..."
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="btn-row" style="margin-top: 18px;">
-          <button type="button" class="btn btn-primary" id="btn-ocr-confirm" onclick="handleConfirmOCR()">
-            ✓ <span id="btn-ocr-confirm-text">Looks Correct – Analyze Now</span>
-          </button>
-          <button type="button" class="btn btn-secondary" id="btn-ocr-cancel" onclick="handleCancelOCR()">
-            ✕ <span id="btn-ocr-cancel-text">Remove Image</span>
-          </button>
-        </div>
-      </div>
-    </main>
-
-    <!-- Loading Spinner -->
-    <div id="loading-spinner" class="loading-box" role="status" aria-live="polite">
-      <div class="spinner"></div>
-      <p style="font-size: 22px; font-weight: 700;" id="loading-status-text">Analyzing message for red flags...</p>
-    </div>
-
-    <!-- Results Section (UC9, UC10) -->
-    <section id="results-section" class="result-section" aria-live="polite">
-      <!-- Big Risk Badge -->
-      <div id="risk-banner" class="risk-banner">
-        <div id="risk-icon" class="risk-icon">⚠️</div>
-        <div class="risk-info">
-          <h2 id="risk-level-title">HIGH RISK – Warning: Likely Scam</h2>
-          <p id="risk-level-desc"></p>
-        </div>
-      </div>
-
-      <!-- Scam Category Card -->
-      <div class="category-card">
-        <div style="font-size: 18px; font-weight: 700; color: #475569; text-transform: uppercase;" id="cat-label-text">
-          Detected Scam Type
-        </div>
-        <div class="category-name" id="result-category-name">Digital Arrest Scam</div>
-        <div style="font-size: 18px; margin-top: 6px; color: #64748b;" id="result-score-text">
-          Suspicion Score: 11 / 10+
-        </div>
-      </div>
-
-      <!-- Plain Language Explanation Box (UC10) -->
-      <div class="explanation-card">
-        <span id="explanation-source-badge" class="explanation-source-badge">✨ AI Explanation</span>
-        <h3 class="card-title" id="explanation-heading-text">Why This Looks Suspicious (Simple Explanation)</h3>
-        <p class="explanation-text" id="result-explanation-text"></p>
-      </div>
-
-      <!-- Matched Red Flags Card -->
-      <div class="card">
-        <h3 class="card-title" id="flags-heading-text">Red Flags Detected in this Message</h3>
-        <div id="flags-container" class="flags-list">
-          <!-- Populated dynamically -->
-        </div>
-      </div>
-
-      <!-- Safety Actions: Do's and Don'ts Checklist -->
-      <div class="card">
-        <h3 class="card-title" id="actions-heading-text">What You Should Do Now</h3>
-        <div class="actions-container">
-          <!-- What TO Do -->
-          <div class="action-column dos-column">
-            <h4 class="column-title" id="dos-title-text">✅ What TO Do</h4>
-            <ul id="dos-list" class="action-list">
-              <!-- Populated dynamically -->
-            </ul>
-          </div>
-
-          <!-- What NOT To Do -->
-          <div class="action-column donts-column">
-            <h4 class="column-title" id="donts-title-text">❌ What NOT To Do</h4>
-            <ul id="donts-list" class="action-list">
-              <!-- Populated dynamically -->
-            </ul>
-          </div>
-        </div>
-
-        <!-- Official Helplines -->
-        <div class="helplines-card">
-          <h4 id="helplines-title-text">🚨 Official Emergency Contacts</h4>
-          <ul id="helplines-list">
-            <!-- Populated dynamically -->
-          </ul>
-        </div>
-      </div>
-
-      <!-- Feedback Section (UC11) -->
-      <div class="feedback-card">
-        <h3 class="card-title" id="feedback-heading-text">Was this helpful?</h3>
-        <p class="card-subtext" id="feedback-subheading-text">
-          Your anonymous feedback helps us protect more senior citizens. No message content is ever stored.
-        </p>
-        
-        <div class="feedback-buttons" id="feedback-action-row">
-          <button type="button" class="btn btn-secondary" onclick="handleFeedback(true)">
-            <span id="feedback-helpful-btn-text">👍 Yes, it helped me</span>
-          </button>
-          <button type="button" class="btn btn-secondary" onclick="handleFeedback(false)">
-            <span id="feedback-unhelpful-btn-text">👎 Not helpful</span>
-          </button>
-        </div>
-
-        <div id="feedback-comment-container" class="feedback-comment-box">
-          <input
-            type="text"
-            id="feedback-comment-input"
-            class="feedback-comment-input"
-            placeholder="Optional: Tell us what could be clearer..."
-          >
-          <button type="button" class="btn btn-primary" onclick="submitFeedbackComment()">
-            <span id="feedback-submit-btn-text">Submit Feedback</span>
-          </button>
-        </div>
-
-        <div id="feedback-thanks" class="feedback-alert">
-          ✓ <span id="feedback-thanks-text">Thank you! Your feedback has been recorded safely.</span>
-        </div>
-      </div>
-
-      <!-- Reset / Check Another Message Button -->
-      <div style="text-align: center; margin: 32px 0;">
-        <button type="button" class="btn btn-primary" onclick="handleReset()">
-          <span id="check-another-btn-text">🔄 Check Another Message</span>
+  <!-- Account Deletion Confirmation Modal -->
+  <div id="delete-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="delete-modal-title" class="modal-title" style="color: var(--danger-600);">Delete Account & Data</h3>
+        <button type="button" class="btn-ghost btn-icon-only" onclick="toggleDeleteModal(false)" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <p>ScamShield – Mini Project | Medicaps University, Indore | Aug–Dec 2026</p>
-      <p style="margin-top: 4px; font-size: 16px;">Decision-Support System | Always verify independently with official authorities</p>
-    </footer>
+      <div class="modal-body">
+        <p id="delete-modal-desc-text" style="color: var(--text-secondary); margin-bottom: var(--space-4);">
+          Are you sure you want to permanently delete your ScamShield account? All your history and preferences will be permanently wiped.
+        </p>
+        <div class="form-group">
+          <label class="form-label" for="delete-confirm-password" id="delete-modal-pwd-label">Please enter your password to confirm:</label>
+          <input type="password" id="delete-confirm-password" class="form-input" placeholder="Current password" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="toggleDeleteModal(false)" id="delete-modal-cancel-btn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btn-confirm-delete" onclick="handleDeleteAccount()">
+          <span id="delete-modal-confirm-btn">Yes, Delete Account</span>
+        </button>
+      </div>
+    </div>
   </div>
 
+  <!-- Main Application Shell -->
+  <div class="app-shell" id="app-shell">
+
+    <!-- Desktop & Drawer Sidebar -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#scan" class="sidebar-brand">
+          <div class="brand-icon-shield">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </div>
+          <div class="brand-title-wrap">
+            <span class="brand-title" id="sidebar-brand-title">ScamShield</span>
+            <span class="brand-version">Decision Support</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <div class="nav-section-title">Detection & Scanner</div>
+        <a href="#scan" class="nav-item active" id="nav-link-scan" onclick="navigateTo('scan')">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
+          <span class="nav-label" id="nav-text-scan">Scan Message</span>
+          <span class="nav-badge" id="nav-badge-live">LIVE</span>
+        </a>
+
+        <a href="#mobile" class="nav-item" id="nav-link-mobile" onclick="navigateTo('mobile')">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+          </span>
+          <span class="nav-label" id="nav-text-mobile">Mobile Detection</span>
+        </a>
+
+        <div class="nav-section-title">Dashboard & Insights</div>
+        <a href="#dashboard" class="nav-item" id="nav-link-dashboard" onclick="navigateTo('dashboard')">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+          </span>
+          <span class="nav-label" id="nav-text-overview">Overview</span>
+        </a>
+
+        <a href="#history" class="nav-item" id="nav-link-history" onclick="navigateTo('history')">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </span>
+          <span class="nav-label" id="nav-text-history">History</span>
+        </a>
+
+        <a href="#reports" class="nav-item" id="nav-link-reports" onclick="navigateTo('reports')">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          </span>
+          <span class="nav-label" id="nav-text-reports">Reports</span>
+        </a>
+
+        <div class="nav-section-title">Configuration</div>
+        <a href="#settings" class="nav-item" id="nav-link-settings" onclick="navigateTo('settings')">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+          </span>
+          <span class="nav-label" id="nav-text-settings">Settings</span>
+        </a>
+
+        <a href="#profile" class="nav-item auth-only" id="nav-link-profile" onclick="navigateTo('profile')" style="display: none;">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </span>
+          <span class="nav-label" id="nav-text-profile">My Profile</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer (User Info / Guest Callout) -->
+      <div class="sidebar-footer">
+        <!-- Logged In User State -->
+        <div id="sidebar-user-block" class="user-profile-widget" style="display: none;">
+          <div class="user-avatar-circle" id="sidebar-user-avatar">SS</div>
+          <div class="user-meta-wrap">
+            <div class="user-name" id="sidebar-user-name">User Name</div>
+            <div class="user-email-text" id="sidebar-user-email">user@example.com</div>
+          </div>
+          <button type="button" class="btn-ghost btn-icon-only" onclick="handleLogout()" title="Log Out" aria-label="Log out">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </button>
+        </div>
+
+        <!-- Guest State -->
+        <div id="sidebar-guest-block">
+          <div style="font-size: var(--font-size-xs); color: var(--navy-300); margin-bottom: var(--space-2);" id="sidebar-guest-notice">
+            Scanning as Guest (No history saved)
+          </div>
+          <div style="display: flex; gap: var(--space-2);">
+            <a href="#login" class="btn btn-sm btn-outline btn-block" style="color: #ffffff; border-color: rgba(255,255,255,0.25);" id="sidebar-btn-login">Log In</a>
+            <a href="#signup" class="btn btn-sm btn-primary btn-block" id="sidebar-btn-signup">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Flow Area -->
+    <div class="app-main-content">
+
+      <!-- Top Bar Header -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <!-- Mobile Hamburger Toggle -->
+          <button type="button" class="mobile-nav-toggle" onclick="toggleMobileDrawer(true)" aria-label="Open mobile menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+          </button>
+          
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-weight: 700; color: var(--navy-900); font-size: 1.1rem;" id="topbar-view-title">Scan Message</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Senior Citizen Large Text Mode Toggle -->
+          <button type="button" class="btn btn-sm btn-outline" id="btn-toggle-large-text" onclick="toggleLargeTextMode()" title="Toggle Senior Large Text Mode" aria-pressed="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+            <span id="topbar-large-text-btn">Large Text</span>
+          </button>
+
+          <!-- Language Selector Switcher -->
+          <div class="btn-group" style="display: inline-flex; border: 1px solid var(--border-default); border-radius: var(--radius-md); overflow: hidden;">
+            <button type="button" class="btn btn-sm" id="btn-lang-en" onclick="setLanguage('en')" style="border-radius: 0; min-height: 36px; padding: 0.35rem 0.65rem; background: var(--indigo-600); color: #fff;">English</button>
+            <button type="button" class="btn btn-sm" id="btn-lang-hi" onclick="setLanguage('hi')" style="border-radius: 0; min-height: 36px; padding: 0.35rem 0.65rem; background: var(--bg-card); color: var(--text-secondary);">हिन्दी</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Views Container -->
+      <main class="content-container">
+
+        <!-- ===================================================================
+             VIEW 1: Scan Message (Default & Public Quick Scan)
+             =================================================================== -->
+        <section id="view-scan" class="page-view active">
+          <div class="scan-view-container">
+            <!-- Official Advisory Notice -->
+            <div class="disclaimer-card">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--indigo-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div>
+                <strong id="disclaimer-badge-text">Decision-Support Tool:</strong>
+                <span id="disclaimer-desc-text">This tool assists you in identifying suspicious messages. It is NOT a replacement for the National Cyber Crime Helpline (1930) or Sanchar Saathi / Chakshu.</span>
+              </div>
+            </div>
+
+            <!-- Input Card -->
+            <div class="scanner-box">
+              <div class="card-header" style="border: none; padding: 0; margin-bottom: var(--space-3);">
+                <div>
+                  <h2 class="card-title" id="input-heading-text">Check a Suspicious Message or Call</h2>
+                  <p class="card-subtext" id="input-subheading-text">Paste any message (SMS, WhatsApp, or Call transcript) or upload a photo of the message below.</p>
+                </div>
+              </div>
+
+              <!-- Message Input -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <textarea
+                  id="message-input"
+                  class="form-textarea scanner-textarea"
+                  placeholder="Paste the suspicious message or call transcript here..."
+                  aria-label="Suspicious Message Text"
+                ></textarea>
+              </div>
+
+              <!-- Scanner Actions -->
+              <div class="scanner-action-bar">
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <input
+                    type="file"
+                    id="screenshot-file"
+                    class="file-input-hidden"
+                    accept="image/png, image/jpeg, image/jpg, image/webp"
+                    style="display: none;"
+                    onchange="handleFileUpload(event)"
+                  >
+                  <button type="button" class="btn btn-secondary" onclick="document.getElementById('screenshot-file').click()" id="btn-upload-wrap">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                    <span id="btn-upload-text">Upload Screenshot</span>
+                  </button>
+
+                  <button type="button" class="btn btn-ghost" onclick="handleClearInput()" id="btn-clear-text">
+                    Clear
+                  </button>
+                </div>
+
+                <div class="scanner-action-bar-right">
+                  <button type="button" class="btn btn-primary btn-lg" id="btn-analyze" onclick="handleAnalyze()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span id="btn-analyze-text">Analyze Message</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- OCR Review Box (UC3, UC4, UC5) -->
+              <div id="ocr-box" class="ocr-review-panel" style="display: none;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <h3 style="font-size: var(--font-size-md); font-weight: 700; color: var(--navy-900);" id="ocr-title-text">Review Text from Screenshot</h3>
+                  <button type="button" class="btn btn-sm btn-ghost" onclick="handleCancelOCR()">✕</button>
+                </div>
+                <p id="ocr-instruction-text" style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: 4px;">
+                  Please compare the extracted text below with your screenshot. Correct any misspelled words or numbers before analyzing.
+                </p>
+
+                <div class="ocr-columns">
+                  <div>
+                    <img id="ocr-image-preview" class="ocr-img-preview" src="" alt="Screenshot Preview">
+                  </div>
+                  <div>
+                    <textarea id="ocr-text-editor" class="form-textarea" style="height: 100%; min-height: 180px;" aria-label="Editable OCR text" placeholder="Extracted text will appear here..."></textarea>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: var(--space-2); margin-top: var(--space-4);">
+                  <button type="button" class="btn btn-primary" id="btn-ocr-confirm" onclick="handleConfirmOCR()">
+                    <span id="btn-ocr-confirm-text">Looks Correct – Analyze Now</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary" onclick="handleCancelOCR()" id="btn-ocr-cancel-text">
+                    Remove Image
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Loading Spinner State -->
+            <div id="loading-spinner" class="card" style="display: none; text-align: center; padding: var(--space-10) var(--space-4);" role="status" aria-live="polite">
+              <div class="spinner" style="margin: 0 auto var(--space-4) auto; width: 44px; height: 44px; border: 3px solid var(--navy-200); border-top-color: var(--indigo-600); border-radius: 50%; animation: btn-spin 0.8s linear infinite;"></div>
+              <p style="font-size: var(--font-size-lg); font-weight: 700; color: var(--navy-900);" id="loading-status-text">Analyzing message for red flags...</p>
+            </div>
+
+            <!-- Results Section (Unified Senior-Friendly Result View) -->
+            <section id="results-section" class="result-container" style="display: none;" aria-live="polite">
+              <!-- 1. Risk Level Banner (Color + Text + Icon) -->
+              <div id="risk-banner" class="risk-banner-card risk-high">
+                <div id="risk-icon" class="risk-icon-wrap">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div class="risk-info">
+                  <h2 id="risk-level-title" class="risk-title-heading">HIGH RISK – Warning: Likely Scam</h2>
+                  <p id="risk-level-desc" class="risk-desc-para">This message exhibits strong indicators of fraud.</p>
+                </div>
+              </div>
+
+              <!-- 2. Scam Category & Score Metric Card -->
+              <div class="category-metric-card">
+                <div>
+                  <div style="font-size: var(--font-size-xs); font-weight: 700; color: var(--text-tertiary); text-transform: uppercase;" id="cat-label-text">Detected Scam Type</div>
+                  <div class="category-name-text" id="result-category-name">Digital Arrest Scam</div>
+                </div>
+                <div class="score-badge-pill" id="result-score-text">
+                  Suspicion Score: 11 / 10+ (High Risk)
+                </div>
+              </div>
+
+              <!-- 3. Plain Language Explanation Card -->
+              <div class="explanation-card">
+                <span id="explanation-source-badge" class="source-badge source-llm">AI-Written Explanation</span>
+                <h3 class="card-title" id="explanation-heading-text">Why This Looks Suspicious (Simple Explanation)</h3>
+                <p class="explanation-body" id="result-explanation-text"></p>
+              </div>
+
+              <!-- 4. Matched Red Flags Card -->
+              <div class="card">
+                <h3 class="card-title" id="flags-heading-text">Red Flags Detected in this Message</h3>
+                <div id="flags-container" class="flags-grid">
+                  <!-- Populated dynamically -->
+                </div>
+              </div>
+
+              <!-- 5. Safety Actions: Do's and Don'ts -->
+              <div class="card">
+                <h3 class="card-title" id="actions-heading-text">What You Should Do Now</h3>
+                <div class="actions-grid">
+                  <!-- What TO Do -->
+                  <div class="action-column dos-col">
+                    <h4 class="action-col-header" id="dos-title-text">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      What TO Do
+                    </h4>
+                    <ul id="dos-list" class="action-checklist"></ul>
+                  </div>
+
+                  <!-- What NOT To Do -->
+                  <div class="action-column donts-col">
+                    <h4 class="action-col-header" id="donts-title-text">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                      What NOT To Do
+                    </h4>
+                    <ul id="donts-list" class="action-checklist"></ul>
+                  </div>
+                </div>
+
+                <!-- 6. Official Helplines Card -->
+                <div class="helpline-card" style="margin-top: var(--space-5);">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <h4 style="font-size: var(--font-size-base); font-weight: 700; color: #ffffff; margin: 0;" id="helplines-title-text">Official Emergency Contacts</h4>
+                  </div>
+                  <ul id="helplines-list" class="helpline-list"></ul>
+                </div>
+              </div>
+
+              <!-- 7. Feedback Section (UC11) -->
+              <div class="card">
+                <h3 class="card-title" id="feedback-heading-text">Was this helpful?</h3>
+                <p class="card-subtext" id="feedback-subheading-text">Your anonymous feedback helps us protect more senior citizens. No message content is ever stored.</p>
+                
+                <div style="display: flex; gap: var(--space-3); margin-top: var(--space-4);" id="feedback-action-row">
+                  <button type="button" class="btn btn-secondary" onclick="handleFeedback(true)">
+                    <span id="feedback-helpful-btn-text">👍 Yes, it helped me</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary" onclick="handleFeedback(false)">
+                    <span id="feedback-unhelpful-btn-text">👎 Not helpful</span>
+                  </button>
+                </div>
+
+                <div id="feedback-comment-container" style="display: none; margin-top: var(--space-4);">
+                  <div style="display: flex; gap: var(--space-2);">
+                    <input type="text" id="feedback-comment-input" class="form-input" placeholder="Optional: Tell us what could be clearer...">
+                    <button type="button" class="btn btn-primary" onclick="submitFeedbackComment()" id="feedback-submit-btn-text">Submit</button>
+                  </div>
+                </div>
+
+                <div id="feedback-thanks" style="display: none; margin-top: var(--space-3); color: var(--success-700); font-weight: 600;" class="form-help">
+                  ✓ <span id="feedback-thanks-text">Thank you! Your feedback has been recorded safely.</span>
+                </div>
+              </div>
+
+              <!-- Reset / Check Another Button -->
+              <div style="text-align: center; margin: var(--space-6) 0;">
+                <button type="button" class="btn btn-secondary btn-lg" onclick="handleReset()">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                  <span id="check-another-btn-text">Check Another Message</span>
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 2: Authentication (Login, Sign Up, Forgot, Reset)
+             =================================================================== -->
+        <section id="view-auth" class="page-view" style="display: none;">
+          <div class="auth-split-layout">
+            
+            <!-- Left Brand Presentation Panel -->
+            <div class="auth-brand-panel">
+              <div>
+                <div class="brand-badge-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  <span id="auth-showcase-tag">Enterprise-Grade Consumer Protection</span>
+                </div>
+                
+                <h1 class="auth-hero-heading" id="auth-showcase-title">
+                  Verify Suspicious Messages <span class="gradient-text">Before You Act</span>
+                </h1>
+                
+                <p class="auth-hero-subtitle" id="auth-showcase-subtitle">
+                  Empowering senior citizens and families in India to instantly detect digital arrest threats, fake bank alerts, lottery lures, and fraudulent UPI requests.
+                </p>
+
+                <!-- Vector Cybersecurity Shield Illustration -->
+                <div class="auth-illustration-container">
+                  <svg class="cyber-shield-graphic" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="200" cy="150" r="110" fill="url(#circle-grad)" fill-opacity="0.2"/>
+                    <path d="M200 40L280 80V160C280 215 200 260 200 260C200 260 120 215 120 160V80L200 40Z" fill="url(#shield-grad)" stroke="#4F46E5" stroke-width="3"/>
+                    <path d="M200 65L260 95V155C260 195 200 230 200 230C200 230 140 195 140 155V95L200 65Z" stroke="#06B6D4" stroke-width="1.5" stroke-dasharray="4 4"/>
+                    <circle cx="200" cy="140" r="32" fill="#101828" stroke="#06B6D4" stroke-width="2"/>
+                    <path d="M190 140L197 147L212 132" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Data nodes -->
+                    <circle cx="100" cy="100" r="6" fill="#06B6D4"/>
+                    <line x1="106" y1="103" x2="140" y2="120" stroke="rgba(6, 182, 212, 0.4)" stroke-width="1.5"/>
+                    <circle cx="300" cy="110" r="6" fill="#4F46E5"/>
+                    <line x1="294" y1="113" x2="260" y2="130" stroke="rgba(79, 70, 229, 0.4)" stroke-width="1.5"/>
+                    <circle cx="110" cy="200" r="5" fill="#10B981"/>
+                    <line x1="115" y1="198" x2="150" y2="180" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1.5"/>
+                    <circle cx="290" cy="210" r="5" fill="#F59E0B"/>
+                    <line x1="285" y1="207" x2="250" y2="185" stroke="rgba(245, 158, 11, 0.4)" stroke-width="1.5"/>
+                    <defs>
+                      <linearGradient id="shield-grad" x1="120" y1="40" x2="280" y2="260" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#1E293B"/>
+                        <stop offset="1" stop-color="#0F172A"/>
+                      </linearGradient>
+                      <radialGradient id="circle-grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(200 150) rotate(90) scale(110)">
+                        <stop stop-color="#4F46E5"/>
+                        <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+                      </radialGradient>
+                    </defs>
+                  </svg>
+                </div>
+
+                <ul class="auth-features-list">
+                  <li class="auth-feature-item">
+                    <span class="auth-feature-check">✓</span>
+                    <span id="auth-feature-1">100% deterministic rule engine with RBI & CERT-In aligned fraud guidelines</span>
+                  </li>
+                  <li class="auth-feature-item">
+                    <span class="auth-feature-check">✓</span>
+                    <span id="auth-feature-2">Zero personal data storage — raw messages, numbers & OTPs are never saved</span>
+                  </li>
+                  <li class="auth-feature-item">
+                    <span class="auth-feature-check">✓</span>
+                    <span id="auth-feature-3">Bilingual English & Hindi support with high-contrast Senior Text Mode</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="auth-brand-footer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+                <span id="auth-trust-badge">Aligned with I4C (1930) & Sanchar Saathi Safety Protocols</span>
+              </div>
+            </div>
+
+            <!-- Right Interactive Form Panel -->
+            <div class="auth-form-panel">
+              <div class="auth-card-wrapper">
+
+                <!-- Form A: Login -->
+                <div id="subview-login" class="auth-subview">
+                  <div class="auth-header">
+                    <h2 class="auth-title" id="login-title">Welcome back</h2>
+                    <p class="auth-subtitle" id="login-subtitle">Log in to your account to access your scan history and reports</p>
+                  </div>
+
+                  <form id="form-login" onsubmit="handleLoginSubmit(event)">
+                    <div class="form-group">
+                      <label class="form-label" for="login-email" id="login-email-label">Email address</label>
+                      <div class="input-wrapper has-lead">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        </span>
+                        <input type="email" id="login-email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="form-label">
+                        <label for="login-password" id="login-pwd-label">Password</label>
+                        <a href="#forgot-password" class="auth-link" id="login-forgot-link" style="font-size: var(--font-size-xs); color: var(--indigo-600); text-decoration: none;">Forgot password?</a>
+                      </div>
+                      <div class="input-wrapper has-lead has-trail">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </span>
+                        <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="input-action-trail" onclick="togglePasswordVisibility('login-password')" aria-label="Toggle password visibility">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-5);">
+                      <label style="display: flex; align-items: center; gap: 8px; font-size: var(--font-size-sm); color: var(--text-secondary); cursor: pointer;">
+                        <input type="checkbox" id="login-remember-me" style="accent-color: var(--indigo-600); width: 16px; height: 16px;">
+                        <span id="login-remember-label">Remember me for 30 days</span>
+                      </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-login-submit">
+                      <span id="btn-login-text">Log In</span>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer-nav">
+                    <span id="login-no-account-text">Don't have an account?</span>
+                    <a href="#signup" id="login-signup-link">Create an account</a>
+                  </div>
+                </div>
+
+                <!-- Form B: Sign Up -->
+                <div id="subview-signup" class="auth-subview" style="display: none;">
+                  <div class="auth-header">
+                    <h2 class="auth-title" id="signup-title">Create your account</h2>
+                    <p class="auth-subtitle" id="signup-subtitle">Join ScamShield to protect yourself and keep track of suspicious alerts</p>
+                  </div>
+
+                  <form id="form-signup" onsubmit="handleSignupSubmit(event)">
+                    <div class="form-group">
+                      <label class="form-label" for="signup-name" id="signup-name-label">Full Name</label>
+                      <div class="input-wrapper has-lead">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </span>
+                        <input type="text" id="signup-name" class="form-input" placeholder="e.g. Ramesh Sharma" required autocomplete="name">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="signup-email" id="signup-email-label">Email address</label>
+                      <div class="input-wrapper has-lead">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        </span>
+                        <input type="email" id="signup-email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="signup-password" id="signup-pwd-label">Password</label>
+                      <div class="input-wrapper has-lead has-trail">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </span>
+                        <input type="password" id="signup-password" class="form-input" placeholder="At least 8 characters" required autocomplete="new-password" oninput="updatePasswordStrength(this.value)">
+                        <button type="button" class="input-action-trail" onclick="togglePasswordVisibility('signup-password')" aria-label="Toggle password visibility">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                      </div>
+
+                      <!-- Password Strength Meter Component -->
+                      <div class="strength-meter" id="pwd-strength-meter" data-score="0">
+                        <div class="strength-bar-track">
+                          <div class="strength-segment"></div>
+                          <div class="strength-segment"></div>
+                          <div class="strength-segment"></div>
+                          <div class="strength-segment"></div>
+                        </div>
+                        <div class="strength-label-row">
+                          <span id="strength-caption-label">Password strength:</span>
+                          <span id="strength-score-label" style="font-weight: 700;">Too short</span>
+                        </div>
+                        <ul class="strength-criteria">
+                          <li id="rule-len">○ <span id="rule-len-text">At least 8 characters</span></li>
+                          <li id="rule-num">○ <span id="rule-num-text">Not all-numeric</span></li>
+                          <li id="rule-email">○ <span id="rule-email-text">Must not contain email</span></li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="signup-confirm-password" id="signup-confirm-pwd-label">Confirm Password</label>
+                      <div class="input-wrapper has-lead has-trail">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </span>
+                        <input type="password" id="signup-confirm-password" class="form-input" placeholder="Re-enter password" required autocomplete="new-password">
+                        <button type="button" class="input-action-trail" onclick="togglePasswordVisibility('signup-confirm-password')" aria-label="Toggle password visibility">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-signup-submit" style="margin-top: var(--space-4);">
+                      <span id="btn-signup-text">Create Free Account</span>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer-nav">
+                    <span id="signup-have-account-text">Already have an account?</span>
+                    <a href="#login" id="signup-login-link">Log In here</a>
+                  </div>
+                </div>
+
+                <!-- Form C: Forgot Password -->
+                <div id="subview-forgot" class="auth-subview" style="display: none;">
+                  <div class="auth-header">
+                    <h2 class="auth-title" id="forgot-title">Reset your password</h2>
+                    <p class="auth-subtitle" id="forgot-subtitle">Enter your registered email address and we will provide a reset link</p>
+                  </div>
+
+                  <form id="form-forgot" onsubmit="handleForgotSubmit(event)">
+                    <div class="form-group">
+                      <label class="form-label" for="forgot-email" id="forgot-email-label">Email address</label>
+                      <div class="input-wrapper has-lead">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        </span>
+                        <input type="email" id="forgot-email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-forgot-submit" style="margin-top: var(--space-4);">
+                      <span id="btn-forgot-text">Send Reset Link</span>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer-nav">
+                    <a href="#login" id="forgot-back-link">← Back to Login</a>
+                  </div>
+                </div>
+
+                <!-- Form D: Reset Password -->
+                <div id="subview-reset" class="auth-subview" style="display: none;">
+                  <div class="auth-header">
+                    <h2 class="auth-title" id="reset-title">Set new password</h2>
+                    <p class="auth-subtitle" id="reset-subtitle">Please choose a strong password with at least 8 characters</p>
+                  </div>
+
+                  <form id="form-reset" onsubmit="handleResetSubmit(event)">
+                    <input type="hidden" id="reset-token" value="">
+
+                    <div class="form-group">
+                      <label class="form-label" for="reset-password" id="reset-new-pwd-label">New Password</label>
+                      <div class="input-wrapper has-lead has-trail">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </span>
+                        <input type="password" id="reset-password" class="form-input" placeholder="At least 8 characters" required autocomplete="new-password">
+                        <button type="button" class="input-action-trail" onclick="togglePasswordVisibility('reset-password')" aria-label="Toggle password visibility">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="reset-confirm-password" id="reset-confirm-pwd-label">Confirm New Password</label>
+                      <div class="input-wrapper has-lead has-trail">
+                        <span class="input-icon-lead">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </span>
+                        <input type="password" id="reset-confirm-password" class="form-input" placeholder="Re-enter password" required autocomplete="new-password">
+                        <button type="button" class="input-action-trail" onclick="togglePasswordVisibility('reset-confirm-password')" aria-label="Toggle password visibility">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-reset-submit" style="margin-top: var(--space-4);">
+                      <span id="btn-reset-text">Update Password</span>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer-nav">
+                    <a href="#login" id="reset-back-link">← Back to Login</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 3: User Profile (Protected View)
+             =================================================================== -->
+        <section id="view-profile" class="page-view" style="display: none;">
+          <div style="max-width: 720px; margin: 0 auto;">
+            <div style="margin-bottom: var(--space-6);">
+              <h1 class="card-title" style="font-size: var(--font-size-2xl);" id="profile-title">My Profile</h1>
+              <p class="card-subtext" id="profile-subtitle">Manage your account credentials and personal preferences</p>
+            </div>
+
+            <!-- Profile Info Card -->
+            <div class="settings-section-card">
+              <h2 class="card-title" id="profile-details-heading" style="font-size: var(--font-size-md); margin-bottom: var(--space-4);">Account Information</h2>
+              
+              <div class="form-group">
+                <label class="form-label" id="profile-email-label">Registered Email</label>
+                <input type="text" id="profile-email-readonly" class="form-input" disabled style="background-color: var(--navy-100); color: var(--navy-600);">
+                <span class="form-help">Email cannot be modified directly once registered.</span>
+              </div>
+
+              <form onsubmit="handleUpdateName(event)">
+                <div class="form-group">
+                  <label class="form-label" for="profile-name-input" id="profile-name-label">Full Name</label>
+                  <input type="text" id="profile-name-input" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-save-name">
+                  <span id="profile-save-name-btn">Save Name</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Change Password Card -->
+            <div class="settings-section-card">
+              <h2 class="card-title" id="profile-pwd-heading" style="font-size: var(--font-size-md); margin-bottom: var(--space-4);">Change Password</h2>
+
+              <form onsubmit="handleChangePassword(event)">
+                <div class="form-group">
+                  <label class="form-label" for="profile-current-password" id="profile-current-pwd-label">Current Password</label>
+                  <input type="password" id="profile-current-password" class="form-input" required autocomplete="current-password">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profile-new-password" id="profile-new-pwd-label">New Password</label>
+                  <input type="password" id="profile-new-password" class="form-input" placeholder="At least 8 characters" required autocomplete="new-password">
+                </div>
+
+                <button type="submit" class="btn btn-secondary" id="btn-change-pwd">
+                  <span id="profile-change-pwd-btn">Change Password</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Danger Zone Card -->
+            <div class="settings-section-card" style="border-color: var(--danger-500); background-color: var(--danger-50);">
+              <h2 class="card-title" style="color: var(--danger-800); font-size: var(--font-size-md);" id="profile-danger-heading">Danger Zone</h2>
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-3);">
+                <div>
+                  <div style="font-weight: 700; color: var(--danger-900);" id="profile-delete-title">Delete Account & All Data</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--danger-800); max-width: 480px;" id="profile-delete-desc">
+                    Permanently delete your user profile and all associated scan records. This action cannot be undone.
+                  </div>
+                </div>
+                <button type="button" class="btn btn-danger" onclick="toggleDeleteModal(true)" id="profile-delete-btn">
+                  Delete My Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 4: Settings (Display, Accessibility, Privacy)
+             =================================================================== -->
+        <section id="view-settings" class="page-view" style="display: none;">
+          <div style="max-width: 720px; margin: 0 auto;">
+            <div style="margin-bottom: var(--space-6);">
+              <h1 class="card-title" style="font-size: var(--font-size-2xl);" id="settings-title">Application Settings</h1>
+              <p class="card-subtext" id="settings-subtitle">Customize accessibility, display size, and privacy protections</p>
+            </div>
+
+            <!-- Accessibility Card -->
+            <div class="settings-section-card">
+              <h2 class="card-title" id="settings-appearance-heading" style="font-size: var(--font-size-md); margin-bottom: var(--space-2);">Display & Accessibility</h2>
+
+              <!-- Setting Row: Large Text Mode -->
+              <div class="setting-row">
+                <div class="setting-info">
+                  <span class="setting-title" id="settings-large-text-title">Senior Citizen Large Text Mode</span>
+                  <span class="setting-desc" id="settings-large-text-desc">Enlarge buttons, inputs, and fonts to 20px+ for easier reading without eye strain</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-large-text-toggle" onchange="toggleLargeTextMode(this.checked)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <!-- Setting Row: Language Selector -->
+              <div class="setting-row">
+                <div class="setting-info">
+                  <span class="setting-title" id="settings-lang-title">Application Language</span>
+                  <span class="setting-desc" id="settings-lang-desc">Switch seamlessly between English and Hindi across the entire platform</span>
+                </div>
+                <div style="display: flex; gap: var(--space-2);">
+                  <button type="button" class="btn btn-sm" id="setting-btn-en" onclick="setLanguage('en')">English</button>
+                  <button type="button" class="btn btn-sm" id="setting-btn-hi" onclick="setLanguage('hi')">हिन्दी</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Privacy Card -->
+            <div class="settings-section-card">
+              <h2 class="card-title" id="settings-privacy-heading" style="font-size: var(--font-size-md); margin-bottom: var(--space-2);">Privacy & Data Storage</h2>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <span class="setting-title" id="settings-retain-masked-title">Save Masked Text in History</span>
+                  <span class="setting-desc" id="settings-retain-masked-desc">Allow your personal scan history to remember anonymised [MASKED] messages. Raw text and numbers are NEVER stored.</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-retain-masked-toggle" onchange="handleRetainMaskedToggle(this.checked)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Save Confirmation / Status -->
+            <div style="text-align: right;">
+              <span id="settings-status-note" style="font-size: var(--font-size-xs); color: var(--success-600); font-weight: 600; display: none;">✓ Preferences saved safely</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLACEHOLDER VIEWS for Stages 5, 6, 7
+             =================================================================== -->
+        <!-- ===================================================================
+             VIEW 5: Dashboard Overview (Stage 5)
+             =================================================================== -->
+        <section id="view-dashboard" class="page-view" style="display: none;">
+          <div style="max-width: 1080px; margin: 0 auto;">
+            <div style="margin-bottom: var(--space-6);">
+              <h1 class="card-title" style="font-size: var(--font-size-2xl);" id="dashboard-heading">Threat Dashboard</h1>
+              <p class="card-subtext" id="dashboard-subheading">Real-time threat monitoring and personal scan analytics</p>
+            </div>
+
+            <!-- Rotating Security Tip Card (Verified I4C / RBI / CERT-In) -->
+            <div id="security-tip-card" class="security-tip-card" role="region" aria-label="Verified Security Advisory">
+              <div class="tip-content-wrap">
+                <span class="tip-authority-badge" id="tip-authority-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  <span id="tip-source-text">Reserve Bank of India</span>
+                </span>
+                <div class="tip-title" id="tip-title-text">Never Share OTPs or UPI PINs</div>
+                <div class="tip-body" id="tip-body-text">
+                  Bank executives, RBI officials, and customer support representatives NEVER ask for OTPs or PINs. Entering a UPI PIN always transfers money out of your account.
+                </div>
+              </div>
+              <div class="tip-controls">
+                <button type="button" class="btn btn-sm btn-ghost" id="btn-tip-prev" onclick="handlePrevTip()" aria-label="Previous Safety Tip">❮</button>
+                <span id="tip-counter" style="font-size: var(--font-size-xs); color: var(--indigo-700); font-weight: 700;">1 / 6</span>
+                <button type="button" class="btn btn-sm btn-ghost" id="btn-tip-next" onclick="handleNextTip()" aria-label="Next Safety Tip">❯</button>
+              </div>
+            </div>
+
+            <!-- Dashboard Empty State (Shown when total_scans === 0) -->
+            <div id="dashboard-empty-state" class="empty-state" style="display: none;">
+              <div class="empty-state-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <h2 class="empty-state-title" id="dashboard-empty-title">No Scans Recorded Yet</h2>
+              <p class="empty-state-desc" id="dashboard-empty-desc">Scan your first suspicious message to see real-time risk charts and threat intelligence here.</p>
+              <a href="#scan" class="btn btn-primary" onclick="navigateTo('scan')" id="dashboard-empty-btn">Scan a Message Now</a>
+            </div>
+
+            <!-- Dashboard Data Grid (Shown when total_scans > 0) -->
+            <div id="dashboard-data-container">
+              <!-- Stat Cards Grid -->
+              <div class="stat-grid">
+                <div class="stat-card stat-total">
+                  <div class="stat-metric-wrap">
+                    <span class="stat-number" id="stat-total-val">0</span>
+                    <span class="stat-label" id="stat-total-label">Total Scans</span>
+                  </div>
+                  <div class="stat-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  </div>
+                </div>
+
+                <div class="stat-card stat-high">
+                  <div class="stat-metric-wrap">
+                    <span class="stat-number" id="stat-high-val">0</span>
+                    <span class="stat-label" id="stat-high-label">High Risk Threats</span>
+                  </div>
+                  <div class="stat-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  </div>
+                </div>
+
+                <div class="stat-card stat-med">
+                  <div class="stat-metric-wrap">
+                    <span class="stat-number" id="stat-med-val">0</span>
+                    <span class="stat-label" id="stat-med-label">Medium Suspicion</span>
+                  </div>
+                  <div class="stat-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  </div>
+                </div>
+
+                <div class="stat-card stat-low">
+                  <div class="stat-metric-wrap">
+                    <span class="stat-number" id="stat-low-val">0</span>
+                    <span class="stat-label" id="stat-low-label">Low / Monitored</span>
+                  </div>
+                  <div class="stat-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Charts Grid (Chart.js 4.x locally vendored) -->
+              <div class="dashboard-charts-grid">
+                <!-- Chart 1: Risk Distribution -->
+                <div class="chart-panel-card">
+                  <div class="chart-header">
+                    <h3 class="card-title" style="font-size: var(--font-size-base);" id="chart-risk-heading">Threat Risk Distribution</h3>
+                  </div>
+                  <div class="chart-container-relative">
+                    <canvas id="chart-risk-doughnut" aria-label="Risk Distribution Doughnut Chart" role="img"></canvas>
+                  </div>
+                  <!-- Accessible Fallback Table -->
+                  <table id="table-risk-fallback" class="chart-table-fallback" aria-label="Accessible Data Table: Risk Distribution">
+                    <thead>
+                      <tr><th>Risk Level</th><th>Scans Count</th></tr>
+                    </thead>
+                    <tbody id="table-risk-tbody">
+                      <tr><td>High Risk</td><td id="tbl-risk-high">0</td></tr>
+                      <tr><td>Medium Risk</td><td id="tbl-risk-med">0</td></tr>
+                      <tr><td>Low Risk</td><td id="tbl-risk-low">0</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Chart 2: Scam Categories Breakdown -->
+                <div class="chart-panel-card">
+                  <div class="chart-header">
+                    <h3 class="card-title" style="font-size: var(--font-size-base);" id="chart-cat-heading">Detected Scam Categories</h3>
+                  </div>
+                  <div class="chart-container-relative">
+                    <canvas id="chart-category-bar" aria-label="Scam Categories Bar Chart" role="img"></canvas>
+                  </div>
+                  <!-- Accessible Fallback Table -->
+                  <table id="table-category-fallback" class="chart-table-fallback" aria-label="Accessible Data Table: Scam Categories">
+                    <thead>
+                      <tr><th>Category</th><th>Count</th></tr>
+                    </thead>
+                    <tbody id="table-cat-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Recent Scans Table Card -->
+              <div class="recent-scans-card">
+                <div class="chart-header">
+                  <h3 class="card-title" style="font-size: var(--font-size-base);" id="recent-scans-heading">Recent Scans</h3>
+                  <a href="#history" class="auth-link" style="font-size: var(--font-size-xs);" id="recent-view-all">View All in History →</a>
+                </div>
+                <div style="overflow-x: auto;">
+                  <table class="scans-table">
+                    <thead>
+                      <tr>
+                        <th>Date & Time</th>
+                        <th>Risk Level</th>
+                        <th>Category</th>
+                        <th>Score</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recent-scans-tbody">
+                      <!-- Rendered dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 6: History & Detail Drawer (Stage 6)
+             =================================================================== -->
+        <section id="view-history" class="page-view" style="display: none;">
+          <div style="max-width: 1080px; margin: 0 auto;">
+            <div style="margin-bottom: var(--space-6);">
+              <h1 class="card-title" style="font-size: var(--font-size-2xl);" id="history-heading">Scan History</h1>
+              <p class="card-subtext" id="history-subheading">Search, filter, and inspect past suspicious communications</p>
+            </div>
+
+            <!-- History Filter & Search Bar -->
+            <div class="history-filter-bar">
+              <div class="history-filter-controls">
+                <div class="input-wrapper has-lead history-search-input">
+                  <span class="input-icon-lead">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  </span>
+                  <input type="text" id="history-search" class="form-input" placeholder="Search category or red flag..." oninput="debounceHistorySearch()">
+                </div>
+
+                <select id="history-filter-risk" class="form-input" style="width: auto; min-width: 140px;" onchange="loadHistory(1)">
+                  <option value="" id="opt-risk-all">All Risk Levels</option>
+                  <option value="High" id="opt-risk-high">High Risk</option>
+                  <option value="Medium" id="opt-risk-med">Medium Risk</option>
+                  <option value="Low" id="opt-risk-low">Low Risk</option>
+                </select>
+
+                <select id="history-filter-category" class="form-input" style="width: auto; min-width: 160px;" onchange="loadHistory(1)">
+                  <option value="" id="opt-cat-all">All Categories</option>
+                </select>
+              </div>
+
+              <div>
+                <button type="button" class="btn btn-outline btn-danger btn-sm" onclick="handleClearAllHistory()" id="btn-clear-history-all">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  <span id="btn-clear-history-text">Clear All History</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Empty State for History -->
+            <div id="history-empty-state" class="empty-state" style="display: none;">
+              <div class="empty-state-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <h2 class="empty-state-title" id="history-empty-title">No History Records Found</h2>
+              <p class="empty-state-desc" id="history-empty-desc">No past analyses match your search criteria.</p>
+            </div>
+
+            <!-- History List Table Container -->
+            <div id="history-table-card" class="recent-scans-card" style="display: none;">
+              <div style="overflow-x: auto;">
+                <table class="scans-table">
+                  <thead>
+                    <tr>
+                      <th id="th-date">Date & Time</th>
+                      <th id="th-risk">Risk Level</th>
+                      <th id="th-cat">Scam Category</th>
+                      <th id="th-score">Score</th>
+                      <th id="th-source">Source</th>
+                      <th id="th-action">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="history-tbody">
+                    <!-- Rendered dynamically -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pagination Controls -->
+              <div class="pagination-bar">
+                <span id="history-page-info">Showing page 1 of 1</span>
+                <div style="display: flex; gap: var(--space-2);">
+                  <button type="button" class="btn btn-sm btn-secondary" id="btn-hist-prev" onclick="changeHistoryPage(-1)" disabled>❮ Previous</button>
+                  <button type="button" class="btn btn-sm btn-secondary" id="btn-hist-next" onclick="changeHistoryPage(1)" disabled>Next ❯</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide-out Detail Drawer Backdrop & Panel -->
+            <div id="drawer-backdrop" class="drawer-backdrop" onclick="closeHistoryDrawer()"></div>
+            <div id="history-detail-drawer" class="detail-drawer" role="dialog" aria-modal="true" aria-label="Analysis Details">
+              <div class="drawer-header">
+                <div>
+                  <h3 class="card-title" style="font-size: var(--font-size-lg);" id="drawer-header-title">Scan Details</h3>
+                  <span id="drawer-date-time" style="font-size: var(--font-size-xs); color: var(--text-tertiary);"></span>
+                </div>
+                <button type="button" class="btn btn-sm btn-ghost" onclick="closeHistoryDrawer()" aria-label="Close details">✕</button>
+              </div>
+
+              <div class="drawer-body" id="drawer-content-body">
+                <!-- Dynamically populated detail view -->
+              </div>
+
+              <div class="drawer-footer">
+                <button type="button" class="btn btn-sm btn-danger" id="btn-delete-drawer-record" onclick="handleDeleteHistoryItem()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  <span id="btn-delete-drawer-text">Delete Record</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="closeHistoryDrawer()">Close</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 7: Reports & Analytics (Stage 6)
+             =================================================================== -->
+        <section id="view-reports" class="page-view" style="display: none;">
+          <div style="max-width: 1080px; margin: 0 auto;">
+            <div class="reports-toolbar">
+              <div>
+                <h1 class="card-title" style="font-size: var(--font-size-2xl);" id="reports-heading">Fraud Reports & Analytics</h1>
+                <p class="card-subtext" id="reports-subheading">Periodic threat breakdown and data portability</p>
+              </div>
+
+              <!-- Time Range Selector -->
+              <div class="range-tab-group" role="tablist">
+                <button type="button" class="range-tab-btn active" id="tab-range-week" onclick="setReportsRange('week')">Past 7 Days</button>
+                <button type="button" class="range-tab-btn" id="tab-range-month" onclick="setReportsRange('month')">Past 30 Days</button>
+                <button type="button" class="range-tab-btn" id="tab-range-all" onclick="setReportsRange('all')">All Time</button>
+              </div>
+            </div>
+
+            <!-- Reports Stats Summary Grid -->
+            <div class="stat-grid">
+              <div class="stat-card stat-total">
+                <div class="stat-metric-wrap">
+                  <span class="stat-number" id="rep-stat-total">0</span>
+                  <span class="stat-label">Scans in Range</span>
+                </div>
+              </div>
+              <div class="stat-card stat-high">
+                <div class="stat-metric-wrap">
+                  <span class="stat-number" id="rep-stat-high">0</span>
+                  <span class="stat-label">High Risk Scans</span>
+                </div>
+              </div>
+              <div class="stat-card stat-med">
+                <div class="stat-metric-wrap">
+                  <span class="stat-number" id="rep-stat-ratio">0%</span>
+                  <span class="stat-label" id="rep-label-ratio">High-Risk Threat Ratio</span>
+                </div>
+              </div>
+              <div class="stat-card stat-low">
+                <div class="stat-metric-wrap">
+                  <span class="stat-number" id="rep-stat-low">0</span>
+                  <span class="stat-label">Low / Monitored</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reports Charts -->
+            <div class="dashboard-charts-grid">
+              <!-- Timeline Chart -->
+              <div class="chart-panel-card">
+                <div class="chart-header">
+                  <h3 class="card-title" style="font-size: var(--font-size-base);" id="reports-timeline-heading">Daily Threat Activity</h3>
+                </div>
+                <div class="chart-container-relative">
+                  <canvas id="chart-reports-timeline" aria-label="Activity Timeline Chart" role="img"></canvas>
+                </div>
+                <table id="table-timeline-fallback" class="chart-table-fallback" aria-label="Accessible Data Table: Daily Activity">
+                  <thead>
+                    <tr><th>Date</th><th>Total</th><th>High</th><th>Medium</th><th>Low</th></tr>
+                  </thead>
+                  <tbody id="table-timeline-tbody"></tbody>
+                </table>
+              </div>
+
+              <!-- Category Distribution Chart -->
+              <div class="chart-panel-card">
+                <div class="chart-header">
+                  <h3 class="card-title" style="font-size: var(--font-size-base);" id="reports-categories-heading">Category Threat Share</h3>
+                </div>
+                <div class="chart-container-relative">
+                  <canvas id="chart-reports-categories" aria-label="Category Share Chart" role="img"></canvas>
+                </div>
+                <table id="table-reports-cat-fallback" class="chart-table-fallback" aria-label="Accessible Data Table: Category Share">
+                  <thead>
+                    <tr><th>Category</th><th>Count</th><th>Share %</th></tr>
+                  </thead>
+                  <tbody id="table-reports-cat-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Anonymised Export Section Card -->
+            <div class="settings-section-card">
+              <h2 class="card-title" style="font-size: var(--font-size-md);" id="export-card-heading">Export Anonymised Records</h2>
+              <p class="card-subtext" style="margin-top: 4px;" id="export-card-sub">
+                Download your private scan records as CSV or JSON. Raw messages, OTPs, and phone numbers are never stored and cannot be exported.
+              </p>
+              <div style="display: flex; gap: var(--space-3); margin-top: var(--space-4);">
+                <button type="button" class="btn btn-secondary" onclick="exportData('csv')">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span id="btn-export-csv-text">Download CSV</span>
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="exportData('json')">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span id="btn-export-json-text">Download JSON</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 8: Mobile Detection & PWA Web Share Target (Stage 7)
+             =================================================================== -->
+        <section id="view-mobile" class="page-view" style="display: none;">
+          <div style="max-width: 1080px; margin: 0 auto;">
+            <div style="margin-bottom: var(--space-6);">
+              <h1 class="card-title" style="font-size: var(--font-size-2xl);" id="mobile-heading">Mobile Detection & Quick Share</h1>
+              <p class="card-subtext" id="mobile-subheading">Instant analysis directly from WhatsApp, SMS, or Telegram on your smartphone</p>
+            </div>
+
+            <!-- PWA Install Banner -->
+            <div id="pwa-install-card" class="pwa-banner" style="display: flex;">
+              <div>
+                <h3 style="font-size: var(--font-size-lg); font-weight: 700; margin-bottom: 4px;" id="pwa-title">Install ScamShield on Your Smartphone</h3>
+                <p style="font-size: var(--font-size-sm); opacity: 0.9; max-width: 600px;" id="pwa-desc">
+                  Install ScamShield as a lightweight app to enable one-tap message checking straight from your phone's Android 'Share' menu.
+                </p>
+              </div>
+              <button type="button" class="btn btn-primary" id="btn-pwa-install" onclick="triggerPWAInstall()" style="background-color: var(--cyan-400); color: var(--navy-900); font-weight: 700;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                <span id="btn-pwa-install-text">Install App</span>
+              </button>
+            </div>
+
+            <!-- How-To Guide for Mobile Sharing -->
+            <div class="mobile-guide-card">
+              <h2 class="card-title" style="font-size: var(--font-size-md);" id="android-guide-heading">How to Check Messages Directly from WhatsApp & SMS</h2>
+              
+              <div style="display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-4);">
+                <div style="display: flex; align-items: flex-start; gap: var(--space-3);">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--indigo-100); color: var(--indigo-700); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
+                  <div style="font-size: var(--font-size-sm); color: var(--text-primary); padding-top: 4px;" id="guide-step-1">
+                    In WhatsApp or Messages, select the suspicious text or take a screenshot of the chat.
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: var(--space-3);">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--indigo-100); color: var(--indigo-700); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
+                  <div style="font-size: var(--font-size-sm); color: var(--text-primary); padding-top: 4px;" id="guide-step-2">
+                    Tap the <strong>Share</strong> button in your phone's menu.
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: var(--space-3);">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--indigo-100); color: var(--indigo-700); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
+                  <div style="font-size: var(--font-size-sm); color: var(--text-primary); padding-top: 4px;" id="guide-step-3">
+                    Choose <strong>ScamShield</strong> to immediately open the analysis with red flags and safety guidance.
+                  </div>
+                </div>
+              </div>
+
+              <div class="platform-pill-group">
+                <span class="platform-pill">✓ Android Chrome / Edge (Web Share Target)</span>
+                <span class="platform-pill">✓ WhatsApp Direct Share</span>
+                <span class="platform-pill">✓ Google Messages Direct Share</span>
+                <span class="platform-pill">ℹ iOS Safari (Screenshot Upload)</span>
+              </div>
+            </div>
+
+            <!-- Multi-Screenshot Batch Analysis Card -->
+            <div class="settings-section-card">
+              <h2 class="card-title" style="font-size: var(--font-size-md);" id="multi-upload-heading">Multi-Screenshot Batch Analysis</h2>
+              <p class="card-subtext" style="margin-top: 4px;" id="multi-upload-sub">
+                Upload up to 5 screenshots at once (max 5MB each). We extract text and identify fraud patterns across multiple chat bubbles.
+              </p>
+
+              <div class="multi-upload-dropzone" id="multi-dropzone" onclick="document.getElementById('multi-file-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleFileDrop(event)">
+                <input type="file" id="multi-file-input" multiple accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;" onchange="handleMultiFilesSelected(event)">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--indigo-600)" stroke-width="2" style="margin-bottom: var(--space-2);"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                <div style="font-weight: 600; color: var(--navy-900);" id="dropzone-text">Click to choose or drag & drop up to 5 screenshot images here</div>
+                <div style="font-size: var(--font-size-xs); color: var(--text-tertiary); margin-top: 4px;">Supports PNG, JPG, WebP up to 5MB each</div>
+              </div>
+
+              <!-- Preview Grid for Selected Images -->
+              <div id="multi-preview-grid" class="multi-preview-grid" style="display: none;"></div>
+
+              <div style="margin-top: var(--space-4); text-align: right;">
+                <button type="button" class="btn btn-primary" id="btn-batch-analyze" onclick="handleBatchAnalyze()" style="display: none;">
+                  <span id="btn-batch-analyze-text">Analyze All Uploaded Images</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Platform Compatibility Notice -->
+            <div class="disclaimer-card">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--indigo-600)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div>
+                <strong id="platform-notice-heading">Platform Compatibility Notice:</strong>
+                <span id="platform-notice-text">
+                  Standard web browsers cannot automatically intercept, inspect, or read incoming SMS or WhatsApp notifications due to sandboxing. On Android, use the Share menu. On iOS, take a screenshot and upload it here.
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Mobile Bottom Navigation Bar (Visible on <=768px) -->
+      <nav class="app-bottom-nav" aria-label="Mobile Navigation">
+        <a href="#dashboard" class="bottom-nav-link" id="bnav-dashboard" onclick="navigateTo('dashboard')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+          <span id="bnav-text-dashboard">Overview</span>
+        </a>
+        <a href="#scan" class="bottom-nav-link active" id="bnav-scan" onclick="navigateTo('scan')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span id="bnav-text-scan">Scan</span>
+        </a>
+        <a href="#history" class="bottom-nav-link" id="bnav-history" onclick="navigateTo('history')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span id="bnav-text-history">History</span>
+        </a>
+        <a href="#settings" class="bottom-nav-link" id="bnav-settings" onclick="navigateTo('settings')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+          <span id="bnav-text-settings">Settings</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="/static/vendor/chart.umd.min.js"></script>
   <script src="/static/js/i18n.js"></script>
   <script src="/static/js/app.js"></script>
 </body>

@@ -26,6 +26,7 @@ wheels/
 # Database
 *.db
 *.sqlite3
+data/backups/
 
 # Environment
 .env
