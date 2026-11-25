@@ -1,0 +1,13 @@
+.git
+.github
+.pytest_cache
+.python311
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+data/backups/
+docs/screenshots/
+.env
